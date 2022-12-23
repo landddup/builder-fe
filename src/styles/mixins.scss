@@ -1,0 +1,64 @@
+@import "./variables.scss";
+
+@mixin font-montserrat-100 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 100;
+}
+
+@mixin font-montserrat-200 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 200;
+}
+
+@mixin font-montserrat-300 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+}
+
+@mixin font-montserrat-400 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+@mixin font-montserrat-500 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+}
+
+@mixin font-montserrat-600 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+}
+
+@mixin font-montserrat-700 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+@mixin font-montserrat-800 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+}
+
+@mixin font-montserrat-900 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+}
+
+@mixin mobile-md {
+    @media screen and (min-width: $mobile-md-width) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (min-width: $tablet-width) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: $desktop-width) {
+        @content;
+    }
+}
