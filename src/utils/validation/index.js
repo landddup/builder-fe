@@ -2,7 +2,7 @@ import LIVR from "livr";
 import extraRules from "livr-extra-rules";
 
 import rules from "./rules";
-import { REQUIRED_ERRORS } from "./errors";
+import { REQUIRED_ERRORS, TOO_SHORT_ERRORS } from "./errors";
 
 LIVR.Validator.registerDefaultRules(extraRules);
 LIVR.Validator.defaultAutoTrim(true);
@@ -59,6 +59,12 @@ export function decodeErrorCode(code, field = "") {
       const errorMessage = field && REQUIRED_ERRORS[field];
 
       return errorMessage || "Value is required";
+    }
+
+    case "TOO_SHORT": {
+      const errorMessage = field && TOO_SHORT_ERRORS[field];
+
+      return errorMessage || "Value is too short";
     }
 
     case "WRONG_EMAIL": {

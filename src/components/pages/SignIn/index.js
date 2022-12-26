@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { validateCreateSession } from "../../../utils/validation";
+
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 
@@ -14,12 +16,34 @@ const SignIn = () => {
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
       ...prev,
-      [valueKey]: { ...prev[valueKey], value },
+      [valueKey]: { ...prev[valueKey], value, errorMessage: "" },
     }));
   };
 
+  const setErrors = (errors) => {
+    setInputs((prev) => {
+      const output = { ...prev };
+
+      Object.keys(errors).forEach((errorKey) => {
+        output[errorKey].errorMessage = errors[errorKey];
+      });
+
+      return output;
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    validateCreateSession({
+      data: { email: inputs.email.value, password: inputs.password.value },
+      onSuccess: (validData) => console.log(validData),
+      onError: (errors) => setErrors(errors),
+    });
+  };
+
   return (
-    <form className={styles.container}>
+    <form className={styles.container} onSubmit={handleSubmit}>
       <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
 
       <Input
