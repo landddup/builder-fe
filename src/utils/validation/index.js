@@ -2,7 +2,7 @@ import LIVR from "livr";
 import extraRules from "livr-extra-rules";
 
 import rules from "./rules";
-import { REQUIRED_ERRORS, TOO_SHORT_ERRORS } from "./errors";
+import { EQUAL_ERRORS, REQUIRED_ERRORS, TOO_SHORT_ERRORS } from "./errors";
 
 LIVR.Validator.registerDefaultRules(extraRules);
 LIVR.Validator.defaultAutoTrim(true);
@@ -24,6 +24,10 @@ function validate({ rule, data, onSuccess, onError }) {
 
 export function validateCreateSession(args) {
   return validate({ rule: rules.createSession, ...args });
+}
+
+export function validateSignUp(args) {
+  return validate({ rule: rules.signUp, ...args });
 }
 
 export function mapErrors(error) {
@@ -69,6 +73,12 @@ export function decodeErrorCode(code, field = "") {
 
     case "WRONG_EMAIL": {
       return "A valid email is required.";
+    }
+
+    case "FIELDS_NOT_EQUAL": {
+      const errorMessage = field && EQUAL_ERRORS[field];
+
+      return errorMessage || "Value is invalid";
     }
 
     default: {
