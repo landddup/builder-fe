@@ -5,21 +5,23 @@ import classNames from "classnames";
 
 import styles from "./index.module.scss";
 
-const CustomLink = ({ to, text, className }) => {
+const CustomLink = ({ to, text, className, children }) => {
   return (
     <Link to={to} className={classNames(styles.link, className)}>
       {text}
+      {children}
     </Link>
   );
 };
 
 CustomLink.propTypes = {
   to: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   className: PropTypes.string,
 };
 
 CustomLink.defaultProps = {
+  text: "",
   className: "",
 };
 

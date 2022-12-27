@@ -45,6 +45,18 @@
     font-weight: 900;
 }
 
+@mixin mobile-sm {
+    @media screen and (min-width: $mobile-sm-width) {
+        @content;
+    }
+}
+
+@mixin mobile-base {
+    @media screen and (min-width: $mobile-base-width) {
+        @content;
+    }
+}
+
 @mixin mobile-md {
     @media screen and (min-width: $mobile-md-width) {
         @content;

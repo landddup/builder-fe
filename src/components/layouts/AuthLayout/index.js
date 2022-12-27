@@ -1,15 +1,16 @@
 import React from "react";
-
-import SvgIcon from "../../base/SvgIcon";
+import Logo from "../../base/Logo";
 
 import styles from "./index.module.scss";
 
 const AuthLayout = ({ children }) => {
   return (
     <div className={styles.container}>
-      <SvgIcon type="logo" className={styles.logo} />
+      <div className={styles.content}>
+        <Logo className={styles.logo} />
 
-      {children}
+        {children}
+      </div>
     </div>
   );
 };
