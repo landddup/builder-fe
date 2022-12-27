@@ -30,6 +30,10 @@ export function validateSignUp(args) {
   return validate({ rule: rules.signUp, ...args });
 }
 
+export function validateRestorePassword(args) {
+  return validate({ rule: rules.restorePassword, ...args });
+}
+
 export function mapErrors(error) {
   const mapedErrors = {};
 
