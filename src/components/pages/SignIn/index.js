@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 
 import { validateCreateSession } from "../../../utils/validation";
+import { RESTORE_PASSWORD, SIGN_UP } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 
 import styles from "./index.module.scss";
+import CustomLink from "../../base/Link";
 
 const SignIn = () => {
   const [inputs, setInputs] = useState({
-    email: { value: "", placeholder: "Email", errorMessage: "" },
-    password: { value: "", placeholder: "Password", errorMessage: "" },
+    email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
+    password: {
+      value: "",
+      placeholder: "Password",
+      errorMessage: "",
+      name: "password",
+      secured: true,
+    },
   });
 
   const handleInputChange = (value, valueKey) => {
@@ -52,7 +60,21 @@ const SignIn = () => {
         {...inputs.password}
       />
 
-      <Button label="Login" />
+      <Button label="Login" size="large" />
+
+      <div className={styles.links}>
+        <CustomLink
+          to={SIGN_UP}
+          text="Need an account?"
+          className={styles.link}
+        />
+
+        <CustomLink
+          to={RESTORE_PASSWORD}
+          text="Restore password"
+          className={styles.link}
+        />
+      </div>
     </form>
   );
 };
