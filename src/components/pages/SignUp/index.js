@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { validateSignUp } from "../../../utils/validation";
-import { SIGN_IN } from "../../../utils/constants/routes";
+import { RESTORE_PASSWORD, SIGN_IN } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
 import Button from "../../base/Button";
@@ -79,11 +79,19 @@ const SignUp = () => {
 
       <Button label="Sign Up" size="large" />
 
-      <CustomLink
-        to={SIGN_IN}
-        text="Already have an account?"
-        className={styles.link}
-      />
+      <div className={styles.links}>
+        <CustomLink
+          to={SIGN_IN}
+          text="Already have an account?"
+          className={styles.link}
+        />
+
+        <CustomLink
+          to={RESTORE_PASSWORD}
+          text="Restore password"
+          className={styles.link}
+        />
+      </div>
     </form>
   );
 };
