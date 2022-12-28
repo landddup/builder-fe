@@ -9,4 +9,11 @@ export default class SessionAPI extends Base {
         authFunctions.createUserWithEmailAndPassword(auth, email, password),
     });
   }
+
+  create(email, password) {
+    return this.apiClient.request({
+      query: (auth) =>
+        authFunctions.signInWithEmailAndPassword(auth, email, password),
+    });
+  }
 }

@@ -17,6 +17,4 @@ export const PUBLIC_ROUTES = {
 
 export const PRIVATE_ROUTES = {
   [ROOT]: { element: SignIn, layout: AuthLayout },
-  [SIGN_IN]: { element: SignIn, layout: AuthLayout },
-  [SIGN_UP]: { element: SignUp, layout: AuthLayout },
 };
