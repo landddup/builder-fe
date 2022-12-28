@@ -7,6 +7,7 @@
     outline: 0;
     cursor: pointer;
     transition: all 0.1s ease-out;
+    user-select: none;
     @include font-600;
 }
 
