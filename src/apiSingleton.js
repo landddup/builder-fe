@@ -1,4 +1,3 @@
-import config from "./config";
 import apiFactory from "./api";
 
 function handleConnectError() {
@@ -10,12 +9,9 @@ function handleTimeoutError() {
 }
 
 const api = apiFactory({
-  apiUrl: config.REACT_APP_API_URL,
-  onError: (error) => console.log("Connection error: ", error),
+  onError: (error) => console.error("Request error: ", error),
   onConnectionError: handleConnectError,
   onTimeoutError: handleTimeoutError,
 });
 
 export default api;
-
-console.log(config);

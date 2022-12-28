@@ -4,17 +4,19 @@ export const sessionSlice = createSlice({
   name: "session",
   initialState: {
     session: null,
+    isLoading: true,
   },
   reducers: {
-    create: (state, action) => {
+    createSession: (state, action) => {
       state.session = action.payload.session;
+      state.isLoading = false;
     },
-    remove: (state) => {
+    removeSession: (state) => {
       state.session = null;
     },
   },
 });
 
-export const { create, remove } = sessionSlice.actions;
+export const { createSession, removeSession } = sessionSlice.actions;
 
 export default sessionSlice.reducer;

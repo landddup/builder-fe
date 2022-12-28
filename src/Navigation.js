@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import {
   HashRouter as Router,
@@ -6,11 +7,13 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import actions from "./actions";
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT } from "./utils/constants/routes";
 
 const Navigation = () => {
-  const isAuth = false;
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state) => !!state.session.session);
   const navigationRoutes = useMemo(() => {
     if (isAuth) {
       return PRIVATE_ROUTES;
@@ -18,6 +21,13 @@ const Navigation = () => {
 
     return PUBLIC_ROUTES;
   }, [isAuth]);
+
+  const initSession = () => {
+    dispatch(actions.sessionActions.checkSession());
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(initSession, []);
 
   return (
     <Router>
