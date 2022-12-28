@@ -1,0 +1,39 @@
+@import "../../../styles/variables.scss";
+
+.container {
+    position: fixed;
+    bottom: -40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease-out;
+    pointer-events: none;
+}
+
+.content {
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.message {
+    font-size: 14px;
+}
+
+.visible {
+    bottom: 40px;
+}
+
+.success {
+    background-color: rgba($color: $green-2, $alpha: 0.9);
+    color: #ffffff;
+}
+
+.warning {
+    background-color: rgba($color: $orange-2, $alpha: 0.9);
+    color: #ffffff;
+}
+
+.error {
+    background-color: rgba($color: $red-1, $alpha: 0.9);
+    color: #ffffff;
+}

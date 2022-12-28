@@ -1,18 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
+import actions from "../../../actions";
 import { validateSignUp } from "../../../utils/validation";
 import { RESTORE_PASSWORD, SIGN_IN } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
 import Button from "../../base/Button";
-
-import styles from "./index.module.scss";
 import CustomLink from "../../base/Link";
 
+import styles from "./index.module.scss";
+
 const SignUp = () => {
+  const dispatch = useDispatch();
   const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
-    email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
+    email: {
+      value: "",
+      placeholder: "Email",
+      errorMessage: "",
+      name: "email",
+    },
     password: {
       value: "",
       placeholder: "Password",
@@ -48,6 +56,23 @@ const SignUp = () => {
     });
   };
 
+  const createUser = async ({ email, password }) => {
+    setFetching(true);
+
+    try {
+      await dispatch(
+        actions.sessionActions.register({
+          email,
+          password,
+        })
+      );
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      setFetching(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -57,7 +82,7 @@ const SignUp = () => {
         password: inputs.password.value,
         passwordConfirm: inputs.passwordConfirm.value,
       },
-      onSuccess: () => setFetching(true),
+      onSuccess: (validData) => createUser(validData),
       onError: (errors) => setErrors(errors),
     });
   };
