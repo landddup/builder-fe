@@ -55,7 +55,7 @@ export function register({ email, password }) {
   return async (dispatch) => {
     try {
       await api.session.register(email, password);
-      await dispatch(login(email, password));
+      await dispatch(login({ email, password }));
 
       await dispatch(
         actions.toastActions.show({
