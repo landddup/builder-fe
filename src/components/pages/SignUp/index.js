@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 import CustomLink from "../../base/Link";
 
 const SignUp = () => {
+  const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
     email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
     password: {
@@ -56,7 +57,7 @@ const SignUp = () => {
         password: inputs.password.value,
         passwordConfirm: inputs.passwordConfirm.value,
       },
-      onSuccess: (validData) => console.log(validData),
+      onSuccess: () => setFetching(true),
       onError: (errors) => setErrors(errors),
     });
   };
@@ -77,7 +78,7 @@ const SignUp = () => {
         {...inputs.passwordConfirm}
       />
 
-      <Button label="Sign Up" size="large" />
+      <Button label="Sign Up" size="large" isLoading={fetching} />
 
       <div className={styles.links}>
         <CustomLink

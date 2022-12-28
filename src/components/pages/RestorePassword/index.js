@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 import CustomLink from "../../base/Link";
 
 const RestorePassword = () => {
+  const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
     email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
   });
@@ -38,7 +39,7 @@ const RestorePassword = () => {
 
     validateRestorePassword({
       data: { email: inputs.email.value },
-      onSuccess: (validData) => console.log(validData),
+      onSuccess: () => setFetching(true),
       onError: (errors) => setErrors(errors),
     });
   };
@@ -47,7 +48,7 @@ const RestorePassword = () => {
     <form className={styles.container} onSubmit={handleSubmit}>
       <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
 
-      <Button label="Get new password" size="large" />
+      <Button label="Get new password" size="large" isLoading={fetching} />
 
       <div className={styles.links}>
         <CustomLink

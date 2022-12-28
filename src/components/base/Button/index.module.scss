@@ -9,6 +9,9 @@
     transition: all 0.1s ease-out;
     user-select: none;
     @include font-600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .small {
@@ -34,6 +37,11 @@
     &:hover {
         background-color: $indigo-800;
     }
+
+    &:disabled {
+        background-color: $gray-500;
+        cursor: not-allowed;
+    }
 }
 
 .outlined {
@@ -44,6 +52,13 @@
     &:hover {
         background-color: $indigo-50;
         color: $indigo-800;
+    }
+
+    &:disabled {
+        background-color: $gray-300;
+        border: 1px solid $indigo-300;
+        color: $indigo-300;
+        cursor: not-allowed;
     }
 }
 
@@ -56,6 +71,12 @@
         background-color: $indigo-50;
         color: $indigo-800;
     }
+
+    &:disabled {
+        background-color: #ffffff;
+        cursor: not-allowed;
+        color: $indigo-300;
+    }
 }
 
 .link {
@@ -66,5 +87,12 @@
     &:hover {
         color: $indigo-800;
         text-decoration: underline;
+    }
+
+    &:disabled {
+        background-color: #ffffff;
+        cursor: not-allowed;
+        color: $indigo-300;
+        text-decoration: none;
     }
 }

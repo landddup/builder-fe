@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 import CustomLink from "../../base/Link";
 
 const SignIn = () => {
+  const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
     email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
     password: {
@@ -45,7 +46,7 @@ const SignIn = () => {
 
     validateCreateSession({
       data: { email: inputs.email.value, password: inputs.password.value },
-      onSuccess: (validData) => console.log(validData),
+      onSuccess: () => setFetching(true),
       onError: (errors) => setErrors(errors),
     });
   };
@@ -60,7 +61,7 @@ const SignIn = () => {
         {...inputs.password}
       />
 
-      <Button label="Login" size="large" />
+      <Button label="Login" size="large" isLoading={fetching} />
 
       <div className={styles.links}>
         <CustomLink
