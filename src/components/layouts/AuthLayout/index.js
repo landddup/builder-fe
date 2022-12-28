@@ -12,20 +12,23 @@ const AuthLayout = ({ children }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
-        <Logo className={styles.logo} />
-
-        {isLoading ? (
+      {isLoading ? (
+        <div className={styles.loading}>
+          <Logo className={styles.logo} />
           <LoadingIndicator
             color="#3f51b5"
             secondaryColor="#3f51b5"
             width={40}
             height={40}
           />
-        ) : (
-          children
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={styles.content}>
+          <Logo className={styles.logo} />
+
+          {children}
+        </div>
+      )}
 
       <ToastContainer />
     </div>
