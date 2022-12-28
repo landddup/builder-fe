@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
+import actions from "../../../actions";
 import { validateCreateSession } from "../../../utils/validation";
 import { RESTORE_PASSWORD, SIGN_UP } from "../../../utils/constants/routes";
 
@@ -10,6 +12,7 @@ import styles from "./index.module.scss";
 import CustomLink from "../../base/Link";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
     email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
@@ -41,12 +44,29 @@ const SignIn = () => {
     });
   };
 
+  const createSession = async ({ email, password }) => {
+    setFetching(true);
+
+    try {
+      await dispatch(
+        actions.sessionActions.login({
+          email,
+          password,
+        })
+      );
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      setFetching(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     validateCreateSession({
       data: { email: inputs.email.value, password: inputs.password.value },
-      onSuccess: () => setFetching(true),
+      onSuccess: (validData) => createSession(validData),
       onError: (errors) => setErrors(errors),
     });
   };
