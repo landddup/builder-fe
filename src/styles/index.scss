@@ -7,7 +7,8 @@ body {
     max-width: 100vw;
     width: 100vw;
     min-height: 100vh;
-    @include font-montserrat-500;
+    font-family: "Montserrat", sans-serif;
+    @include font-500;
 
     &::-webkit-scrollbar {
         width: 10px;

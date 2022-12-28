@@ -1,47 +1,38 @@
 @import "./variables.scss";
 
-@mixin font-montserrat-100 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-100 {
     font-weight: 100;
 }
 
-@mixin font-montserrat-200 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-200 {
     font-weight: 200;
 }
 
-@mixin font-montserrat-300 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-300 {
     font-weight: 300;
 }
 
-@mixin font-montserrat-400 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-400 {
     font-weight: 400;
 }
 
-@mixin font-montserrat-500 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-500 {
     font-weight: 500;
 }
 
-@mixin font-montserrat-600 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-600 {
     font-weight: 600;
 }
 
-@mixin font-montserrat-700 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-700 {
     font-weight: 700;
 }
 
-@mixin font-montserrat-800 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-800 {
     font-weight: 800;
 }
 
-@mixin font-montserrat-900 {
-    font-family: "Montserrat", sans-serif;
+@mixin font-900 {
     font-weight: 900;
 }
 

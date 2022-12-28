@@ -19,12 +19,12 @@
     border: 1px solid $gray-400;
     outline: 0;
     font-size: 14px;
-    @include font-montserrat-500;
+    @include font-500;
 
     &::placeholder {
         color: $gray-500;
         font-size: 14px;
-        @include font-montserrat-500;
+        @include font-500;
     }
 
     &:disabled {
@@ -74,6 +74,6 @@
     color: $red-1;
     margin-top: 4px;
     display: inline-block;
-    @include font-montserrat-400;
+    @include font-400;
     font-size: 12px;
 }
