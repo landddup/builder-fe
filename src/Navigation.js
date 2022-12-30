@@ -23,7 +23,7 @@ const Navigation = () => {
   }, [isAuth]);
 
   const initSession = () => {
-    dispatch(actions.sessionActions.checkSession());
+    dispatch(actions.sessionActions.subscribeOnSessionChanges());
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

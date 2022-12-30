@@ -8,6 +8,7 @@ const ERRORS = {
   "auth/email-already-in-use": "Email already in use",
   "auth/wrong-password": "Wrong password",
   "auth/user-not-found": "User not found",
+  "auth/user-disabled": "Your account is disabled",
 };
 
 function updateSession(session) {
@@ -16,7 +17,7 @@ function updateSession(session) {
   };
 }
 
-export function checkSession() {
+export function subscribeOnSessionChanges() {
   return async (dispatch) => {
     firebaseAuth.onAuthStateChanged(
       async (state) => await dispatch(updateSession(state))
@@ -24,11 +25,16 @@ export function checkSession() {
   };
 }
 
+function verifyEmail(user) {
+  return async () => {
+    await api.session.verifyEmail(user);
+  };
+}
+
 export function login({ email, password }) {
   return async (dispatch) => {
     try {
       await api.session.create(email, password);
-      await dispatch(checkSession());
 
       await dispatch(
         actions.toastActions.show({
@@ -54,7 +60,9 @@ export function login({ email, password }) {
 export function register({ email, password }) {
   return async (dispatch) => {
     try {
-      await api.session.register(email, password);
+      const userCredential = await api.session.register(email, password);
+
+      await dispatch(verifyEmail(userCredential.user));
       await dispatch(login({ email, password }));
 
       await dispatch(

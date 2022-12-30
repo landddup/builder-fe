@@ -16,4 +16,10 @@ export default class SessionAPI extends Base {
         authFunctions.signInWithEmailAndPassword(auth, email, password),
     });
   }
+
+  verifyEmail(user) {
+    return this.apiClient.request({
+      query: () => authFunctions.sendEmailVerification(user),
+    });
+  }
 }
