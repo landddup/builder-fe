@@ -5,7 +5,6 @@ import Logo from "../../base/Logo";
 import LoadingIndicator from "../../base/LoadingIndicator";
 
 import styles from "./index.module.scss";
-import ToastContainer from "../../containers/ToastContainer";
 
 const AuthLayout = ({ children }) => {
   const { isLoading } = useSelector((state) => state.session);
@@ -29,8 +28,6 @@ const AuthLayout = ({ children }) => {
           {children}
         </div>
       )}
-
-      <ToastContainer />
     </div>
   );
 };

@@ -1,26 +1,40 @@
 @import "../../../styles/variables.scss";
 
 .container {
+    width: 100vw;
     position: fixed;
-    bottom: -40px;
+    bottom: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.1s ease-out;
     pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .content {
     padding: 10px 20px;
     border-radius: 4px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .message {
     font-size: 14px;
+    white-space: nowrap;
+    text-align: center;
 }
 
 .visible {
     bottom: 40px;
+    opacity: 1;
+    max-height: 200px;
+    transition: all 0.1s ease-out;
 }
 
 .success {

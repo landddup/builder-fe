@@ -6,12 +6,12 @@ import styles from "./index.module.scss";
 
 const Toast = ({ type, message }) => {
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.visible]: !!message,
-      })}
-    >
-      <div className={classNames(styles.content, styles[type])}>
+    <div className={classNames(styles.container)}>
+      <div
+        className={classNames(styles.content, styles[type], {
+          [styles.visible]: !!message,
+        })}
+      >
         <span className={styles.message}>{message}</span>
       </div>
     </div>
