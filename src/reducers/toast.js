@@ -16,7 +16,6 @@ export const toastSlice = createSlice({
       state.duration = action.payload.duration;
     },
     hideToast: (state) => {
-      // state.type = "";
       state.message = "";
       state.duration = DEFAULT_TOAST_DURATION;
     },

@@ -1,18 +1,5 @@
 @import "../../../styles/variables.scss";
 
-.container {
-    width: 100vw;
-    position: fixed;
-    bottom: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .content {
     padding: 10px 20px;
     border-radius: 4px;
@@ -22,6 +9,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    pointer-events: none;
 }
 
 .message {
