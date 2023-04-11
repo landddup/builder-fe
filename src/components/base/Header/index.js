@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { logout } from "../../../actions/session";
+import { sessionActions } from "../../../actions";
 
 import Logo from "../Logo";
 import SvgButton from "../SvgButton";
@@ -12,7 +12,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(sessionActions.logout());
   };
 
   return (

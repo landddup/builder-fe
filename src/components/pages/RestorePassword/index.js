@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { validateRestorePassword } from "../../../utils/validation";
-import { restorePassword } from "../../../actions/session";
+import { sessionActions } from "../../../actions";
 import { SIGN_IN, SIGN_UP } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
@@ -41,7 +41,7 @@ const RestorePassword = () => {
   const callRestorePassword = async () => {
     setFetching(true);
 
-    await dispatch(restorePassword(inputs.email.value));
+    await dispatch(sessionActions.restorePassword(inputs.email.value));
 
     setFetching(false);
     setInputs((prev) => ({ ...prev, email: { ...prev.email, value: "" } }));

@@ -10,6 +10,7 @@ import Button from "../../base/Button";
 import CustomLink from "../../base/Link";
 
 import styles from "./index.module.scss";
+import SvgButton from "../../base/SvgButton";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -71,6 +72,10 @@ const SignIn = () => {
     });
   };
 
+  const loginWithGoogle = async () => {
+    await dispatch(sessionActions.loginWithGoogle());
+  };
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
@@ -81,7 +86,16 @@ const SignIn = () => {
         {...inputs.password}
       />
 
-      <Button label="Login" size="large" isLoading={fetching} />
+      <Button label="Sign In" size="large" isLoading={fetching} />
+
+      <div className={styles.socialButtons}>
+        <SvgButton
+          icon="google"
+          onClick={loginWithGoogle}
+          containerClassName={styles.socialIconContainer}
+          iconClassName={styles.socialIcon}
+        />
+      </div>
 
       <div className={styles.links}>
         <CustomLink

@@ -15,5 +15,12 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAnalytics = getAnalytics(firebaseApp);
 const firebaseAuth = authFunctions.getAuth(firebaseApp);
+const provider = new authFunctions.GoogleAuthProvider();
 
-export { firebaseApp, firebaseAnalytics, firebaseAuth, authFunctions };
+export {
+  firebaseApp,
+  firebaseAnalytics,
+  firebaseAuth,
+  provider,
+  authFunctions,
+};

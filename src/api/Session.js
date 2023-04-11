@@ -1,6 +1,6 @@
 import Base from "./Base.js";
 
-import { authFunctions, firebaseAuth } from "../firebase-config";
+import { authFunctions, provider } from "../firebase-config";
 
 export default class SessionAPI extends Base {
   register(email, password) {
@@ -25,13 +25,19 @@ export default class SessionAPI extends Base {
 
   destroy() {
     return this.apiClient.request({
-      query: () => firebaseAuth.signOut(),
+      query: (auth) => auth.signOut(),
     });
   }
 
   restorePassword(email) {
     return this.apiClient.request({
-      query: () => authFunctions.sendPasswordResetEmail(firebaseAuth, email),
+      query: (auth) => authFunctions.sendPasswordResetEmail(auth, email),
+    });
+  }
+
+  createWithGoogle() {
+    return this.apiClient.request({
+      query: (auth) => authFunctions.signInWithPopup(auth, provider),
     });
   }
 }

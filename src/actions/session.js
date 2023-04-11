@@ -20,15 +20,23 @@ function updateSession(session) {
 
 export function subscribeOnSessionChanges() {
   return (dispatch) => {
-    firebaseAuth.onAuthStateChanged(
-      async (state) => await dispatch(updateSession(state))
-    );
+    try {
+      firebaseAuth.onAuthStateChanged(
+        async (state) => await dispatch(updateSession(state))
+      );
+    } catch (error) {
+      console.error("subscribeOnSessionChanges error: ", error);
+    }
   };
 }
 
 function verifyEmail(user) {
   return async () => {
-    await api.session.verifyEmail(user);
+    try {
+      await api.session.verifyEmail(user);
+    } catch (error) {
+      console.error("verifyEmail error: ", error);
+    }
   };
 }
 
@@ -45,7 +53,7 @@ export function login({ email, password }) {
         })
       );
     } catch (error) {
-      console.error("register error: ", error);
+      console.error("login error: ", error);
 
       await dispatch(
         toastActions.show({
@@ -126,7 +134,33 @@ export function restorePassword(email) {
         })
       );
     } catch (error) {
-      console.error("logout error: ", error);
+      console.error("restorePassword error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code] || "Something went wrong",
+        })
+      );
+    }
+  };
+}
+
+export function loginWithGoogle() {
+  return async (dispatch) => {
+    try {
+      await api.session.createWithGoogle();
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.SUCCESS,
+          duration: 3000,
+          message: "Successfully logged in",
+        })
+      );
+    } catch (error) {
+      console.error("loginWithGoogle error: ", error);
 
       await dispatch(
         toastActions.show({

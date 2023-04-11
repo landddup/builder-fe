@@ -10,6 +10,7 @@ import Button from "../../base/Button";
 import CustomLink from "../../base/Link";
 
 import styles from "./index.module.scss";
+import SvgButton from "../../base/SvgButton";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -87,6 +88,10 @@ const SignUp = () => {
     });
   };
 
+  const signUpWithGoogle = async () => {
+    await dispatch(sessionActions.loginWithGoogle());
+  };
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
@@ -104,6 +109,15 @@ const SignUp = () => {
       />
 
       <Button label="Sign Up" size="large" isLoading={fetching} />
+
+      <div className={styles.socialButtons}>
+        <SvgButton
+          icon="google"
+          onClick={signUpWithGoogle}
+          containerClassName={styles.socialIconContainer}
+          iconClassName={styles.socialIcon}
+        />
+      </div>
 
       <div className={styles.links}>
         <CustomLink

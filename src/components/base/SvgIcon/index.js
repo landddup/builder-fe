@@ -1,15 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// BASE ICONS
+// BASE
 import { ReactComponent as Logo } from "../../../images/logo.svg";
 import { ReactComponent as EyeVisible } from "../../../images/eye-visible.svg";
 import { ReactComponent as EyeClosed } from "../../../images/eye-closed.svg";
 import { ReactComponent as User } from "../../../images/user.svg";
 import { ReactComponent as Logout } from "../../../images/logout.svg";
 
+// SOCIAL
+import { ReactComponent as Google } from "../../../images/google.svg";
+
 const SvgIcon = ({ type, className, onClick }) => {
-  const BASE_ICONS = {
+  const BASE = {
     logo: Logo,
     eyeVisible: EyeVisible,
     eyeClosed: EyeClosed,
@@ -17,8 +20,13 @@ const SvgIcon = ({ type, className, onClick }) => {
     logout: Logout,
   };
 
+  const SOCIAL = {
+    google: Google,
+  };
+
   const SVG_BY_TYPE = {
-    ...BASE_ICONS,
+    ...BASE,
+    ...SOCIAL,
   };
 
   const CustomSvg = SVG_BY_TYPE[type] || "svg";
