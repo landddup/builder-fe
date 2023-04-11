@@ -30,7 +30,7 @@
     align-items: center;
 }
 
-@include mobile-base {
+@include mobile-lg {
     .container {
         background-color: $gray-50;
     }
