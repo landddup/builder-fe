@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import actions from "../../../actions";
+import { sessionActions } from "../../../actions";
 import { validateSignUp } from "../../../utils/validation";
 import { RESTORE_PASSWORD, SIGN_IN } from "../../../utils/constants/routes";
 
@@ -61,7 +61,7 @@ const SignUp = () => {
 
     try {
       await dispatch(
-        actions.sessionActions.register({
+        sessionActions.register({
           email,
           password,
         })

@@ -1,18 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import actions from "../../../actions";
+import { toastActions } from "../../../actions";
 
 import Toast from "../../base/Toast";
 
 const ToastContainer = () => {
   const dispatch = useDispatch();
+  const hideRef = useRef();
+
   const { type, message, duration } = useSelector((state) => state.toast);
 
   useEffect(() => {
     if (!!message) {
-      setTimeout(() => {
-        dispatch(actions.toastActions.hide());
+      clearTimeout(hideRef.current);
+
+      hideRef.current = setTimeout(() => {
+        dispatch(toastActions.hide());
       }, duration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

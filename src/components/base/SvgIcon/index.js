@@ -5,12 +5,16 @@ import PropTypes from "prop-types";
 import { ReactComponent as Logo } from "../../../images/logo.svg";
 import { ReactComponent as EyeVisible } from "../../../images/eye-visible.svg";
 import { ReactComponent as EyeClosed } from "../../../images/eye-closed.svg";
+import { ReactComponent as User } from "../../../images/user.svg";
+import { ReactComponent as Logout } from "../../../images/logout.svg";
 
 const SvgIcon = ({ type, className, onClick }) => {
   const BASE_ICONS = {
     logo: Logo,
     eyeVisible: EyeVisible,
     eyeClosed: EyeClosed,
+    user: User,
+    logout: Logout,
   };
 
   const SVG_BY_TYPE = {

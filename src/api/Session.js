@@ -1,6 +1,6 @@
 import Base from "./Base.js";
 
-import { authFunctions } from "../firebase-config";
+import { authFunctions, firebaseAuth } from "../firebase-config";
 
 export default class SessionAPI extends Base {
   register(email, password) {
@@ -20,6 +20,12 @@ export default class SessionAPI extends Base {
   verifyEmail(user) {
     return this.apiClient.request({
       query: () => authFunctions.sendEmailVerification(user),
+    });
+  }
+
+  destroy() {
+    return this.apiClient.request({
+      query: () => firebaseAuth.signOut(),
     });
   }
 }

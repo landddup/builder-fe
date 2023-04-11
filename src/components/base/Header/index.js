@@ -1,26 +1,31 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import Burger from "./molecules/Burger";
+import { logout } from "../../../actions/session";
+
+import Logo from "../Logo";
+import SvgButton from "../SvgButton";
 
 import styles from "./index.module.scss";
-import actions from "../../../actions";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { collapsed } = useSelector((state) => state.sideMenu);
 
-  const handleCollapse = () => {
-    if (collapsed) {
-      dispatch(actions.sideMenuActions.showSideMenu());
-    } else {
-      dispatch(actions.sideMenuActions.hideSideMenu());
-    }
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
     <header className={styles.container}>
-      <Burger collapsed={collapsed} onClick={handleCollapse} />
+      <div className={styles.content}>
+        <Logo className={styles.logo} />
+
+        <SvgButton
+          icon="logout"
+          iconClassName={styles.icon}
+          onClick={handleLogout}
+        />
+      </div>
     </header>
   );
 };

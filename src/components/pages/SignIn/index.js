@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import actions from "../../../actions";
+import { sessionActions } from "../../../actions";
 import { validateCreateSession } from "../../../utils/validation";
 import { RESTORE_PASSWORD, SIGN_UP } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
 import Button from "../../base/Button";
+import CustomLink from "../../base/Link";
 
 import styles from "./index.module.scss";
-import CustomLink from "../../base/Link";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const SignIn = () => {
 
     try {
       await dispatch(
-        actions.sessionActions.login({
+        sessionActions.login({
           email,
           password,
         })

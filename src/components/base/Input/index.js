@@ -3,8 +3,9 @@ import { nanoid } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import SvgButton from "../SvgButton";
+
 import styles from "./index.module.scss";
-import SvgIcon from "../SvgIcon";
 
 const Input = ({
   value,
@@ -44,13 +45,11 @@ const Input = ({
         />
 
         {secured && (
-          <div className={styles.iconContainer}>
-            <SvgIcon
-              type={isValueHidden ? "eyeVisible" : "eyeClosed"}
-              className={styles.icon}
-              onClick={() => setIsValueHidden((prev) => !prev)}
-            />
-          </div>
+          <SvgButton
+            icon={isValueHidden ? "eyeVisible" : "eyeClosed"}
+            containerClassName={styles.iconContainer}
+            onClick={() => setIsValueHidden((prev) => !prev)}
+          />
         )}
       </div>
 

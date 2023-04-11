@@ -7,7 +7,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import actions from "./actions";
+
+import { sessionActions } from "./actions";
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT } from "./utils/constants/routes";
 
@@ -23,7 +24,7 @@ const Navigation = () => {
   }, [isAuth]);
 
   const initSession = () => {
-    dispatch(actions.sessionActions.subscribeOnSessionChanges());
+    dispatch(sessionActions.subscribeOnSessionChanges());
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

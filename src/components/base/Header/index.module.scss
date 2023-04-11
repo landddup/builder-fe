@@ -1,10 +1,44 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .container {
-    background-color: $indigo-700;
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     display: flex;
+    justify-content: center;
     align-items: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    height: 40px;
+
+    svg {
+        height: 40px;
+        width: auto;
+    }
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    display: none;
+}
+
+@include mobile-md {
+    .content {
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    .icon {
+        display: block;
+    }
 }

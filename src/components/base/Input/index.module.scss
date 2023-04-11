@@ -45,30 +45,6 @@
     top: 50%;
     right: 8px;
     transform: translate(0, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 50%;
-    transition: all 0.1s ease-out;
-
-    &:hover {
-        background-color: $indigo-50;
-    }
-
-    &:active {
-        background-color: $indigo-100;
-    }
-}
-
-.icon {
-    width: 20px;
-    height: 20px;
-
-    path {
-        fill: $indigo-500;
-    }
 }
 
 .errorMessage {

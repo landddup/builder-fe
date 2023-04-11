@@ -1,0 +1,31 @@
+@import "../../../styles/variables.scss";
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    width: min-content;
+    height: min-content;
+    box-sizing: border-box;
+    border-radius: 50%;
+    transition: all 0.1s ease-out;
+
+    &:hover {
+        background-color: $indigo-50;
+    }
+
+    &:active {
+        background-color: $indigo-100;
+    }
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+
+    path {
+        fill: $indigo-500;
+    }
+}

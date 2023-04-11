@@ -1,14 +1,15 @@
 import { firebaseAuth } from "../firebase-config";
 import { createSession } from "../reducers/session";
-import actions from "./index";
-import api from "../apiSingleton";
 import { TOAST_TYPES } from "../utils/constants/toast";
+import { toastActions } from ".";
+import api from "../apiSingleton";
 
 const ERRORS = {
   "auth/email-already-in-use": "Email already in use",
   "auth/wrong-password": "Wrong password",
   "auth/user-not-found": "User not found",
   "auth/user-disabled": "Your account is disabled",
+  "auth/too-many-requests": "Too many requests. Please try again later",
 };
 
 function updateSession(session) {
@@ -18,7 +19,7 @@ function updateSession(session) {
 }
 
 export function subscribeOnSessionChanges() {
-  return async (dispatch) => {
+  return (dispatch) => {
     firebaseAuth.onAuthStateChanged(
       async (state) => await dispatch(updateSession(state))
     );
@@ -37,7 +38,7 @@ export function login({ email, password }) {
       await api.session.create(email, password);
 
       await dispatch(
-        actions.toastActions.show({
+        toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Successfully logged in",
@@ -47,7 +48,7 @@ export function login({ email, password }) {
       console.error("register error: ", error);
 
       await dispatch(
-        actions.toastActions.show({
+        toastActions.show({
           type: TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code],
@@ -66,7 +67,7 @@ export function register({ email, password }) {
       await dispatch(login({ email, password }));
 
       await dispatch(
-        actions.toastActions.show({
+        toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Account successfully created",
@@ -76,10 +77,36 @@ export function register({ email, password }) {
       console.error("register error: ", error);
 
       await dispatch(
-        actions.toastActions.show({
+        toastActions.show({
           type: TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code],
+        })
+      );
+    }
+  };
+}
+
+export function logout() {
+  return async (dispatch) => {
+    try {
+      await api.session.destroy(firebaseAuth);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.SUCCESS,
+          duration: 3000,
+          message: "Successfully logged out",
+        })
+      );
+    } catch (error) {
+      console.error("logout error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code] || "Something went wrong",
         })
       );
     }
