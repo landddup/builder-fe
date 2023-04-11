@@ -28,4 +28,10 @@ export default class SessionAPI extends Base {
       query: () => firebaseAuth.signOut(),
     });
   }
+
+  restorePassword(email) {
+    return this.apiClient.request({
+      query: () => authFunctions.sendPasswordResetEmail(firebaseAuth, email),
+    });
+  }
 }

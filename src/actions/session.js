@@ -90,13 +90,39 @@ export function register({ email, password }) {
 export function logout() {
   return async (dispatch) => {
     try {
-      await api.session.destroy(firebaseAuth);
+      await api.session.destroy();
 
       await dispatch(
         toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Successfully logged out",
+        })
+      );
+    } catch (error) {
+      console.error("logout error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code] || "Something went wrong",
+        })
+      );
+    }
+  };
+}
+
+export function restorePassword(email) {
+  return async (dispatch) => {
+    try {
+      await api.session.restorePassword(email);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.SUCCESS,
+          duration: 3000,
+          message: `Link was sent to ${email}`,
         })
       );
     } catch (error) {

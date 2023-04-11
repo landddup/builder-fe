@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { validateRestorePassword } from "../../../utils/validation";
+import { restorePassword } from "../../../actions/session";
 import { SIGN_IN, SIGN_UP } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
 import Button from "../../base/Button";
-
-import styles from "./index.module.scss";
 import CustomLink from "../../base/Link";
 
+import styles from "./index.module.scss";
+
 const RestorePassword = () => {
+  const dispatch = useDispatch();
+
   const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
     email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
@@ -34,12 +38,21 @@ const RestorePassword = () => {
     });
   };
 
+  const callRestorePassword = async () => {
+    setFetching(true);
+
+    await dispatch(restorePassword(inputs.email.value));
+
+    setFetching(false);
+    setInputs((prev) => ({ ...prev, email: { ...prev.email, value: "" } }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     validateRestorePassword({
       data: { email: inputs.email.value },
-      onSuccess: () => setFetching(true),
+      onSuccess: callRestorePassword,
       onError: (errors) => setErrors(errors),
     });
   };
