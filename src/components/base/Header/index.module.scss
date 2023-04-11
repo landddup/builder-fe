@@ -3,7 +3,7 @@
 
 .container {
     width: 100%;
-    padding: 10px;
+    padding: 15px 0;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -11,10 +11,14 @@
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: $mobile-md-width;
+    transition: all 0.3s;
 }
 
 .logo {
@@ -32,12 +36,19 @@
     display: none;
 }
 
-@include mobile-md {
+@include mobile-lg {
     .content {
-        justify-content: space-between;
-        width: 80%;
+        max-width: 750px;
     }
+}
 
+@include tablet {
+    .content {
+        max-width: 980px;
+    }
+}
+
+@include desktop {
     .icon {
         display: block;
     }
