@@ -23,13 +23,6 @@
     margin-bottom: 30px;
 }
 
-.loading {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 @include mobile-lg {
     .container {
         background-color: $gray-50;

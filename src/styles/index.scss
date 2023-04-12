@@ -37,3 +37,21 @@ p {
     margin-block-start: 0;
     margin-block-end: 0;
 }
+
+#root {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.loading {
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__logo {
+        margin-bottom: 30px;
+    }
+}
