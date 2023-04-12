@@ -6,13 +6,24 @@ import SvgIcon from "../SvgIcon";
 
 import styles from "./index.module.scss";
 
-const SvgButton = ({ icon, onClick, containerClassName, iconClassName }) => {
+const SvgButton = ({ icon, variant, size, disabled, onClick, className }) => {
   return (
-    <div className={classNames(styles.iconContainer, containerClassName)}>
+    <div
+      className={classNames(
+        styles.iconContainer,
+        styles[size],
+        styles[variant],
+        {
+          [styles.containedDisabled]: variant === "contained" && disabled,
+          [styles.outlinedDisabled]: variant === "outlined" && disabled,
+        },
+        className
+      )}
+    >
       <SvgIcon
         type={icon}
-        className={classNames(styles.icon, iconClassName)}
-        onClick={onClick}
+        className={classNames(styles.icon)}
+        {...(disabled ? {} : { onClick })}
       />
     </div>
   );
@@ -20,15 +31,19 @@ const SvgButton = ({ icon, onClick, containerClassName, iconClassName }) => {
 
 SvgButton.propTypes = {
   icon: PropTypes.string.isRequired,
+  variant: PropTypes.string,
+  size: PropTypes.string,
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
   onClick: PropTypes.func,
-  containerClassName: PropTypes.string,
-  iconClassName: PropTypes.string,
 };
 
 SvgButton.defaultProps = {
+  variant: "outlined",
+  size: "large",
+  disabled: false,
+  className: "",
   onClick: () => {},
-  containerClassName: "",
-  iconClassName: "",
 };
 
 export default SvgButton;

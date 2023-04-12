@@ -32,15 +32,9 @@
 }
 
 .icons {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 10px;
-}
-
-.icon {
-    width: 25px;
-    height: 25px;
-    display: none;
 }
 
 @include mobile-lg {
@@ -56,7 +50,7 @@
 }
 
 @include desktop {
-    .icon {
-        display: block;
+    .icons {
+        display: flex;
     }
 }

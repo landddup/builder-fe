@@ -16,6 +16,7 @@ const Input = ({
   errorMessage,
   secured,
   type,
+  required,
   onChange,
 }) => {
   const [isValueHidden, setIsValueHidden] = useState(secured);
@@ -28,10 +29,30 @@ const Input = ({
     onChange(newValue, valueKey);
   };
 
+  const getLabel = () => {
+    switch (true) {
+      case !!label && required: {
+        return (
+          <>
+            {`${label} `}
+            <span className={styles.asterisk}>*</span>
+          </>
+        );
+      }
+
+      case !!label: {
+        return label;
+      }
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={styles.container}>
       <label htmlFor={id} className={styles.label}>
-        {label}
+        {getLabel()}
       </label>
 
       <div className={styles.fieldContainer}>
@@ -44,13 +65,15 @@ const Input = ({
           placeholder={placeholder}
           disabled={disabled}
           type={isValueHidden ? "password" : type}
+          required={required}
           onChange={handleChange}
         />
 
         {secured && (
           <SvgButton
             icon={isValueHidden ? "eyeVisible" : "eyeClosed"}
-            containerClassName={styles.iconContainer}
+            size="small"
+            className={styles.icon}
             onClick={() => setIsValueHidden((prev) => !prev)}
           />
         )}
@@ -70,6 +93,7 @@ Input.propTypes = {
   errorMessage: PropTypes.string,
   secured: PropTypes.bool,
   type: PropTypes.string,
+  required: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
 };
 
@@ -81,6 +105,7 @@ Input.defaultProps = {
   errorMessage: "",
   secured: false,
   type: "default",
+  required: false,
 };
 
 export default Input;

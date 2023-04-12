@@ -1,4 +1,4 @@
-import { authFunctions, firebaseAuth } from "../firebase-config";
+import { firebaseAuth } from "../firebase-config";
 import { createSession } from "../reducers/session";
 import { TOAST_TYPES } from "../utils/constants/toast";
 import { toastActions } from ".";
@@ -175,9 +175,8 @@ export function loginWithGoogle() {
 }
 
 export function updateUser({ displayName, email }) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
-      await api.session.createWithGoogle();
       await api.session.updateUser({ displayName });
       await api.session.updateEmail(email);
 

@@ -5,20 +5,85 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    padding: 5px;
+    padding: 4px;
     width: min-content;
     height: min-content;
     box-sizing: border-box;
     border-radius: 50%;
     transition: all 0.1s ease-out;
+}
+
+.contained {
+    background-color: $indigo-500;
+
+    svg {
+        path {
+            fill: #ffffff;
+        }
+    }
+
+    &:hover {
+        background-color: $indigo-800;
+        box-shadow: 2px 3px 6px rgba(40, 53, 147, 0.2);
+    }
+}
+
+.outlined {
+    background-color: #ffffff;
+    border: 2px solid $indigo-500;
+
+    svg {
+        path {
+            fill: $indigo-500;
+        }
+    }
 
     &:hover {
         background-color: $indigo-50;
+        box-shadow: 2px 3px 6px rgba(40, 53, 147, 0.2);
+    }
+}
+
+.containedDisabled {
+    background-color: $gray-500;
+
+    &:hover {
+        background-color: $gray-500;
+        box-shadow: none;
+        cursor: not-allowed;
+    }
+}
+
+.outlinedDisabled {
+    background-color: $gray-300;
+    border: 2px solid $indigo-300;
+
+    svg {
+        path {
+            fill: $indigo-300;
+        }
     }
 
-    &:active {
-        background-color: $indigo-100;
+    &:hover {
+        background-color: $gray-300;
+        box-shadow: none;
+        cursor: not-allowed;
     }
+}
+
+.small {
+    width: 28px;
+    height: 28px;
+}
+
+.default {
+    width: 36px;
+    height: 36px;
+}
+
+.large {
+    width: 44px;
+    height: 44px;
 }
 
 .icon {

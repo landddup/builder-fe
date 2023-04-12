@@ -23,6 +23,8 @@ const RestorePassword = () => {
       placeholder: "Email",
       errorMessage: "",
       name: "email",
+      type: "email",
+      required: true,
     },
   });
 

@@ -18,6 +18,8 @@ const ALLOWED_USER_FIELDS = {
   email: {
     label: "Email",
     placeholder: "Email",
+    type: "email",
+    required: true,
   },
 };
 
@@ -41,6 +43,8 @@ const User = () => {
 
   const [inputs, setInputs] = useState(prepareInputs(currentSession));
   const [fetching, setFetching] = useState(false);
+
+  console.log(currentSession);
 
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
@@ -81,9 +85,15 @@ const User = () => {
     });
   };
 
+  const renderVirifyEmailButton = () => {
+    return <div>{/* <p>Email not verified</p> */}</div>;
+  };
+
   return (
     <div>
       <h1>User Info</h1>
+
+      {!currentSession.isEmailVerified && renderVirifyEmailButton()}
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputs}>

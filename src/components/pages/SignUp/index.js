@@ -24,6 +24,8 @@ const SignUp = () => {
       placeholder: "Email",
       errorMessage: "",
       name: "email",
+      type: "email",
+      required: true,
     },
     password: {
       value: "",
@@ -31,6 +33,8 @@ const SignUp = () => {
       label: "Password",
       errorMessage: "",
       name: "password",
+      type: "password",
+      required: true,
       secured: true,
     },
     passwordConfirm: {
@@ -39,6 +43,8 @@ const SignUp = () => {
       placeholder: "Confirm password",
       errorMessage: "",
       name: "passwordConfirm",
+      type: "password",
+      required: true,
       secured: true,
     },
   });
@@ -112,12 +118,7 @@ const SignUp = () => {
       <Button label="Sign Up" size="large" isLoading={fetching} />
 
       <div className={styles.socialButtons}>
-        <SvgButton
-          icon="google"
-          onClick={signUpWithGoogle}
-          containerClassName={styles.socialIconContainer}
-          iconClassName={styles.socialIcon}
-        />
+        <SvgButton icon="google" onClick={signUpWithGoogle} />
       </div>
 
       <div className={styles.links}>
