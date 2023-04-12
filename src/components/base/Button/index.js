@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import styles from "./index.module.scss";
 import LoadingIndicator from "../LoadingIndicator";
+
+import styles from "./index.module.scss";
 
 const LOADER_COLORS = {
   contained: "#ffffff",

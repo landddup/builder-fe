@@ -8,9 +8,9 @@ import { RESTORE_PASSWORD, SIGN_UP } from "../../../utils/constants/routes";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import CustomLink from "../../base/Link";
+import SvgButton from "../../base/SvgButton";
 
 import styles from "./index.module.scss";
-import SvgButton from "../../base/SvgButton";
 
 const SignIn = () => {
   const dispatch = useDispatch();

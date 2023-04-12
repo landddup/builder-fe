@@ -9,6 +9,6 @@ export const TOO_SHORT_ERRORS = {
   passwordConfirm: "Password must be at least 8 symbols",
 };
 
-export const EQUAL_ERRORS = {
+export const NOT_EQUAL_ERRORS = {
   passwordConfirm: "Passwords not equal",
 };

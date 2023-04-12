@@ -2,7 +2,7 @@ import LIVR from "livr";
 import extraRules from "livr-extra-rules";
 
 import rules from "./rules";
-import { EQUAL_ERRORS, REQUIRED_ERRORS, TOO_SHORT_ERRORS } from "./errors";
+import { NOT_EQUAL_ERRORS, REQUIRED_ERRORS, TOO_SHORT_ERRORS } from "./errors";
 
 LIVR.Validator.registerDefaultRules(extraRules);
 LIVR.Validator.defaultAutoTrim(true);
@@ -80,7 +80,7 @@ export function decodeErrorCode(code, field = "") {
     }
 
     case "FIELDS_NOT_EQUAL": {
-      const errorMessage = field && EQUAL_ERRORS[field];
+      const errorMessage = field && NOT_EQUAL_ERRORS[field];
 
       return errorMessage || "Value is invalid";
     }
