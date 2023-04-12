@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { sessionActions } from "../../../actions";
+import { preparePayload } from "../../../utils/validation/helpers";
 import { validateSignUp } from "../../../utils/validation";
+import { sessionActions } from "../../../actions";
 import { RESTORE_PASSWORD, SIGN_IN } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
@@ -14,10 +15,12 @@ import styles from "./index.module.scss";
 
 const SignUp = () => {
   const dispatch = useDispatch();
+
   const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
     email: {
       value: "",
+      label: "Email",
       placeholder: "Email",
       errorMessage: "",
       name: "email",
@@ -25,12 +28,14 @@ const SignUp = () => {
     password: {
       value: "",
       placeholder: "Password",
+      label: "Password",
       errorMessage: "",
       name: "password",
       secured: true,
     },
     passwordConfirm: {
       value: "",
+      label: "Confirm password",
       placeholder: "Confirm password",
       errorMessage: "",
       name: "passwordConfirm",
@@ -41,7 +46,11 @@ const SignUp = () => {
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
       ...prev,
-      [valueKey]: { ...prev[valueKey], value, errorMessage: "" },
+      [valueKey]: {
+        ...prev[valueKey],
+        errorMessage: "",
+        value,
+      },
     }));
   };
 
@@ -60,31 +69,25 @@ const SignUp = () => {
   const createUser = async ({ email, password }) => {
     setFetching(true);
 
-    try {
-      await dispatch(
-        sessionActions.register({
-          email,
-          password,
-        })
-      );
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      setFetching(false);
-    }
+    await dispatch(
+      sessionActions.register({
+        email,
+        password,
+      })
+    );
+
+    setFetching(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const payload = preparePayload(inputs, "value");
+
     validateSignUp({
-      data: {
-        email: inputs.email.value,
-        password: inputs.password.value,
-        passwordConfirm: inputs.passwordConfirm.value,
-      },
+      data: payload,
       onSuccess: (validData) => createUser(validData),
-      onError: (errors) => setErrors(errors),
+      onError: setErrors,
     });
   };
 
@@ -94,19 +97,17 @@ const SignUp = () => {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
-
-      <Input
-        valueKey="password"
-        onChange={handleInputChange}
-        {...inputs.password}
-      />
-
-      <Input
-        valueKey="passwordConfirm"
-        onChange={handleInputChange}
-        {...inputs.passwordConfirm}
-      />
+      {Object.keys(inputs).map((inputKey) => {
+        return (
+          <Input
+            key={inputKey}
+            valueKey={inputKey}
+            onChange={handleInputChange}
+            disabled={fetching}
+            {...inputs[inputKey]}
+          />
+        );
+      })}
 
       <Button label="Sign Up" size="large" isLoading={fetching} />
 

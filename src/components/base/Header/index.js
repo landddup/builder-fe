@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import { sessionActions } from "../../../actions";
-import { PROFILE } from "../../../utils/constants/routes";
+import { USER } from "../../../utils/constants/routes";
 
 import Logo from "../Logo";
 import CustomLink from "../Link";
@@ -23,7 +23,7 @@ const Header = () => {
         <Logo className={styles.logo} />
 
         <div className={styles.icons}>
-          <CustomLink to={PROFILE}>
+          <CustomLink to={USER}>
             <SvgButton icon="user" iconClassName={styles.icon} />
           </CustomLink>
 

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { sessionActions } from "../../../actions";
+import { preparePayload } from "../../../utils/validation/helpers";
 import { validateCreateSession } from "../../../utils/validation";
+import { sessionActions } from "../../../actions";
 import { RESTORE_PASSWORD, SIGN_UP } from "../../../utils/constants/routes";
 
 import Input from "../../base/Input";
@@ -14,11 +15,19 @@ import styles from "./index.module.scss";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+
   const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
-    email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
+    email: {
+      value: "",
+      label: "Email",
+      placeholder: "Email",
+      errorMessage: "",
+      name: "email",
+    },
     password: {
       value: "",
+      label: "Password",
       placeholder: "Password",
       errorMessage: "",
       name: "password",
@@ -29,7 +38,11 @@ const SignIn = () => {
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
       ...prev,
-      [valueKey]: { ...prev[valueKey], value, errorMessage: "" },
+      [valueKey]: {
+        ...prev[valueKey],
+        errorMessage: "",
+        value,
+      },
     }));
   };
 
@@ -48,27 +61,25 @@ const SignIn = () => {
   const createSession = async ({ email, password }) => {
     setFetching(true);
 
-    try {
-      await dispatch(
-        sessionActions.login({
-          email,
-          password,
-        })
-      );
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      setFetching(false);
-    }
+    await dispatch(
+      sessionActions.login({
+        email,
+        password,
+      })
+    );
+
+    setFetching(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const payload = preparePayload(inputs, "value");
+
     validateCreateSession({
-      data: { email: inputs.email.value, password: inputs.password.value },
+      data: payload,
       onSuccess: (validData) => createSession(validData),
-      onError: (errors) => setErrors(errors),
+      onError: setErrors,
     });
   };
 
@@ -78,13 +89,17 @@ const SignIn = () => {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
-
-      <Input
-        valueKey="password"
-        onChange={handleInputChange}
-        {...inputs.password}
-      />
+      {Object.keys(inputs).map((inputKey) => {
+        return (
+          <Input
+            key={inputKey}
+            valueKey={inputKey}
+            onChange={handleInputChange}
+            disabled={fetching}
+            {...inputs[inputKey]}
+          />
+        );
+      })}
 
       <Button label="Sign In" size="large" isLoading={fetching} />
 

@@ -40,4 +40,16 @@ export default class SessionAPI extends Base {
       query: (auth) => authFunctions.signInWithPopup(auth, provider),
     });
   }
+
+  updateUser(payload) {
+    return this.apiClient.request({
+      query: (auth) => authFunctions.updateProfile(auth.currentUser, payload),
+    });
+  }
+
+  updateEmail(payload) {
+    return this.apiClient.request({
+      query: (auth) => authFunctions.updateEmail(auth.currentUser, payload),
+    });
+  }
 }

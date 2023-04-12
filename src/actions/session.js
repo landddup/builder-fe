@@ -1,4 +1,4 @@
-import { firebaseAuth } from "../firebase-config";
+import { authFunctions, firebaseAuth } from "../firebase-config";
 import { createSession } from "../reducers/session";
 import { TOAST_TYPES } from "../utils/constants/toast";
 import { toastActions } from ".";
@@ -10,6 +10,7 @@ const ERRORS = {
   "auth/user-not-found": "User not found",
   "auth/user-disabled": "Your account is disabled",
   "auth/too-many-requests": "Too many requests. Please try again later",
+  default: "Something went wrong",
 };
 
 function updateSession(currentSession) {
@@ -114,14 +115,14 @@ export function logout() {
         toastActions.show({
           type: TOAST_TYPES.ERROR,
           duration: 3000,
-          message: ERRORS[error.code] || "Something went wrong",
+          message: ERRORS[error.code] || ERRORS.default,
         })
       );
     }
   };
 }
 
-export function restorePassword(email) {
+export function restorePassword({ email }) {
   return async (dispatch) => {
     try {
       await api.session.restorePassword(email);
@@ -140,7 +141,7 @@ export function restorePassword(email) {
         toastActions.show({
           type: TOAST_TYPES.ERROR,
           duration: 3000,
-          message: ERRORS[error.code] || "Something went wrong",
+          message: ERRORS[error.code] || ERRORS.default,
         })
       );
     }
@@ -166,7 +167,35 @@ export function loginWithGoogle() {
         toastActions.show({
           type: TOAST_TYPES.ERROR,
           duration: 3000,
-          message: ERRORS[error.code] || "Something went wrong",
+          message: ERRORS[error.code] || ERRORS.default,
+        })
+      );
+    }
+  };
+}
+
+export function updateUser({ displayName, email }) {
+  return async (dispatch, getState) => {
+    try {
+      await api.session.createWithGoogle();
+      await api.session.updateUser({ displayName });
+      await api.session.updateEmail(email);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.SUCCESS,
+          duration: 3000,
+          message: "User successfully updated",
+        })
+      );
+    } catch (error) {
+      console.error("updateUser error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code] || ERRORS.default,
         })
       );
     }

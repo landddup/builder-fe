@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
+import { preparePayload } from "../../../utils/validation/helpers";
 import { validateRestorePassword } from "../../../utils/validation";
 import { sessionActions } from "../../../actions";
 import { SIGN_IN, SIGN_UP } from "../../../utils/constants/routes";
@@ -16,13 +17,23 @@ const RestorePassword = () => {
 
   const [fetching, setFetching] = useState(false);
   const [inputs, setInputs] = useState({
-    email: { value: "", placeholder: "Email", errorMessage: "", name: "email" },
+    email: {
+      value: "",
+      label: "Email",
+      placeholder: "Email",
+      errorMessage: "",
+      name: "email",
+    },
   });
 
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
       ...prev,
-      [valueKey]: { ...prev[valueKey], value, errorMessage: "" },
+      [valueKey]: {
+        ...prev[valueKey],
+        errorMessage: "",
+        value,
+      },
     }));
   };
 
@@ -38,28 +49,39 @@ const RestorePassword = () => {
     });
   };
 
-  const callRestorePassword = async () => {
+  const callRestorePassword = async ({ email }) => {
     setFetching(true);
 
-    await dispatch(sessionActions.restorePassword(inputs.email.value));
+    await dispatch(sessionActions.restorePassword({ email }));
 
     setFetching(false);
-    setInputs((prev) => ({ ...prev, email: { ...prev.email, value: "" } }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const payload = preparePayload(inputs, "value");
+
     validateRestorePassword({
-      data: { email: inputs.email.value },
+      data: payload,
       onSuccess: callRestorePassword,
-      onError: (errors) => setErrors(errors),
+      onError: setErrors,
     });
   };
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <Input valueKey="email" onChange={handleInputChange} {...inputs.email} />
+      {Object.keys(inputs).map((inputKey) => {
+        return (
+          <Input
+            key={inputKey}
+            valueKey={inputKey}
+            onChange={handleInputChange}
+            disabled={fetching}
+            {...inputs[inputKey]}
+          />
+        );
+      })}
 
       <Button label="Get new password" size="large" isLoading={fetching} />
 

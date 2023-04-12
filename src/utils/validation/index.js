@@ -34,6 +34,10 @@ export function validateRestorePassword(args) {
   return validate({ rule: rules.restorePassword, ...args });
 }
 
+export function validateUser(args) {
+  return validate({ rule: rules.user, ...args });
+}
+
 export function mapErrors(error) {
   const mapedErrors = {};
 

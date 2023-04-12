@@ -21,10 +21,16 @@ const Button = ({
   type,
   isLoading,
   onClick,
+  className,
 }) => {
   return (
     <button
-      className={classNames(styles.button, styles[size], styles[variant])}
+      className={classNames(
+        styles.button,
+        styles[size],
+        styles[variant],
+        className
+      )}
       type={type}
       disabled={disabled || isLoading}
       onClick={onClick}
@@ -49,6 +55,7 @@ Button.propTypes = {
   type: PropTypes.string,
   isLoading: PropTypes.bool,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -58,6 +65,7 @@ Button.defaultProps = {
   type: "default",
   isLoading: false,
   onClick: () => {},
+  className: "",
 };
 
 export default Button;

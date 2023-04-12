@@ -10,6 +10,7 @@ import styles from "./index.module.scss";
 const Input = ({
   value,
   valueKey,
+  label,
   placeholder,
   disabled,
   errorMessage,
@@ -29,7 +30,9 @@ const Input = ({
 
   return (
     <div className={styles.container}>
-      <label htmlFor={id} className={styles.label}></label>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
 
       <div className={styles.fieldContainer}>
         <input
@@ -60,7 +63,8 @@ const Input = ({
 
 Input.propTypes = {
   value: PropTypes.string.isRequired,
-  valueKey: PropTypes.string.isRequired,
+  valueKey: PropTypes.string,
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   errorMessage: PropTypes.string,
@@ -70,6 +74,8 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  valueKey: "",
+  label: "",
   placeholder: "",
   disabled: false,
   errorMessage: "",

@@ -3,12 +3,19 @@
 
 .container {
     width: 100%;
-    margin-bottom: 20px;
     user-select: none;
 }
 
 .fieldContainer {
     position: relative;
+}
+
+.label {
+    display: block;
+    color: $indigo-500;
+    font-size: 14px;
+    margin-bottom: 7px;
+    @include font-700;
 }
 
 .field {
