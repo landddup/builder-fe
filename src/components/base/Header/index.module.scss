@@ -30,6 +30,12 @@
     }
 }
 
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .icon {
     width: 25px;
     height: 25px;

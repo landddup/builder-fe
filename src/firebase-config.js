@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import * as authFunctions from "firebase/auth";
 
 const firebaseConfig = {
@@ -13,14 +12,7 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const firebaseAnalytics = getAnalytics(firebaseApp);
 const firebaseAuth = authFunctions.getAuth(firebaseApp);
 const provider = new authFunctions.GoogleAuthProvider();
 
-export {
-  firebaseApp,
-  firebaseAnalytics,
-  firebaseAuth,
-  provider,
-  authFunctions,
-};
+export { firebaseApp, firebaseAuth, provider, authFunctions };

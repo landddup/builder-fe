@@ -14,7 +14,8 @@ import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT } from "./utils/constants/routes";
 
 const Navigation = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => !!state.session.session);
+  const isAuth = useSelector((state) => !!state.session.currentSession);
+
   const navigationRoutes = useMemo(() => {
     if (isAuth) {
       return PRIVATE_ROUTES;

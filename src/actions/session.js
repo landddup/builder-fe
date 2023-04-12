@@ -12,9 +12,9 @@ const ERRORS = {
   "auth/too-many-requests": "Too many requests. Please try again later",
 };
 
-function updateSession(session) {
+function updateSession(currentSession) {
   return async (dispatch) => {
-    dispatch(createSession({ session }));
+    dispatch(createSession({ currentSession }));
   };
 }
 

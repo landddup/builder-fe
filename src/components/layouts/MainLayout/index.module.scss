@@ -1,3 +1,5 @@
+@import "../../../styles/mixins.scss";
+
 .container {
     display: flex;
     flex-direction: column;
@@ -6,4 +8,18 @@
 
 .content {
     width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+@include mobile-lg {
+    .content {
+        max-width: 750px;
+    }
+}
+
+@include tablet {
+    .content {
+        max-width: 980px;
+    }
 }
