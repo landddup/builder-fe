@@ -39,12 +39,12 @@ export function validateRestorePassword(args) {
   return validate({ rule: rules.restorePassword, ...args });
 }
 
-export function validateUser(args) {
-  return validate({ rule: rules.user, ...args });
+export function validateProfile(args) {
+  return validate({ rule: rules.profile, ...args });
 }
 
-export function validateUserWithPassword(args) {
-  return validate({ rule: rules.userWithPassword, ...args });
+export function validateProfileWithPassword(args) {
+  return validate({ rule: rules.profileWithPassword, ...args });
 }
 
 export function mapErrors(error) {

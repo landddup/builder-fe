@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { preparePayload } from "../../../utils/validation/helpers";
 
 import {
-  validateUser,
-  validateUserWithPassword,
+  validateProfile,
+  validateProfileWithPassword,
 } from "../../../utils/validation";
 
 import { PROVIDERS } from "../../../utils/constants/firebase";
@@ -16,7 +16,7 @@ import Button from "../../base/Button";
 
 import styles from "./index.module.scss";
 
-const ALLOWED_USER_FIELDS = {
+const ALLOWED_PROFILE_FIELDS = {
   displayName: {
     label: "Display name",
     placeholder: "Display name",
@@ -36,13 +36,13 @@ const ALLOWED_USER_FIELDS = {
   },
 };
 
-const prepareInputs = (user, providerId) => {
+const prepareInputs = (profile, providerId) => {
   const output = {};
 
-  Object.keys(ALLOWED_USER_FIELDS).forEach((fieldKey) => {
+  Object.keys(ALLOWED_PROFILE_FIELDS).forEach((fieldKey) => {
     output[fieldKey] = {
-      ...ALLOWED_USER_FIELDS[fieldKey],
-      value: user[fieldKey] || "",
+      ...ALLOWED_PROFILE_FIELDS[fieldKey],
+      value: profile[fieldKey] || "",
       errorMessage: "",
     };
   });
@@ -61,7 +61,7 @@ const prepareInputs = (user, providerId) => {
   return output;
 };
 
-const User = () => {
+const Profile = () => {
   const dispatch = useDispatch();
   const { currentSession } = useSelector((state) => state.session);
 
@@ -94,33 +94,35 @@ const User = () => {
     });
   };
 
-  const getCurrentUser = async (validInputs) => {
-    let currentUser;
+  const getCurrentProfile = async (validInputs) => {
+    let currentProfile;
 
     if (providerId === PROVIDERS.PASSWORD) {
-      currentUser = await dispatch(
+      currentProfile = await dispatch(
         sessionActions.reauthenticateWithPassword(validInputs)
       );
     }
 
     if (providerId === PROVIDERS.GOOGLE) {
-      currentUser = await dispatch(sessionActions.reauthenticateWithGoogle());
+      currentProfile = await dispatch(
+        sessionActions.reauthenticateWithGoogle()
+      );
     }
 
-    return currentUser;
+    return currentProfile;
   };
 
-  const updateCurrentUser = async (validInputs) => {
+  const updateCurrentProfile = async (validInputs) => {
     setFetching(true);
 
     try {
-      const currentUser = await getCurrentUser(validInputs);
+      const currentProfile = await getCurrentProfile(validInputs);
 
-      if (!currentUser) {
+      if (!currentProfile) {
         return;
       }
 
-      await dispatch(sessionActions.updateUser(validInputs));
+      await dispatch(sessionActions.updateProfile(validInputs));
     } finally {
       setFetching(false);
     }
@@ -131,11 +133,13 @@ const User = () => {
 
     const payload = preparePayload(inputs, "value");
     const validate =
-      PROVIDERS.PASSWORD in payload ? validateUserWithPassword : validateUser;
+      PROVIDERS.PASSWORD in payload
+        ? validateProfileWithPassword
+        : validateProfile;
 
     validate({
       data: payload,
-      onSuccess: updateCurrentUser,
+      onSuccess: updateCurrentProfile,
       onError: setErrors,
     });
   };
@@ -146,7 +150,7 @@ const User = () => {
 
   return (
     <div>
-      <h1>User Info</h1>
+      <h1>Profile Info</h1>
 
       {!currentSession.isEmailVerified && renderVirifyEmailButton()}
 
@@ -169,7 +173,7 @@ const User = () => {
           <Button
             type="submit"
             size="large"
-            label="Update user"
+            label="Update profile"
             isLoading={fetching}
             className={styles.button}
           />
@@ -179,4 +183,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Profile;

@@ -231,21 +231,21 @@ export function reauthenticateWithGoogle() {
   };
 }
 
-export function updateUser({ displayName, email, phoneNumber, password }) {
+export function updateProfile({ displayName, email, phoneNumber, password }) {
   return async (dispatch) => {
     try {
-      await api.session.updateUser({ displayName });
+      await api.session.updateProfile({ displayName });
       await api.session.updateEmail(email);
 
       await dispatch(
         toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
-          message: "User successfully updated",
+          message: "Profile successfully updated",
         })
       );
     } catch (error) {
-      console.error("updateUser error: ", error);
+      console.error("updateProfile error: ", error);
 
       await dispatch(
         toastActions.show({

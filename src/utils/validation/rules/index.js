@@ -1,15 +1,15 @@
 import createSession from "./createSession";
 import signUp from "./signUp";
 import restorePassword from "./restorePassword";
-import user from "./user";
-import userWithPassword from "./userWithPassword";
+import uprofileser from "./profile";
+import profileWithPassword from "./profileWithPassword";
 
 const rules = {
   createSession,
   signUp,
   restorePassword,
-  user,
-  userWithPassword,
+  uprofileser,
+  profileWithPassword,
 };
 
 export default rules;

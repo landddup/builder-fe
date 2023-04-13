@@ -41,13 +41,19 @@ export default class SessionAPI extends Base {
     });
   }
 
-  updateUser(payload) {
+  updateProfile(payload) {
     return this.apiClient.request({
       query: (auth) => authFunctions.updateProfile(auth.currentUser, payload),
     });
   }
 
   updateEmail(payload) {
+    return this.apiClient.request({
+      query: (auth) => authFunctions.updateEmail(auth.currentUser, payload),
+    });
+  }
+
+  updatePhone(payload) {
     return this.apiClient.request({
       query: (auth) => authFunctions.updateEmail(auth.currentUser, payload),
     });
