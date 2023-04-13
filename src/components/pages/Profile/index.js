@@ -16,6 +16,7 @@ import Button from "../../base/Button";
 
 import styles from "./index.module.scss";
 import SvgIcon from "../../base/SvgIcon";
+import Block from "../../base/Block";
 
 const ALLOWED_PROFILE_FIELDS = {
   displayName: {
@@ -159,13 +160,13 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.block}>
+      <Block>
         <h2>Profile completion</h2>
 
         <div className={styles.content}>{renderEmailVerificationContent()}</div>
-      </div>
+      </Block>
 
-      <div className={styles.block}>
+      <Block>
         <h2>Profile Info</h2>
 
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -192,7 +193,7 @@ const Profile = () => {
             />
           </div>
         </form>
-      </div>
+      </Block>
     </div>
   );
 };
