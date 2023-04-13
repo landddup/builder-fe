@@ -1,6 +1,6 @@
 import Base from "./Base.js";
 
-import { authFunctions, provider } from "../firebase-config";
+import { authFunctions, googleProvider } from "../firebase-config";
 
 export default class SessionAPI extends Base {
   register(email, password) {
@@ -37,7 +37,7 @@ export default class SessionAPI extends Base {
 
   createWithGoogle() {
     return this.apiClient.request({
-      query: (auth) => authFunctions.signInWithPopup(auth, provider),
+      query: (auth) => authFunctions.signInWithPopup(auth, googleProvider),
     });
   }
 

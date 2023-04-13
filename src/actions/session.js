@@ -1,4 +1,8 @@
-import { firebaseAuth, authFunctions } from "../firebase-config";
+import {
+  firebaseAuth,
+  authFunctions,
+  googleProvider,
+} from "../firebase-config";
 import { createSession } from "../reducers/session";
 import { TOAST_TYPES } from "../utils/constants/toast";
 import { toastActions } from ".";
@@ -151,7 +155,7 @@ export function restorePassword({ email }) {
 export function loginWithGoogle() {
   return async (dispatch) => {
     try {
-      await api.session.createWithGoogle();
+      const currentSession = await api.session.createWithGoogle();
 
       await dispatch(
         toastActions.show({
@@ -160,6 +164,8 @@ export function loginWithGoogle() {
           message: "Successfully logged in",
         })
       );
+
+      return currentSession;
     } catch (error) {
       console.error("loginWithGoogle error: ", error);
 
@@ -177,16 +183,37 @@ export function loginWithGoogle() {
 export function reauthenticateWithPassword({ password }) {
   return async (dispatch) => {
     try {
-      const auth = authFunctions.getAuth();
-
       const credential = authFunctions.EmailAuthProvider.credential(
-        auth.currentUser.email,
+        firebaseAuth.currentUser.email,
         password
       );
 
       const result = await authFunctions.reauthenticateWithCredential(
-        auth.currentUser,
+        firebaseAuth.currentUser,
         credential
+      );
+
+      return result;
+    } catch (error) {
+      console.error("reauthenticateWithPassword error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code] || ERRORS.default,
+        })
+      );
+    }
+  };
+}
+
+export function reauthenticateWithGoogle() {
+  return async (dispatch) => {
+    try {
+      const result = await authFunctions.reauthenticateWithPopup(
+        firebaseAuth.currentUser,
+        googleProvider
       );
 
       return result;
@@ -209,8 +236,6 @@ export function updateUser({ displayName, email, phoneNumber, password }) {
     try {
       await api.session.updateUser({ displayName });
       await api.session.updateEmail(email);
-
-      console.log({ displayName, email, phoneNumber, password });
 
       await dispatch(
         toastActions.show({

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { preparePayload } from "../../../utils/validation/helpers";
+
 import {
   validateUser,
   validateUserWithPassword,
 } from "../../../utils/validation";
+
+import { PROVIDERS } from "../../../utils/constants/firebase";
 import { sessionActions } from "../../../actions";
 
 import Input from "../../base/Input";
@@ -33,8 +36,7 @@ const ALLOWED_USER_FIELDS = {
   },
 };
 
-const prepareInputs = (user) => {
-  const { providerId } = user.providerData[0];
+const prepareInputs = (user, providerId) => {
   const output = {};
 
   Object.keys(ALLOWED_USER_FIELDS).forEach((fieldKey) => {
@@ -45,13 +47,13 @@ const prepareInputs = (user) => {
     };
   });
 
-  if (providerId === "password") {
-    output.password = {
+  if (providerId === PROVIDERS.PASSWORD) {
+    output[PROVIDERS.PASSWORD] = {
       value: "",
       label: "Current password",
       placeholder: "Current password",
       name: "password",
-      // autoComplete: "new-password",
+      autoComplete: "new-password",
       secured: true,
     };
   }
@@ -63,7 +65,14 @@ const User = () => {
   const dispatch = useDispatch();
   const { currentSession } = useSelector((state) => state.session);
 
-  const [inputs, setInputs] = useState(prepareInputs(currentSession));
+  const { providerId } = useMemo(
+    () => currentSession.providerData[0],
+    [currentSession]
+  );
+
+  const [inputs, setInputs] = useState(
+    prepareInputs(currentSession, providerId)
+  );
   const [fetching, setFetching] = useState(false);
 
   const handleInputChange = (value, valueKey) => {
@@ -85,18 +94,30 @@ const User = () => {
     });
   };
 
+  const getCurrentUser = async (validInputs) => {
+    let currentUser;
+
+    if (providerId === PROVIDERS.PASSWORD) {
+      currentUser = await dispatch(
+        sessionActions.reauthenticateWithPassword(validInputs)
+      );
+    }
+
+    if (providerId === PROVIDERS.GOOGLE) {
+      currentUser = await dispatch(sessionActions.reauthenticateWithGoogle());
+    }
+
+    return currentUser;
+  };
+
   const updateCurrentUser = async (validInputs) => {
     setFetching(true);
 
     try {
-      if ("password" in validInputs) {
-        const currentUser = await dispatch(
-          sessionActions.reauthenticateWithPassword(validInputs)
-        );
+      const currentUser = await getCurrentUser(validInputs);
 
-        if (!currentUser) {
-          return;
-        }
+      if (!currentUser) {
+        return;
       }
 
       await dispatch(sessionActions.updateUser(validInputs));
@@ -110,7 +131,7 @@ const User = () => {
 
     const payload = preparePayload(inputs, "value");
     const validate =
-      "password" in payload ? validateUserWithPassword : validateUser;
+      PROVIDERS.PASSWORD in payload ? validateUserWithPassword : validateUser;
 
     validate({
       data: payload,
@@ -144,13 +165,15 @@ const User = () => {
           })}
         </div>
 
-        <Button
-          type="submit"
-          size="large"
-          label="Update user"
-          isLoading={fetching}
-          className={styles.button}
-        />
+        <div className={styles.button}>
+          <Button
+            type="submit"
+            size="large"
+            label="Update user"
+            isLoading={fetching}
+            className={styles.button}
+          />
+        </div>
       </form>
     </div>
   );
