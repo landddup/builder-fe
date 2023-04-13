@@ -9,6 +9,7 @@ const LoadingIndicator = ({
   secondaryColor,
   strokeWidth,
   strokeWidthSecondary,
+  className,
 }) => {
   return (
     <Oval
@@ -19,6 +20,7 @@ const LoadingIndicator = ({
       secondaryColor={secondaryColor}
       strokeWidth={strokeWidth}
       strokeWidthSecondary={strokeWidthSecondary}
+      wrapperClass={className}
     />
   );
 };
@@ -30,6 +32,7 @@ LoadingIndicator.propTypes = {
   secondaryColor: PropTypes.string,
   strokeWidth: PropTypes.number,
   strokeWidthSecondary: PropTypes.number,
+  className: PropTypes.string,
 };
 
 LoadingIndicator.defaultProps = {
@@ -39,6 +42,7 @@ LoadingIndicator.defaultProps = {
   secondaryColor: "#ffffff",
   strokeWidth: 4,
   strokeWidthSecondary: 4,
+  className: "",
 };
 
 export default LoadingIndicator;

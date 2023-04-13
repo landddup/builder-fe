@@ -39,6 +39,7 @@ const Button = ({
         <LoadingIndicator
           color={LOADER_COLORS[variant]}
           secondaryColor={LOADER_COLORS[variant]}
+          className={styles[`loading${size}`]}
         />
       ) : (
         label
