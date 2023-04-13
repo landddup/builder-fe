@@ -28,6 +28,10 @@ export const PUBLIC_ROUTES = {
 };
 
 export const PRIVATE_ROUTES = {
-  [ROOT]: { element: Main, layout: MainLayout },
-  [PROFILE]: { element: Profile, layout: MainLayout },
+  [ROOT]: { element: Main, layout: MainLayout, title: "Main" },
+  [PROFILE]: {
+    element: Profile,
+    layout: MainLayout,
+    title: "Profile settings",
+  },
 };
