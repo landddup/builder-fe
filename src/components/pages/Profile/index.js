@@ -186,7 +186,6 @@ const Profile = () => {
           <div className={styles.button}>
             <Button
               type="submit"
-              size="large"
               label="Update profile"
               isLoading={fetching.profile}
               className={styles.button}
