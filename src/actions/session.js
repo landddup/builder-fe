@@ -7,6 +7,7 @@ import { createSession } from "../reducers/session";
 import { TOAST_TYPES } from "../utils/constants/toast";
 import { toastActions } from ".";
 import api from "../apiSingleton";
+import { PROVIDERS } from "../utils/constants/firebase";
 
 const ERRORS = {
   "auth/email-already-in-use": "Email already in use",
@@ -35,12 +36,28 @@ export function subscribeOnSessionChanges() {
   };
 }
 
-function verifyEmail(user) {
-  return async () => {
+export function verifyEmail(user) {
+  return async (dispatch) => {
     try {
       await api.session.verifyEmail(user);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.SUCCESS,
+          duration: 3000,
+          message: `Link sent to ${user.email}`,
+        })
+      );
     } catch (error) {
       console.error("verifyEmail error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code],
+        })
+      );
     }
   };
 }
@@ -54,7 +71,7 @@ export function login({ email, password }) {
         toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
-          message: "Successfully logged in",
+          message: "Successfully signed in",
         })
       );
     } catch (error) {
@@ -109,7 +126,7 @@ export function logout() {
         toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
-          message: "Successfully logged out",
+          message: "Successfully signed out",
         })
       );
     } catch (error) {
@@ -161,7 +178,7 @@ export function loginWithGoogle() {
         toastActions.show({
           type: TOAST_TYPES.SUCCESS,
           duration: 3000,
-          message: "Successfully logged in",
+          message: "Successfully signed in",
         })
       );
 
@@ -231,11 +248,43 @@ export function reauthenticateWithGoogle() {
   };
 }
 
-export function updateProfile({ displayName, email, phoneNumber, password }) {
+function reauthenticate(validInputs) {
+  return async (dispatch) => {
+    const providerId = firebaseAuth.currentUser.providerData[0].providerId;
+
+    let currentProfile;
+
+    if (providerId === PROVIDERS.PASSWORD) {
+      currentProfile = await dispatch(reauthenticateWithPassword(validInputs));
+    }
+
+    if (providerId === PROVIDERS.GOOGLE) {
+      currentProfile = await dispatch(reauthenticateWithGoogle());
+    }
+
+    return currentProfile;
+  };
+}
+
+export function updateProfile({ displayName, email, password }) {
   return async (dispatch) => {
     try {
-      await api.session.updateProfile({ displayName });
-      await api.session.updateEmail(email);
+      const currentUser = firebaseAuth.currentUser;
+      const currentSession = await dispatch(
+        reauthenticate({ displayName, email, password })
+      );
+
+      if (!currentSession) {
+        return;
+      }
+
+      if (currentUser.displayName !== displayName) {
+        await api.session.updateProfile({ displayName });
+      }
+
+      if (currentUser.email !== email) {
+        await api.session.updateEmail(email);
+      }
 
       await dispatch(
         toastActions.show({

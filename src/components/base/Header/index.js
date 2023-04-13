@@ -24,13 +24,19 @@ const Header = () => {
 
         <div className={styles.icons}>
           <CustomLink to={PROFILE}>
-            <SvgButton icon="profile" variant="contained" size="default" />
+            <SvgButton
+              icon="profile"
+              variant="contained"
+              size="default"
+              title="Profile settings"
+            />
           </CustomLink>
 
           <SvgButton
             icon="logout"
             variant="contained"
             size="default"
+            title="Sign out"
             onClick={handleLogout}
           />
         </div>

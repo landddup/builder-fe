@@ -15,6 +15,7 @@ import Input from "../../base/Input";
 import Button from "../../base/Button";
 
 import styles from "./index.module.scss";
+import SvgIcon from "../../base/SvgIcon";
 
 const ALLOWED_PROFILE_FIELDS = {
   displayName: {
@@ -27,12 +28,6 @@ const ALLOWED_PROFILE_FIELDS = {
     type: "email",
     name: "email",
     required: true,
-  },
-  phoneNumber: {
-    label: "Phone Number",
-    placeholder: "Phone Number",
-    type: "tel",
-    name: "phone",
   },
 };
 
@@ -53,7 +48,6 @@ const prepareInputs = (profile, providerId) => {
       label: "Current password",
       placeholder: "Current password",
       name: "password",
-      autoComplete: "new-password",
       secured: true,
     };
   }
@@ -73,7 +67,10 @@ const Profile = () => {
   const [inputs, setInputs] = useState(
     prepareInputs(currentSession, providerId)
   );
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState({
+    profile: false,
+    email: false,
+  });
 
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
@@ -94,38 +91,12 @@ const Profile = () => {
     });
   };
 
-  const getCurrentProfile = async (validInputs) => {
-    let currentProfile;
-
-    if (providerId === PROVIDERS.PASSWORD) {
-      currentProfile = await dispatch(
-        sessionActions.reauthenticateWithPassword(validInputs)
-      );
-    }
-
-    if (providerId === PROVIDERS.GOOGLE) {
-      currentProfile = await dispatch(
-        sessionActions.reauthenticateWithGoogle()
-      );
-    }
-
-    return currentProfile;
-  };
-
   const updateCurrentProfile = async (validInputs) => {
-    setFetching(true);
+    setFetching((prev) => ({ ...prev, profile: true }));
 
-    try {
-      const currentProfile = await getCurrentProfile(validInputs);
+    await dispatch(sessionActions.updateProfile(validInputs));
 
-      if (!currentProfile) {
-        return;
-      }
-
-      await dispatch(sessionActions.updateProfile(validInputs));
-    } finally {
-      setFetching(false);
-    }
+    setFetching((prev) => ({ ...prev, profile: false }));
   };
 
   const handleSubmit = (e) => {
@@ -144,41 +115,85 @@ const Profile = () => {
     });
   };
 
-  const renderVirifyEmailButton = () => {
-    return <div>{/* <p>Email not verified</p> */}</div>;
+  const verifyEmail = async () => {
+    setFetching((prev) => ({ ...prev, email: true }));
+
+    await dispatch(sessionActions.verifyEmail(currentSession));
+
+    setFetching((prev) => ({ ...prev, email: false }));
+  };
+
+  const renderEmailVerificationContent = () => {
+    const { emailVerified } = currentSession;
+
+    if (emailVerified) {
+      return (
+        <div className={styles.completionItem}>
+          <div className={styles.completionTextContainer}>
+            <SvgIcon type="check" className={styles.completionIcon} />
+
+            <p className={styles.completionText}>Email verified</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={styles.completionItem}>
+        <div className={styles.completionTextContainer}>
+          <SvgIcon type="xcircle" className={styles.completionIcon} />
+
+          <p className={styles.completionText}>Email not verified</p>
+        </div>
+
+        <Button
+          label="Send verification link"
+          size="small"
+          variant="outlined"
+          isLoading={fetching.email}
+          onClick={verifyEmail}
+        />
+      </div>
+    );
   };
 
   return (
-    <div>
-      <h1>Profile Info</h1>
+    <div className={styles.container}>
+      <div className={styles.block}>
+        <h2>Profile completion</h2>
 
-      {!currentSession.isEmailVerified && renderVirifyEmailButton()}
+        <div className={styles.content}>{renderEmailVerificationContent()}</div>
+      </div>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.inputs}>
-          {Object.keys(inputs).map((inputKey) => {
-            return (
-              <Input
-                key={inputKey}
-                valueKey={inputKey}
-                onChange={handleInputChange}
-                disabled={fetching}
-                {...inputs[inputKey]}
-              />
-            );
-          })}
-        </div>
+      <div className={styles.block}>
+        <h2>Profile Info</h2>
 
-        <div className={styles.button}>
-          <Button
-            type="submit"
-            size="large"
-            label="Update profile"
-            isLoading={fetching}
-            className={styles.button}
-          />
-        </div>
-      </form>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.content}>
+            {Object.keys(inputs).map((inputKey) => {
+              return (
+                <Input
+                  key={inputKey}
+                  valueKey={inputKey}
+                  onChange={handleInputChange}
+                  disabled={fetching.profile}
+                  {...inputs[inputKey]}
+                />
+              );
+            })}
+          </div>
+
+          <div className={styles.button}>
+            <Button
+              type="submit"
+              size="large"
+              label="Update profile"
+              isLoading={fetching.profile}
+              className={styles.button}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

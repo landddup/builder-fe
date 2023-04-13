@@ -52,10 +52,4 @@ export default class SessionAPI extends Base {
       query: (auth) => authFunctions.updateEmail(auth.currentUser, payload),
     });
   }
-
-  updatePhone(payload) {
-    return this.apiClient.request({
-      query: (auth) => authFunctions.updateEmail(auth.currentUser, payload),
-    });
-  }
 }

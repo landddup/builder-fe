@@ -1,4 +1,38 @@
 @import "../../../styles/mixins.scss";
+@import "../../../styles/variables.scss";
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 40px;
+}
+
+.block {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
+.completionItem {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
+.completionTextContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.completionIcon {
+    path {
+        fill: $indigo-500;
+    }
+}
+
+.completionText {
+    white-space: nowrap;
+}
 
 .form {
     display: flex;
@@ -6,10 +40,9 @@
     align-items: flex-start;
     justify-content: flex-start;
     gap: 20px;
-    padding-top: 20px;
 }
 
-.inputs,
+.content,
 .button {
     width: 100%;
     display: grid;
@@ -24,14 +57,14 @@
 }
 
 @include mobile-md {
-    .inputs,
+    .content,
     .button {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @include mobile-lg {
-    .inputs,
+    .content,
     .button {
         grid-template-columns: repeat(3, 1fr);
     }

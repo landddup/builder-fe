@@ -6,9 +6,19 @@ import SvgIcon from "../SvgIcon";
 
 import styles from "./index.module.scss";
 
-const SvgButton = ({ icon, variant, size, disabled, onClick, className }) => {
+const SvgButton = ({
+  icon,
+  variant,
+  size,
+  disabled,
+  className,
+  title,
+  onClick,
+}) => {
   return (
     <div
+      title={title}
+      {...(disabled ? {} : { onClick })}
       className={classNames(
         styles.iconContainer,
         styles[size],
@@ -20,11 +30,7 @@ const SvgButton = ({ icon, variant, size, disabled, onClick, className }) => {
         className
       )}
     >
-      <SvgIcon
-        type={icon}
-        className={classNames(styles.icon)}
-        {...(disabled ? {} : { onClick })}
-      />
+      <SvgIcon type={icon} className={classNames(styles.icon)} />
     </div>
   );
 };
@@ -35,6 +41,7 @@ SvgButton.propTypes = {
   size: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.string,
+  title: PropTypes.string,
   onClick: PropTypes.func,
 };
 
@@ -43,6 +50,7 @@ SvgButton.defaultProps = {
   size: "large",
   disabled: false,
   className: "",
+  title: "",
   onClick: () => {},
 };
 

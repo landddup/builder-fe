@@ -48,7 +48,7 @@
 
 .outlined {
     background-color: #ffffff;
-    border: 1px solid $indigo-500;
+    border: 2px solid $indigo-500;
     color: $indigo-500;
 
     &:hover {
@@ -58,7 +58,7 @@
 
     &:disabled {
         background-color: $gray-300;
-        border: 1px solid $indigo-300;
+        border: 2px solid $indigo-300;
         color: $indigo-300;
         cursor: not-allowed;
     }

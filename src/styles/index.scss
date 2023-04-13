@@ -9,6 +9,7 @@ body {
     width: 100vw;
     min-height: 100vh;
     font-family: "Roboto Flex", sans-serif;
+    color: $gray-900;
     @include font-500;
 
     &::-webkit-scrollbar {
