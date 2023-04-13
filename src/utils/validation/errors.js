@@ -9,6 +9,10 @@ export const TOO_SHORT_ERRORS = {
   passwordConfirm: "Password must be at least 8 symbols",
 };
 
+export const TOO_LONG_ERRORS = {
+  phoneNumber: "Max length of number is 10 symbols",
+};
+
 export const NOT_EQUAL_ERRORS = {
   passwordConfirm: "Passwords not equal",
 };

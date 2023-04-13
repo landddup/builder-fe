@@ -1,4 +1,4 @@
-import { firebaseAuth } from "../firebase-config";
+import { firebaseAuth, authFunctions } from "../firebase-config";
 import { createSession } from "../reducers/session";
 import { TOAST_TYPES } from "../utils/constants/toast";
 import { toastActions } from ".";
@@ -174,11 +174,43 @@ export function loginWithGoogle() {
   };
 }
 
-export function updateUser({ displayName, email }) {
+export function reauthenticateWithPassword({ password }) {
+  return async (dispatch) => {
+    try {
+      const auth = authFunctions.getAuth();
+
+      const credential = authFunctions.EmailAuthProvider.credential(
+        auth.currentUser.email,
+        password
+      );
+
+      const result = await authFunctions.reauthenticateWithCredential(
+        auth.currentUser,
+        credential
+      );
+
+      return result;
+    } catch (error) {
+      console.error("reauthenticateWithPassword error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: ERRORS[error.code] || ERRORS.default,
+        })
+      );
+    }
+  };
+}
+
+export function updateUser({ displayName, email, phoneNumber, password }) {
   return async (dispatch) => {
     try {
       await api.session.updateUser({ displayName });
       await api.session.updateEmail(email);
+
+      console.log({ displayName, email, phoneNumber, password });
 
       await dispatch(
         toastActions.show({

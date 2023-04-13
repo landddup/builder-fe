@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { preparePayload } from "../../../utils/validation/helpers";
-import { validateUser } from "../../../utils/validation";
+import {
+  validateUser,
+  validateUserWithPassword,
+} from "../../../utils/validation";
 import { sessionActions } from "../../../actions";
 
 import Input from "../../base/Input";
@@ -19,11 +22,19 @@ const ALLOWED_USER_FIELDS = {
     label: "Email",
     placeholder: "Email",
     type: "email",
+    name: "email",
     required: true,
+  },
+  phoneNumber: {
+    label: "Phone Number",
+    placeholder: "Phone Number",
+    type: "tel",
+    name: "phone",
   },
 };
 
 const prepareInputs = (user) => {
+  const { providerId } = user.providerData[0];
   const output = {};
 
   Object.keys(ALLOWED_USER_FIELDS).forEach((fieldKey) => {
@@ -34,6 +45,17 @@ const prepareInputs = (user) => {
     };
   });
 
+  if (providerId === "password") {
+    output.password = {
+      value: "",
+      label: "Current password",
+      placeholder: "Current password",
+      name: "password",
+      // autoComplete: "new-password",
+      secured: true,
+    };
+  }
+
   return output;
 };
 
@@ -43,8 +65,6 @@ const User = () => {
 
   const [inputs, setInputs] = useState(prepareInputs(currentSession));
   const [fetching, setFetching] = useState(false);
-
-  console.log(currentSession);
 
   const handleInputChange = (value, valueKey) => {
     setInputs((prev) => ({
@@ -68,17 +88,31 @@ const User = () => {
   const updateCurrentUser = async (validInputs) => {
     setFetching(true);
 
-    await dispatch(sessionActions.updateUser(validInputs));
+    try {
+      if ("password" in validInputs) {
+        const currentUser = await dispatch(
+          sessionActions.reauthenticateWithPassword(validInputs)
+        );
 
-    setFetching(false);
+        if (!currentUser) {
+          return;
+        }
+      }
+
+      await dispatch(sessionActions.updateUser(validInputs));
+    } finally {
+      setFetching(false);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const payload = preparePayload(inputs, "value");
+    const validate =
+      "password" in payload ? validateUserWithPassword : validateUser;
 
-    validateUser({
+    validate({
       data: payload,
       onSuccess: updateCurrentUser,
       onError: setErrors,

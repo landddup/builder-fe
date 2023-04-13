@@ -2,7 +2,12 @@ import LIVR from "livr";
 import extraRules from "livr-extra-rules";
 
 import rules from "./rules";
-import { NOT_EQUAL_ERRORS, REQUIRED_ERRORS, TOO_SHORT_ERRORS } from "./errors";
+import {
+  NOT_EQUAL_ERRORS,
+  REQUIRED_ERRORS,
+  TOO_SHORT_ERRORS,
+  TOO_LONG_ERRORS,
+} from "./errors";
 
 LIVR.Validator.registerDefaultRules(extraRules);
 LIVR.Validator.defaultAutoTrim(true);
@@ -36,6 +41,10 @@ export function validateRestorePassword(args) {
 
 export function validateUser(args) {
   return validate({ rule: rules.user, ...args });
+}
+
+export function validateUserWithPassword(args) {
+  return validate({ rule: rules.userWithPassword, ...args });
 }
 
 export function mapErrors(error) {
@@ -77,6 +86,12 @@ export function decodeErrorCode(code, field = "") {
       const errorMessage = field && TOO_SHORT_ERRORS[field];
 
       return errorMessage || "Value is too short";
+    }
+
+    case "TOO_LONG": {
+      const errorMessage = field && TOO_LONG_ERRORS[field];
+
+      return errorMessage || "Value is too long";
     }
 
     case "WRONG_EMAIL": {

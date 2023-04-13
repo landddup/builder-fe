@@ -33,7 +33,6 @@ const SignIn = () => {
       placeholder: "Password",
       errorMessage: "",
       name: "password",
-      type: "password",
       required: true,
       secured: true,
     },

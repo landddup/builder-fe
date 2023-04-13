@@ -18,6 +18,7 @@ const Input = ({
   type,
   required,
   onChange,
+  ...rest
 }) => {
   const [isValueHidden, setIsValueHidden] = useState(secured);
 
@@ -67,6 +68,7 @@ const Input = ({
           type={isValueHidden ? "password" : type}
           required={required}
           onChange={handleChange}
+          {...rest}
         />
 
         {secured && (
