@@ -27,10 +27,7 @@
 .projects,
 .blockHeader {
     background-color: #ffffff;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 20px;
+    @include adaptiveLayout;
     grid-template-areas:
         "title"
         "button";
@@ -67,7 +64,6 @@
 @include mobile-md {
     .projects,
     .blockHeader {
-        grid-template-columns: repeat(2, 1fr);
         grid-template-areas: "title button";
     }
 }
@@ -75,7 +71,6 @@
 @include mobile-lg {
     .projects,
     .blockHeader {
-        grid-template-columns: repeat(3, 1fr);
         grid-template-areas: "title . button";
     }
 }
