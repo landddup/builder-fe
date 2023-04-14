@@ -28,6 +28,16 @@ const SideMenu = ({ className }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
+  useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+    } else {
+      document.body.style.overflow = "visible";
+      document.body.style.position = "static";
+    }
+  }, [isVisible]);
+
   return (
     <div className={classNames(styles.container, className)}>
       <Burger onClick={setIsVisible} isVisible={isVisible} />
