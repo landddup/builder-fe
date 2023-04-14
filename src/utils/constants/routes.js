@@ -32,6 +32,6 @@ export const PRIVATE_ROUTES = {
   [PROFILE]: {
     element: Profile,
     layout: MainLayout,
-    title: "Profile settings",
+    title: "Profile Settings",
   },
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
@@ -34,11 +34,20 @@ const SideMenu = ({ className }) => {
 
       <div className={menuClassName}>
         <nav className={styles.nav}>
-          {Object.keys(PRIVATE_ROUTES).map((routeKey) => {
+          {Object.keys(PRIVATE_ROUTES).map((routeKey, index) => {
             return (
-              <CustomLink key={routeKey} to={routeKey} className={styles.link}>
-                {PRIVATE_ROUTES[routeKey].title}
-              </CustomLink>
+              <Fragment key={routeKey}>
+                {index > 0 && <div className={styles.linkSeparator} />}
+
+                <CustomLink
+                  to={routeKey}
+                  className={({ isActive }) =>
+                    classNames(styles.link, { [styles.linkActive]: isActive })
+                  }
+                >
+                  {PRIVATE_ROUTES[routeKey].title}
+                </CustomLink>
+              </Fragment>
             );
           })}
         </nav>
