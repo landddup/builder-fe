@@ -7,10 +7,8 @@ import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "./utils/constants/routes";
 import { sessionActions } from "./actions";
 
 import { WithRedirect } from "./components/hoc";
-import Logo from "./components/base/Logo";
-import LoadingIndicator from "./components/base/LoadingIndicator";
 
-import "./styles/index.scss";
+import LoadingContainer from "./components/containers/LoadingContainer";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -33,18 +31,7 @@ const Navigation = () => {
 
   return (
     <Router>
-      {isLoading ? (
-        <div className="loading">
-          <Logo className="loading__logo" />
-
-          <LoadingIndicator
-            color="#3f51b5"
-            secondaryColor="#3f51b5"
-            width={40}
-            height={40}
-          />
-        </div>
-      ) : (
+      <LoadingContainer isLoading={isLoading} withLogo>
         <WithRedirect routes={navigationRoutes}>
           <Routes>
             {Object.keys(navigationRoutes).map((routeKey) => {
@@ -65,7 +52,7 @@ const Navigation = () => {
             })}
           </Routes>
         </WithRedirect>
-      )}
+      </LoadingContainer>
     </Router>
   );
 };

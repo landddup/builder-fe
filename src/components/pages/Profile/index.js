@@ -11,12 +11,12 @@ import {
 import { PROVIDERS } from "../../../utils/constants/firebase";
 import { sessionActions } from "../../../actions";
 
-import Input from "../../base/Input";
+import Block from "../../base/Block";
+import SvgIcon from "../../base/SvgIcon";
 import Button from "../../base/Button";
+import Input from "../../base/Input";
 
 import styles from "./index.module.scss";
-import SvgIcon from "../../base/SvgIcon";
-import Block from "../../base/Block";
 
 const ALLOWED_PROFILE_FIELDS = {
   displayName: {
@@ -189,7 +189,6 @@ const Profile = () => {
               type="submit"
               label="Update profile"
               isLoading={fetching.profile}
-              className={styles.button}
             />
           </div>
         </form>

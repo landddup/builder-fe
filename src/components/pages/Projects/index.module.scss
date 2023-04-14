@@ -1,0 +1,68 @@
+@import "../../../styles/mixins.scss";
+@import "../../../styles/variables.scss";
+
+.container {
+    flex: 1 1 auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+}
+
+.content {
+    padding-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.projects,
+.blockHeader {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    grid-template-areas:
+        "title"
+        "button";
+}
+
+.headerTitle {
+    grid-area: title;
+}
+
+.button {
+    grid-area: button;
+}
+
+.project {
+    border: 0;
+    outline: 0;
+    padding: 20px;
+    background-color: $indigo-50;
+    cursor: pointer;
+    transition: all ease 0.15s;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: $indigo-100;
+    }
+}
+
+@include mobile-md {
+    .projects,
+    .blockHeader {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: "title button";
+    }
+}
+
+@include mobile-lg {
+    .projects,
+    .blockHeader {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "title . button";
+    }
+}

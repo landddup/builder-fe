@@ -1,0 +1,11 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.container {
+    padding: 20px 0;
+}
+
+.text {
+    color: $gray-500;
+    @include font-400;
+}

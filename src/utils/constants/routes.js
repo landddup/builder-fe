@@ -8,7 +8,7 @@ import SignUp from "../../components/pages/SignUp";
 import RestorePassword from "../../components/pages/RestorePassword";
 
 // PRIVATE PAGES
-import Main from "../../components/pages/Main";
+import Projects from "../../components/pages/Projects";
 import Profile from "../../components/pages/Profile";
 
 // PUBLIC ROUTES
@@ -28,7 +28,7 @@ export const PUBLIC_ROUTES = {
 };
 
 export const PRIVATE_ROUTES = {
-  [ROOT]: { element: Main, layout: MainLayout, title: "Main" },
+  [ROOT]: { element: Projects, layout: MainLayout, title: "My projects" },
   [PROFILE]: {
     element: Profile,
     layout: MainLayout,
