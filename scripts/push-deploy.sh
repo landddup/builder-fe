@@ -3,14 +3,12 @@ echo "Enter commit message"
 read commit
 echo "Enter target branch"
 read branch
-echo "Is branch already exist? y/n"
-read checkout
 
-if [$checkout="n"]
+if [[ -z `git branch --list $branch` ]]
 then
-    git checkout -b $branch
+    `git checkout -b $branch`
 else
-    git checkout $branch
+    `git checkout $branch`
 fi
 
 git add .
