@@ -11,7 +11,7 @@ import CustomLink from "../Link";
 import styles from "./index.module.scss";
 
 const SideMenu = ({ className }) => {
-  const { pathname } = useLocation();
+  const { key } = useLocation();
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -26,7 +26,7 @@ const SideMenu = ({ className }) => {
       setIsVisible(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, [key]);
 
   return (
     <div className={classNames(styles.container, className)}>
@@ -35,7 +35,6 @@ const SideMenu = ({ className }) => {
       <div className={menuClassName}>
         <nav className={styles.nav}>
           {Object.keys(PRIVATE_ROUTES).map((routeKey) => {
-            console.log(PRIVATE_ROUTES);
             return (
               <CustomLink key={routeKey} to={routeKey} className={styles.link}>
                 {PRIVATE_ROUTES[routeKey].title}

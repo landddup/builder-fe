@@ -1,13 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
-
-import SvgIcon from "../../../SvgIcon";
 
 import styles from "./index.module.scss";
 
 const Burger = ({ isVisible, onClick }) => {
-  const [isOpened, setIsOpened] = useState(isVisible);
+  const [isOpened, setIsOpened] = useState(false);
 
   const handleClick = () => {
     setIsOpened((prev) => !prev);
@@ -19,7 +16,7 @@ const Burger = ({ isVisible, onClick }) => {
   }, [isOpened]);
 
   useEffect(() => {
-    if (isOpened !== isVisible) {
+    if (isVisible !== isOpened) {
       setIsOpened(isVisible);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,22 +27,12 @@ const Burger = ({ isVisible, onClick }) => {
       <div
         className={classNames(styles.items, { [styles.itemsOpened]: isOpened })}
       >
-        <SvgIcon type="line" className={itemClassName} />
-        <SvgIcon type="line" className={itemClassName} />
-        <SvgIcon type="line" className={itemClassName} />
+        <span className={itemClassName} />
+        <span className={itemClassName} />
+        <span className={itemClassName} />
       </div>
     </button>
   );
-};
-
-Burger.propTypes = {
-  isVisible: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
-Burger.defaultProps = {
-  isVisible: false,
-  onClick: () => {},
 };
 
 export default Burger;
