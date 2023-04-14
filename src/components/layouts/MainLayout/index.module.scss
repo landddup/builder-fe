@@ -12,26 +12,14 @@
 
 .content {
     max-width: $mobile-md-width;
-    width: 100%;
     padding: 20px;
     box-sizing: border-box;
     transition: all 0.3s;
+    @include adaptiveWidth;
 }
 
 @include mobile-md {
     .content {
         padding: 40px 20px;
-    }
-}
-
-@include mobile-lg {
-    .content {
-        max-width: 750px;
-    }
-}
-
-@include tablet {
-    .content {
-        max-width: 980px;
     }
 }

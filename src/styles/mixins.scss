@@ -1,5 +1,6 @@
 @import "./variables.scss";
 
+// FONTS
 @mixin font-100 {
     font-weight: 100;
 }
@@ -36,6 +37,7 @@
     font-weight: 900;
 }
 
+// BREAK POINTS
 @mixin mobile-sm {
     @media screen and (min-width: $mobile-sm-width) {
         @content;
@@ -69,5 +71,22 @@
 @mixin desktop {
     @media screen and (min-width: $desktop-width) {
         @content;
+    }
+}
+
+// OTHER
+@mixin adaptiveWidth {
+    width: 100%;
+
+    @include mobile-lg {
+        & {
+            max-width: 750px;
+        }
+    }
+
+    @include tablet {
+        & {
+            max-width: 980px;
+        }
     }
 }

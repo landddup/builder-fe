@@ -15,13 +15,13 @@
 
 .content {
     max-width: $mobile-md-width;
-    width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s;
+    @include adaptiveWidth;
 }
 
 .logo {
@@ -37,18 +37,6 @@
     display: none;
     align-items: center;
     gap: 10px;
-}
-
-@include mobile-lg {
-    .content {
-        max-width: 750px;
-    }
-}
-
-@include tablet {
-    .content {
-        max-width: 980px;
-    }
 }
 
 @include desktop {
