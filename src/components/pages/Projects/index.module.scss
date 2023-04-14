@@ -18,8 +18,15 @@
     gap: 30px;
 }
 
+.block {
+    position: relative;
+    padding-top: 10px;
+    gap: 0;
+}
+
 .projects,
 .blockHeader {
+    background-color: #ffffff;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -27,6 +34,12 @@
     grid-template-areas:
         "title"
         "button";
+}
+
+.blockHeader {
+    position: sticky;
+    top: 70px;
+    padding: 10px 0;
 }
 
 .headerTitle {

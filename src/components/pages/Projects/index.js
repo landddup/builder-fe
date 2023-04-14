@@ -29,7 +29,7 @@ const Projects = () => {
   return (
     <div className={styles.container}>
       <LoadingContainer isLoading={isLoading}>
-        <Block>
+        <Block className={styles.block}>
           <div className={styles.blockHeader}>
             <h2 className={styles.headerTitle}>My projects</h2>
 
