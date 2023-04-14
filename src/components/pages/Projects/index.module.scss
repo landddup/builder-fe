@@ -26,8 +26,8 @@
 
 .projects,
 .blockHeader {
-    background-color: #ffffff;
     @include adaptiveLayout;
+    background-color: #ffffff;
     grid-template-areas:
         "title"
         "button";
@@ -50,7 +50,7 @@
 .project {
     border: 0;
     outline: 0;
-    padding: 20px;
+    padding: 40px;
     background-color: $indigo-50;
     cursor: pointer;
     transition: all ease 0.15s;
