@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
-import { PRIVATE_ROUTES } from "../../../utils/constants/routes";
+import { PRIVATE_ROUTES, PROFILE, ROOT } from "../../../utils/constants/routes";
 
 import Burger from "./molecules/Burger";
 import CustomLink from "../Link";
@@ -20,6 +20,15 @@ const SideMenu = ({ className }) => {
       [styles.menuContainerVisible]: isVisible,
     });
   }, [isVisible]);
+
+  const routeKeys = useMemo(() => {
+    const ALLOWED_ROUTES = [ROOT, PROFILE];
+    const output = Object.keys(PRIVATE_ROUTES).filter((routeKey) =>
+      ALLOWED_ROUTES.includes(routeKey)
+    );
+
+    return output;
+  }, []);
 
   useEffect(() => {
     if (isVisible) {
@@ -44,7 +53,7 @@ const SideMenu = ({ className }) => {
 
       <div className={menuClassName}>
         <nav className={styles.nav}>
-          {Object.keys(PRIVATE_ROUTES).map((routeKey, index) => {
+          {routeKeys.map((routeKey, index) => {
             return (
               <Fragment key={routeKey}>
                 {index > 0 && <div className={styles.linkSeparator} />}

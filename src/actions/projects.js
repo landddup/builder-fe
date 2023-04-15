@@ -1,4 +1,5 @@
 import { nanoid } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
 import { toastActions } from ".";
 import { db, dbFunctions } from "../firebase-config";
@@ -6,16 +7,26 @@ import { updateProjects } from "../reducers/projects";
 import { COLLECTION_TYPES } from "../utils/constants/firebase";
 import { TOAST_TYPES } from "../utils/constants/toast";
 
+function sortByDate(items) {
+  const output = items.sort((a, b) =>
+    dayjs(a.createdAt).isAfter(b.createdAt) ? -1 : 1
+  );
+
+  return output;
+}
+
 export function subscribeOnProjects(uid) {
   return (dispatch) => {
     const unsubscribe = dbFunctions.onSnapshot(
       dbFunctions.collection(db, `${COLLECTION_TYPES.PROJECTS}/${uid}/items`),
       async (doc) => {
-        const projectsList = [];
+        let projectsList = [];
 
         doc.forEach((el) => projectsList.push(el.data()));
 
-        await dispatch(updateProjects({ projectsList: projectsList }));
+        await dispatch(
+          updateProjects({ projectsList: sortByDate(projectsList) })
+        );
       }
     );
 
@@ -26,7 +37,7 @@ export function subscribeOnProjects(uid) {
 export function addNewProject({ uid, ...rest }) {
   return async (dispatch) => {
     try {
-      const newProject = { id: nanoid(), ...rest };
+      const newProject = { id: nanoid(), createdAt: dayjs().unix(), ...rest };
       const collectionRef = dbFunctions.collection(
         db,
         `${COLLECTION_TYPES.PROJECTS}/${uid}/items`

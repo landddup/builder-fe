@@ -10,6 +10,7 @@ import RestorePassword from "../../components/pages/RestorePassword";
 // PRIVATE PAGES
 import Projects from "../../components/pages/Projects";
 import Profile from "../../components/pages/Profile";
+import Project from "../../components/pages/Project";
 
 // PUBLIC ROUTES
 export const ROOT = "/";
@@ -19,6 +20,8 @@ export const RESTORE_PASSWORD = `${ROOT}restore-password`;
 
 // PRIVATE ROUTES
 export const PROFILE = `${ROOT}profile`;
+export const PROJECTS = `${ROOT}projects`;
+export const PROJECT = `${ROOT}projects${ROOT}:projectId`;
 
 export const PUBLIC_ROUTES = {
   [ROOT]: { element: SignIn, layout: AuthLayout },
@@ -33,5 +36,13 @@ export const PRIVATE_ROUTES = {
     element: Profile,
     layout: MainLayout,
     title: "Profile Settings",
+  },
+  [PROJECTS]: {
+    element: Projects,
+    layout: MainLayout,
+  },
+  [PROJECT]: {
+    element: Project,
+    layout: MainLayout,
   },
 };

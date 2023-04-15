@@ -24,19 +24,39 @@
 .preview {
     border: 0;
     outline: 0;
-    padding: 40px;
-    background-color: $indigo-50;
+    padding: 60px;
+    background-color: $grey-200;
     cursor: pointer;
     transition: all ease 0.15s;
     border-radius: 4px;
+    box-sizing: border-box;
+}
 
-    &:hover {
-        background-color: $indigo-100;
-        transform: scale(1.03);
-    }
+.link {
+    width: 100%;
 }
 
 .projectTitle {
     font-size: 18px;
     @include font-600;
+}
+
+@include desktop {
+    .preview {
+        &:hover {
+            background-color: $grey-300;
+            transform: scale(1.03);
+
+            & .editButton {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+    }
+
+    .editButton {
+        opacity: 0;
+        pointer-events: none;
+        transition: all ease 0.15s;
+    }
 }
