@@ -160,15 +160,11 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <Block>
-        <h2>Profile completion</h2>
-
+      <Block title="Profile completion" stickyHeader>
         <div className={styles.content}>{renderEmailVerificationContent()}</div>
       </Block>
 
-      <Block>
-        <h2>Profile Info</h2>
-
+      <Block title="Profile info" stickyHeader>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.content}>
             {Object.keys(inputs).map((inputKey) => {

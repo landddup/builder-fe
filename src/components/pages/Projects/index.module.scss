@@ -1,13 +1,6 @@
 @import "../../../styles/mixins.scss";
 @import "../../../styles/variables.scss";
 
-.container {
-    flex: 1 1 auto;
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 20px;
-}
-
 .content {
     padding-top: 10px;
     width: 100%;
@@ -18,33 +11,8 @@
     gap: 30px;
 }
 
-.block {
-    position: relative;
-    padding-top: 10px;
-    gap: 0;
-}
-
-.projects,
-.blockHeader {
+.projects {
     @include adaptiveLayout;
-    background-color: #ffffff;
-    grid-template-areas:
-        "title"
-        "button";
-}
-
-.blockHeader {
-    position: sticky;
-    top: 70px;
-    padding: 10px 0;
-}
-
-.headerTitle {
-    grid-area: title;
-}
-
-.button {
-    grid-area: button;
 }
 
 .project {
@@ -58,19 +26,5 @@
 
     &:hover {
         background-color: $indigo-100;
-    }
-}
-
-@include mobile-md {
-    .projects,
-    .blockHeader {
-        grid-template-areas: "title button";
-    }
-}
-
-@include mobile-lg {
-    .projects,
-    .blockHeader {
-        grid-template-areas: "title . button";
     }
 }

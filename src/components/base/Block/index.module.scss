@@ -1,11 +1,53 @@
+@import "../../../styles/mixins.scss";
+
 .container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 10px;
     background-color: #ffffff;
     border-radius: 4px;
-    padding: 20px;
+    padding: 10px 20px 20px;
     box-shadow: 0 0 10px rgba(192, 192, 192, 0.54);
     box-sizing: border-box;
     transition: all 0.3s;
+}
+
+.header {
+    @include adaptiveLayout;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: #ffffff;
+    grid-template-areas:
+        "title"
+        "button";
+}
+
+.title {
+    grid-area: title;
+}
+
+.button {
+    grid-area: button;
+}
+
+.relative {
+    position: relative;
+}
+
+.sticky {
+    position: sticky;
+    z-index: 1;
+    top: 70px;
+}
+
+@include mobile-md {
+    .header {
+        grid-template-areas: "title button";
+    }
+}
+
+@include mobile-lg {
+    .header {
+        grid-template-areas: "title . button";
+    }
 }

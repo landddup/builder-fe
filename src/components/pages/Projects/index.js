@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { projectsActions } from "../../../actions";
+
 import Block from "../../base/Block";
 import LoadingContainer from "../../containers/LoadingContainer";
 import DummyProjects from "./molecules/DummyProjects";
 
 import styles from "./index.module.scss";
-import { projectsActions } from "../../../actions";
-import Button from "../../base/Button";
 
 const Projects = () => {
   const dispatch = useDispatch();
+
   const {
     projects: { isLoading, projectsList },
     session: { currentSession },
@@ -29,18 +30,13 @@ const Projects = () => {
   return (
     <div className={styles.container}>
       <LoadingContainer isLoading={isLoading}>
-        <Block className={styles.block}>
-          <div className={styles.blockHeader}>
-            <h2 className={styles.headerTitle}>My projects</h2>
-
-            <Button
-              label="Add new project"
-              isLoading={fetching}
-              onClick={handleAddProject}
-              className={styles.button}
-            />
-          </div>
-
+        <Block
+          title="My projects"
+          button="Add new project"
+          isLoading={fetching}
+          onClick={handleAddProject}
+          stickyHeader
+        >
           <div className={styles.content}>
             {!!projectsList.length ? (
               <div className={styles.projects}>
