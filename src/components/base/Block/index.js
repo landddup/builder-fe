@@ -19,20 +19,24 @@ const Block = ({
         [styles.relative]: stickyHeader,
       })}
     >
-      <div
-        className={classNames(styles.header, { [styles.sticky]: stickyHeader })}
-      >
-        <h2 className={styles.title}>{title}</h2>
+      {(title || button) && (
+        <div
+          className={classNames(styles.header, {
+            [styles.sticky]: stickyHeader,
+          })}
+        >
+          <h2 className={styles.title}>{title}</h2>
 
-        {button && (
-          <Button
-            label={button}
-            isLoading={isLoading}
-            onClick={onClick}
-            className={styles.button}
-          />
-        )}
-      </div>
+          {button && (
+            <Button
+              label={button}
+              isLoading={isLoading}
+              onClick={onClick}
+              className={styles.button}
+            />
+          )}
+        </div>
+      )}
 
       {children}
     </div>

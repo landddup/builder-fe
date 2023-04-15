@@ -10,7 +10,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     font-family: "Roboto Flex", sans-serif;
-    color: $gray-900;
+    color: $grey-900;
     box-sizing: border-box;
     @include font-500;
 
@@ -53,7 +53,7 @@ p::selection,
 span::selection,
 input::selection {
     background-color: $indigo-500;
-    color: $gray-50;
+    color: $grey-50;
 }
 
 #root {

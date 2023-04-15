@@ -36,7 +36,6 @@
     padding: 20px 20px 0;
     box-sizing: border-box;
     transition: all 0.3s;
-    max-width: $mobile-md-width;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -52,7 +51,7 @@
 
 .link {
     font-size: 18px;
-    color: $gray-500;
+    color: $grey-500;
     transition: all 0.3s;
     @include font-400;
 

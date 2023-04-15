@@ -5,7 +5,7 @@ import { toastActions } from "../../../actions";
 
 import Toast from "../../base/Toast";
 
-const ToastContainer = () => {
+const ToastContainer = ({ children }) => {
   const dispatch = useDispatch();
   const hideRef = useRef();
 
@@ -22,7 +22,13 @@ const ToastContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);
 
-  return <Toast type={type} message={message} />;
+  return (
+    <div>
+      {children}
+
+      <Toast type={type} message={message} />
+    </div>
+  );
 };
 
 export default ToastContainer;

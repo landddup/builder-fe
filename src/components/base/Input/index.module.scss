@@ -12,7 +12,7 @@
 
 .label {
     display: block;
-    color: $gray-800;
+    color: $grey-800;
     font-size: 12px;
     margin-bottom: 7px;
     @include font-500;
@@ -28,21 +28,21 @@
     box-sizing: border-box;
     padding: 0 12px;
     border-radius: 4px;
-    border: 1px solid $gray-400;
+    border: 1px solid $grey-400;
     outline: 0;
     font-size: 14px;
     @include font-500;
 
     &::placeholder {
-        color: $gray-500;
+        color: $grey-500;
         font-size: 14px;
         @include font-500;
     }
 
     &:disabled {
         cursor: not-allowed;
-        border: 1px solid $gray-300;
-        background-color: $gray-100;
+        border: 1px solid $grey-300;
+        background-color: $grey-100;
     }
 
     &Error {

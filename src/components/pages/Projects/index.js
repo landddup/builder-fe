@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { projectsActions } from "../../../actions";
+import { modalActions } from "../../../actions";
 
 import Block from "../../base/Block";
 import LoadingContainer from "../../containers/LoadingContainer";
@@ -11,20 +11,14 @@ import styles from "./index.module.scss";
 
 const Projects = () => {
   const dispatch = useDispatch();
+  const { isLoading, projectsList } = useSelector((state) => state.projects);
 
-  const {
-    projects: { isLoading, projectsList },
-    session: { currentSession },
-  } = useSelector((state) => state);
-
-  const [fetching, setFetching] = useState(false);
-
-  const handleAddProject = async () => {
-    setFetching(true);
-
-    await dispatch(projectsActions.addNewProject(currentSession.uid));
-
-    setFetching(false);
+  const showAddProjectModal = async () => {
+    dispatch(
+      modalActions.showModal({
+        type: "createProject",
+      })
+    );
   };
 
   return (
@@ -33,8 +27,7 @@ const Projects = () => {
         <Block
           title="My projects"
           button="Add new project"
-          isLoading={fetching}
-          onClick={handleAddProject}
+          onClick={showAddProjectModal}
           stickyHeader
         >
           <div className={styles.content}>

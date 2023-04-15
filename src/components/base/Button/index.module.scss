@@ -42,7 +42,7 @@
     }
 
     &:disabled {
-        background-color: $gray-500;
+        background-color: $grey-500;
         cursor: not-allowed;
     }
 }
@@ -58,7 +58,7 @@
     }
 
     &:disabled {
-        background-color: $gray-300;
+        background-color: $grey-300;
         border: 2px solid $indigo-300;
         color: $indigo-300;
         cursor: not-allowed;
