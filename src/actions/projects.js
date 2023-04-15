@@ -23,10 +23,10 @@ export function subscribeOnProjects(uid) {
   };
 }
 
-export function addNewProject(uid) {
+export function addNewProject({ uid, ...rest }) {
   return async (dispatch) => {
     try {
-      const newProject = { id: nanoid() };
+      const newProject = { id: nanoid(), ...rest };
       const collectionRef = dbFunctions.collection(
         db,
         `${COLLECTION_TYPES.PROJECTS}/${uid}/items`

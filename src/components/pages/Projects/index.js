@@ -34,9 +34,15 @@ const Projects = () => {
             {!!projectsList.length ? (
               <div className={styles.projects}>
                 {projectsList.map((project) => {
-                  const { id } = project;
+                  const { id, title } = project;
 
-                  return <button key={id} className={styles.project} />;
+                  return (
+                    <div key={id} className={styles.project}>
+                      <div className={styles.preview} />
+
+                      <p className={styles.projectTitle}>{title}</p>
+                    </div>
+                  );
                 })}
               </div>
             ) : (

@@ -1,0 +1,40 @@
+@import "../../../../../styles/mixins.scss";
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.inputs,
+.buttons {
+    @include adaptiveLayout;
+}
+
+.buttons {
+    grid-template-areas:
+        "cancel"
+        "submit";
+}
+
+.cancelButton {
+    grid-area: cancel;
+}
+
+.submitButton {
+    grid-area: submit;
+}
+
+@include mobile-md {
+    .buttons {
+        grid-template-areas: "cancel submit";
+    }
+}
+
+@include mobile-lg {
+    .buttons {
+        grid-template-areas: "cancel . submit";
+    }
+}

@@ -107,6 +107,7 @@
     @include mobile-lg {
         & {
             grid-template-columns: repeat(3, 1fr);
+            column-gap: 40px;
         }
     }
 }
