@@ -6,10 +6,10 @@ import { modalActions } from "../../../actions";
 import LoadingContainer from "../../containers/LoadingContainer";
 import Block from "../../base/Block";
 import DummyProjects from "./molecules/DummyProjects";
-import Button from "../../base/Button";
+import Button from "../../shared/Button";
 
 import styles from "./index.module.scss";
-import CustomLink from "../../base/Link";
+import CustomLink from "../../shared/Link";
 
 const Projects = () => {
   const dispatch = useDispatch();

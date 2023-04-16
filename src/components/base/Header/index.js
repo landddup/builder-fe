@@ -6,8 +6,8 @@ import { PROFILE } from "../../../utils/constants/routes";
 
 import Logo from "../Logo";
 import SideMenu from "../SideMenu";
-import CustomLink from "../Link";
-import SvgButton from "../SvgButton";
+import CustomLink from "../../shared/Link";
+import SvgButton from "../../shared/SvgButton";
 
 import styles from "./index.module.scss";
 

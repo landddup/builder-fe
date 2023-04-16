@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { PRIVATE_ROUTES, PROFILE, ROOT } from "../../../utils/constants/routes";
 
 import Burger from "./molecules/Burger";
-import CustomLink from "../Link";
+import CustomLink from "../../shared/Link";
 
 import styles from "./index.module.scss";
 

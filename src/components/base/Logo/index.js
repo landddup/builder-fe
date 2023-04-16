@@ -4,8 +4,8 @@ import classNames from "classnames";
 
 import { ROOT } from "../../../utils/constants/routes";
 
-import CustomLink from "../Link";
-import SvgIcon from "../SvgIcon";
+import CustomLink from "../../shared/Link";
+import SvgIcon from "../../shared/SvgIcon";
 
 import styles from "./index.module.scss";
 

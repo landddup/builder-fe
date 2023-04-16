@@ -47,10 +47,6 @@ export function validateProfileWithPassword(args) {
   return validate({ rule: rules.profileWithPassword, ...args });
 }
 
-export function validateCreateProject(args) {
-  return validate({ rule: rules.createProject, ...args });
-}
-
 export function mapErrors(error) {
   const mapedErrors = {};
 

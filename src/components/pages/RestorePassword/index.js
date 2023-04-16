@@ -6,9 +6,9 @@ import { validateRestorePassword } from "../../../utils/validation";
 import { sessionActions } from "../../../actions";
 import { SIGN_IN, SIGN_UP } from "../../../utils/constants/routes";
 
-import Input from "../../base/Input";
-import Button from "../../base/Button";
-import CustomLink from "../../base/Link";
+import Input from "../../shared/Input";
+import Button from "../../shared/Button";
+import CustomLink from "../../shared/Link";
 
 import styles from "./index.module.scss";
 

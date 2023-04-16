@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import styles from "./index.module.scss";
-import Button from "../Button";
+import Button from "../../shared/Button";
 
 const Block = ({
   title,

@@ -12,9 +12,9 @@ import { PROVIDERS } from "../../../utils/constants/firebase";
 import { sessionActions } from "../../../actions";
 
 import Block from "../../base/Block";
-import SvgIcon from "../../base/SvgIcon";
-import Button from "../../base/Button";
-import Input from "../../base/Input";
+import SvgIcon from "../../shared/SvgIcon";
+import Button from "../../shared/Button";
+import Input from "../../shared/Input";
 
 import styles from "./index.module.scss";
 

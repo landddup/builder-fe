@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Logo from "../../base/Logo";
-import LoadingIndicator from "../../base/LoadingIndicator";
+import LoadingIndicator from "../../shared/LoadingIndicator";
 
 import styles from "./index.module.scss";
 
