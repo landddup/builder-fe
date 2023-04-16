@@ -31,11 +31,10 @@ export const PUBLIC_ROUTES = {
 };
 
 export const PRIVATE_ROUTES = {
-  [ROOT]: { element: Projects, layout: MainLayout, title: "My projects" },
+  [ROOT]: { element: Projects, layout: MainLayout },
   [PROFILE]: {
     element: Profile,
     layout: MainLayout,
-    title: "Profile Settings",
   },
   [PROJECTS]: {
     element: Projects,
@@ -45,4 +44,9 @@ export const PRIVATE_ROUTES = {
     element: Project,
     layout: MainLayout,
   },
+};
+
+export const SIDE_MENU_ROUTES = {
+  [ROOT]: "My projects",
+  [PROFILE]: "Profile settings",
 };

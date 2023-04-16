@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
-import { PRIVATE_ROUTES, PROFILE, ROOT } from "../../../utils/constants/routes";
+import { SIDE_MENU_ROUTES } from "../../../utils/constants/routes";
 
 import Burger from "./molecules/Burger";
 import CustomLink from "../../shared/Link";
@@ -20,15 +20,6 @@ const SideMenu = ({ className }) => {
       [styles.menuContainerVisible]: isVisible,
     });
   }, [isVisible]);
-
-  const routeKeys = useMemo(() => {
-    const ALLOWED_ROUTES = [ROOT, PROFILE];
-    const output = Object.keys(PRIVATE_ROUTES).filter((routeKey) =>
-      ALLOWED_ROUTES.includes(routeKey)
-    );
-
-    return output;
-  }, []);
 
   useEffect(() => {
     if (isVisible) {
@@ -53,7 +44,7 @@ const SideMenu = ({ className }) => {
 
       <div className={menuClassName}>
         <nav className={styles.nav}>
-          {routeKeys.map((routeKey, index) => {
+          {Object.keys(SIDE_MENU_ROUTES).map((routeKey, index) => {
             return (
               <Fragment key={routeKey}>
                 {index > 0 && <div className={styles.linkSeparator} />}
@@ -64,7 +55,7 @@ const SideMenu = ({ className }) => {
                     classNames(styles.link, { [styles.linkActive]: isActive })
                   }
                 >
-                  {PRIVATE_ROUTES[routeKey].title}
+                  {SIDE_MENU_ROUTES[routeKey]}
                 </CustomLink>
               </Fragment>
             );
