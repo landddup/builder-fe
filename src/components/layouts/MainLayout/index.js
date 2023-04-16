@@ -11,16 +11,12 @@ const MainLayout = ({ children }) => {
   const { uid } = useSelector((state) => state.session.currentSession);
   const dispatch = useDispatch();
 
-  const initProjects = async () => {
-    return await dispatch(projectsActions.subscribeOnProjects(uid));
+  const initProjects = () => {
+    dispatch(projectsActions.subscribeOnProjects(uid));
   };
 
   useEffect(() => {
-    (async () => {
-      const unsibscribe = await initProjects();
-
-      return unsibscribe;
-    })();
+    initProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

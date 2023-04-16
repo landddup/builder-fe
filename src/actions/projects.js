@@ -23,7 +23,7 @@ export function setProjects(projectsList) {
 
 export function subscribeOnProjects(uid) {
   return (dispatch) => {
-    const unsubscribe = dbFunctions.onSnapshot(
+    dbFunctions.onSnapshot(
       dbFunctions.collection(db, `${COLLECTION_TYPES.PROJECTS}/${uid}/items`),
       async (doc) => {
         let projectsList = [];
@@ -32,14 +32,12 @@ export function subscribeOnProjects(uid) {
 
         await dispatch(setProjects(sortByDate(projectsList)));
       },
-      (error) => {
+      async (error) => {
         console.log("subscribeOnProjects error: ", error);
 
-        dispatch(clearProjects());
+        await dispatch(clearProjects());
       }
     );
-
-    return unsubscribe;
   };
 }
 
