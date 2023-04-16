@@ -50,10 +50,9 @@
 }
 
 .link {
-    font-size: 18px;
+    font-size: 22px;
     color: $grey-500;
     transition: all 0.3s;
-    @include font-400;
 
     &:hover {
         color: $indigo-500;
