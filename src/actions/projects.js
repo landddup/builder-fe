@@ -3,7 +3,14 @@ import dayjs from "dayjs";
 
 import { toastActions } from ".";
 import { db, dbFunctions } from "../firebase-config";
-import { updateProjects, clearProjects } from "../reducers/projects";
+
+import {
+  updateProjects,
+  updateTemplates,
+  clearProjects,
+  clearTemplates,
+} from "../reducers/projects";
+
 import { COLLECTION_TYPES } from "../utils/constants/firebase";
 import { TOAST_TYPES } from "../utils/constants/toast";
 
@@ -18,6 +25,12 @@ function sortByDate(items) {
 export function setProjects(projectsList) {
   return async (dispatch) => {
     await dispatch(updateProjects({ projectsList }));
+  };
+}
+
+export function setTemplates(templates) {
+  return async (dispatch) => {
+    await dispatch(updateTemplates({ templates }));
   };
 }
 
@@ -36,6 +49,30 @@ export function subscribeOnProjects(uid) {
         console.log("subscribeOnProjects error: ", error);
 
         await dispatch(clearProjects());
+      }
+    );
+  };
+}
+
+export function subscribeOnTemplates() {
+  return (dispatch) => {
+    dbFunctions.onSnapshot(
+      dbFunctions.collection(db, COLLECTION_TYPES.TEMPLATES),
+      async (doc) => {
+        let templates = [];
+
+        doc.forEach((el) => {
+          const data = el.data();
+
+          templates.push({ ...data, createdAt: data.createdAt.seconds });
+        });
+
+        await dispatch(setTemplates(sortByDate(templates)));
+      },
+      async (error) => {
+        console.log("subscribeOnTemplates error: ", error);
+
+        await dispatch(clearTemplates());
       }
     );
   };

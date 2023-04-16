@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 const DummyProjects = () => {
   return (
     <div className={styles.container}>
-      <p className={styles.text}>You don't have any projects</p>
+      <p className={styles.text}>No projects yet</p>
     </div>
   );
 };

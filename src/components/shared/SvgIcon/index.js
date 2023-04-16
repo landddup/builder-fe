@@ -10,6 +10,7 @@ import { ReactComponent as Logout } from "../../../images/logout.svg";
 import { ReactComponent as XCircle } from "../../../images/x-circle.svg";
 import { ReactComponent as Check } from "../../../images/check.svg";
 import { ReactComponent as Plus } from "../../../images/plus.svg";
+import { ReactComponent as GridAdd } from "../../../images/grid-add.svg";
 
 // SOCIAL
 import { ReactComponent as Google } from "../../../images/google.svg";
@@ -24,6 +25,7 @@ const SvgIcon = ({ type, className, onClick }) => {
     xcircle: XCircle,
     check: Check,
     plus: Plus,
+    gridAdd: GridAdd,
   };
 
   const SOCIAL = {

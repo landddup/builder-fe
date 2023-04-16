@@ -13,6 +13,7 @@ const MainLayout = ({ children }) => {
 
   const initProjects = () => {
     dispatch(projectsActions.subscribeOnProjects(uid));
+    dispatch(projectsActions.subscribeOnTemplates());
   };
 
   useEffect(() => {
