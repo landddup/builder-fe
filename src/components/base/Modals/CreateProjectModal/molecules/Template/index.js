@@ -17,9 +17,6 @@ const Template = ({ title, onAdd }) => {
       exactly: 1,
       wordsPerString: 2,
       join: " ",
-      formatter: (word) => {
-        return word.slice(0, 1).toUpperCase().concat(word.slice(1));
-      },
     });
 
     await onAdd({ title });

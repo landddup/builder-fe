@@ -1,0 +1,59 @@
+@import "../../../../../styles/variables.scss";
+@import "../../../../../styles/mixins.scss";
+
+.project {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+}
+
+.preview {
+    border: 0;
+    outline: 0;
+    padding: 20px;
+    height: 200px;
+    background-color: $grey-200;
+    transition: all ease 0.15s;
+    border-radius: 4px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.link {
+    width: 100%;
+}
+
+.projectTitle {
+    font-size: 22px;
+    text-align: center;
+    @include font-600;
+}
+
+.buttons {
+    position: absolute;
+    bottom: 20px;
+    width: calc(100% - 40px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    transition: all ease 0.15s;
+}
+
+@include desktop {
+    .preview {
+        &:hover {
+            background-color: $grey-300;
+            transform: scale(1.03);
+
+            .buttons {
+                opacity: 1;
+                transform: translate(0);
+            }
+        }
+    }
+
+    .buttons {
+        opacity: 0;
+        transform: translate(0, 20px);
+    }
+}

@@ -1,19 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { modalActions } from "../../../actions";
+import { modalActions, projectsActions } from "../../../actions";
 
 import LoadingContainer from "../../containers/LoadingContainer";
 import Block from "../../base/Block";
 import DummyProjects from "./molecules/DummyProjects";
-import Button from "../../shared/Button";
+import ProjectTile from "./molecules/ProjectTile";
 
 import styles from "./index.module.scss";
-import CustomLink from "../../shared/Link";
 
 const Projects = () => {
   const dispatch = useDispatch();
   const { isLoading, projectsList } = useSelector((state) => state.projects);
+  const { currentSession } = useSelector((state) => state.session);
 
   const showAddProjectModal = async () => {
     dispatch(
@@ -21,6 +21,16 @@ const Projects = () => {
         type: "createProject",
       })
     );
+  };
+
+  const deleteProject = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete the project?"
+    );
+
+    if (confirmDelete) {
+      await dispatch(projectsActions.deleteProject(currentSession.uid, id));
+    }
   };
 
   return (
@@ -39,20 +49,12 @@ const Projects = () => {
                   const { id, title } = project;
 
                   return (
-                    <div key={id} className={styles.project}>
-                      <CustomLink to={`projects/${id}`} className={styles.link}>
-                        <div className={styles.preview}>
-                          <Button
-                            className={styles.editButton}
-                            label="Edit"
-                            variant="outlined"
-                            size="large"
-                          />
-                        </div>
-                      </CustomLink>
-
-                      <p className={styles.projectTitle}>{title}</p>
-                    </div>
+                    <ProjectTile
+                      key={id}
+                      id={id}
+                      title={title}
+                      onDelete={deleteProject}
+                    />
                   );
                 })}
               </div>

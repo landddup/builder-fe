@@ -1,6 +1,7 @@
 // LAYOUTS
 import AuthLayout from "../../components/layouts/AuthLayout";
 import MainLayout from "../../components/layouts/MainLayout";
+import BuilderLayout from "../../components/layouts/BuilderLayout";
 
 // PUBLIC PAGES
 import SignIn from "../../components/pages/SignIn";
@@ -42,7 +43,7 @@ export const PRIVATE_ROUTES = {
   },
   [PROJECT]: {
     element: Project,
-    layout: MainLayout,
+    layout: BuilderLayout,
   },
 };
 

@@ -109,3 +109,43 @@ export function addNewProject({ uid, ...rest }) {
     }
   };
 }
+
+export function deleteProject(uid, id) {
+  return async (dispatch) => {
+    try {
+      const collectionRef = dbFunctions.collection(
+        db,
+        `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
+      );
+
+      const docsRef = await dbFunctions.getDocs(collectionRef);
+
+      docsRef.forEach(async (el) => {
+        const { id: docId } = el;
+        const { id: dataId } = el.data();
+
+        if (dataId === id) {
+          await dbFunctions.deleteDoc(dbFunctions.doc(collectionRef, docId));
+        }
+      });
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.SUCCESS,
+          duration: 3000,
+          message: "Project successfully deleted",
+        })
+      );
+    } catch (error) {
+      console.log("deleteProject error: ", error);
+
+      await dispatch(
+        toastActions.show({
+          type: TOAST_TYPES.ERROR,
+          duration: 3000,
+          message: "Project not deleted",
+        })
+      );
+    }
+  };
+}
