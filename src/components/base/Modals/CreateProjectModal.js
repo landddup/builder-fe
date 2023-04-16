@@ -63,7 +63,7 @@ const CreateProjectModal = () => {
   };
 
   return (
-    <Block title="New Project info">
+    <Block title="Create a new website">
       <FormModal
         inputs={inputs}
         submitButton="Add project"

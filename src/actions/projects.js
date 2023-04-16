@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 import { toastActions } from ".";
 import { db, dbFunctions } from "../firebase-config";
-import { updateProjects } from "../reducers/projects";
+import { updateProjects, clearProjects } from "../reducers/projects";
 import { COLLECTION_TYPES } from "../utils/constants/firebase";
 import { TOAST_TYPES } from "../utils/constants/toast";
 
@@ -15,6 +15,12 @@ function sortByDate(items) {
   return output;
 }
 
+export function setProjects(projectsList) {
+  return async (dispatch) => {
+    await dispatch(updateProjects({ projectsList }));
+  };
+}
+
 export function subscribeOnProjects(uid) {
   return (dispatch) => {
     const unsubscribe = dbFunctions.onSnapshot(
@@ -24,9 +30,12 @@ export function subscribeOnProjects(uid) {
 
         doc.forEach((el) => projectsList.push(el.data()));
 
-        await dispatch(
-          updateProjects({ projectsList: sortByDate(projectsList) })
-        );
+        await dispatch(setProjects(sortByDate(projectsList)));
+      },
+      (error) => {
+        console.log("subscribeOnProjects error: ", error);
+
+        dispatch(clearProjects());
       }
     );
 

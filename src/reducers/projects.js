@@ -11,9 +11,13 @@ export const projectsSlice = createSlice({
       state.projectsList = action.payload.projectsList;
       state.isLoading = false;
     },
+    clearProjects: (state, action) => {
+      state.projectsList = [];
+      state.isLoading = true;
+    },
   },
 });
 
-export const { updateProjects } = projectsSlice.actions;
+export const { updateProjects, clearProjects } = projectsSlice.actions;
 
 export default projectsSlice.reducer;
