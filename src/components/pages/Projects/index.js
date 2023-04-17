@@ -46,12 +46,12 @@ const Projects = () => {
             {!!projectsList.length ? (
               <div className={styles.projects}>
                 {projectsList.map((project) => {
-                  const { id, title } = project;
+                  const { dbId, title } = project;
 
                   return (
                     <ProjectTile
-                      key={id}
-                      id={id}
+                      key={dbId}
+                      id={dbId}
                       title={title}
                       onDelete={deleteProject}
                     />

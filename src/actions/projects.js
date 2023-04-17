@@ -41,7 +41,7 @@ export function subscribeOnProjects(uid) {
       async (doc) => {
         let projectsList = [];
 
-        doc.forEach((el) => projectsList.push(el.data()));
+        doc.forEach((el) => projectsList.push({ ...el.data(), dbId: el.id }));
 
         await dispatch(setProjects(sortByDate(projectsList)));
       },
@@ -110,7 +110,7 @@ export function addNewProject({ uid, ...rest }) {
   };
 }
 
-export function deleteProject(uid, id) {
+export function deleteProject(uid, dbId) {
   return async (dispatch) => {
     try {
       const collectionRef = dbFunctions.collection(
@@ -118,16 +118,7 @@ export function deleteProject(uid, id) {
         `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
       );
 
-      const docsRef = await dbFunctions.getDocs(collectionRef);
-
-      docsRef.forEach(async (el) => {
-        const { id: docId } = el;
-        const { id: dataId } = el.data();
-
-        if (dataId === id) {
-          await dbFunctions.deleteDoc(dbFunctions.doc(collectionRef, docId));
-        }
-      });
+      await dbFunctions.deleteDoc(dbFunctions.doc(collectionRef, dbId));
 
       await dispatch(
         toastActions.show({
