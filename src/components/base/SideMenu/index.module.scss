@@ -50,9 +50,11 @@
 }
 
 .link {
-    font-size: 22px;
+    @include font-medium-2xl;
     color: $grey-500;
     transition: all 0.3s;
+    text-align: left;
+    justify-content: flex-start;
 
     &:hover {
         color: $indigo-500;
@@ -65,6 +67,6 @@
 
 @include mobile-lg {
     .link {
-        font-size: 24px;
+        @include font-medium-3xl;
     }
 }

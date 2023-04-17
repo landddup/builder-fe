@@ -8,8 +8,7 @@
 }
 
 .title {
-    @include font-600;
-    font-size: 20px;
+    @include font-bold-2xl;
     text-align: center;
     user-select: none;
 }

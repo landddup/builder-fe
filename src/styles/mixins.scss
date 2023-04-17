@@ -1,40 +1,207 @@
 @import "./variables.scss";
 
 // FONTS
-@mixin font-100 {
-    font-weight: 100;
+@mixin font-sm {
+    font-size: 12px;
+    line-height: 16px;
 }
 
-@mixin font-200 {
-    font-weight: 200;
+@mixin font-base {
+    font-size: 14px;
+    line-height: 20px;
 }
 
-@mixin font-300 {
-    font-weight: 300;
+@mixin font-lg {
+    font-size: 16px;
+    line-height: 24px;
 }
 
-@mixin font-400 {
+@mixin font-xl {
+    font-size: 18px;
+    line-height: 26px;
+}
+
+@mixin font-2xl {
+    font-size: 20px;
+    line-height: 28px;
+}
+
+@mixin font-3xl {
+    font-size: 24px;
+    line-height: 32px;
+}
+
+@mixin font-4xl {
+    font-size: 32px;
+    line-height: 36px;
+}
+
+@mixin font-5xl {
+    font-size: 40px;
+    line-height: 40px;
+}
+
+@mixin font-6xl {
+    font-size: 48px;
+    line-height: 48px;
+}
+
+@mixin font-7xl {
+    font-size: 60px;
+    line-height: 60px;
+}
+
+// FONTS REGULAR
+@mixin font-regular-sm {
+    @include font-sm;
     font-weight: 400;
 }
 
-@mixin font-500 {
+@mixin font-regular-base {
+    @include font-base;
+    font-weight: 400;
+}
+
+@mixin font-regular-lg {
+    @include font-lg;
+    font-weight: 400;
+}
+
+@mixin font-regular-xl {
+    @include font-xl;
+    font-weight: 400;
+}
+
+@mixin font-regular-2xl {
+    @include font-2xl;
+    font-weight: 400;
+}
+
+@mixin font-regular-3xl {
+    @include font-3xl;
+    font-weight: 400;
+}
+
+@mixin font-regular-4xl {
+    @include font-4xl;
+    font-weight: 400;
+}
+
+@mixin font-regular-5xl {
+    @include font-5xl;
+    font-weight: 400;
+}
+
+@mixin font-regular-6xl {
+    @include font-6xl;
+    font-weight: 400;
+}
+
+@mixin font-regular-7xl {
+    @include font-7xl;
+    font-weight: 400;
+}
+
+// FONTS MEDIUM
+@mixin font-medium-sm {
+    @include font-sm;
     font-weight: 500;
 }
 
-@mixin font-600 {
+@mixin font-medium-base {
+    @include font-base;
+    font-weight: 500;
+}
+
+@mixin font-medium-lg {
+    @include font-lg;
+    font-weight: 500;
+}
+
+@mixin font-medium-xl {
+    @include font-xl;
+    font-weight: 500;
+}
+
+@mixin font-medium-2xl {
+    @include font-2xl;
+    font-weight: 500;
+}
+
+@mixin font-medium-3xl {
+    @include font-3xl;
+    font-weight: 500;
+}
+
+@mixin font-medium-4xl {
+    @include font-4xl;
+    font-weight: 500;
+}
+
+@mixin font-medium-5xl {
+    @include font-5xl;
+    font-weight: 500;
+}
+
+@mixin font-medium-6xl {
+    @include font-6xl;
+    font-weight: 500;
+}
+
+@mixin font-medium-7xl {
+    @include font-7xl;
+    font-weight: 500;
+}
+
+// FONTS BOLD
+@mixin font-bold-sm {
+    @include font-sm;
     font-weight: 600;
 }
 
-@mixin font-700 {
-    font-weight: 700;
+@mixin font-bold-base {
+    @include font-base;
+    font-weight: 600;
 }
 
-@mixin font-800 {
-    font-weight: 800;
+@mixin font-bold-lg {
+    @include font-lg;
+    font-weight: 600;
 }
 
-@mixin font-900 {
-    font-weight: 900;
+@mixin font-bold-xl {
+    @include font-xl;
+    font-weight: 600;
+}
+
+@mixin font-bold-2xl {
+    @include font-2xl;
+    font-weight: 600;
+}
+
+@mixin font-bold-3xl {
+    @include font-3xl;
+    font-weight: 600;
+}
+
+@mixin font-bold-4xl {
+    @include font-4xl;
+    font-weight: 600;
+}
+
+@mixin font-bold-5xl {
+    @include font-5xl;
+    font-weight: 600;
+}
+
+@mixin font-bold-6xl {
+    @include font-6xl;
+    font-weight: 600;
+}
+
+@mixin font-bold-7xl {
+    @include font-7xl;
+    font-weight: 600;
 }
 
 // BREAK POINTS

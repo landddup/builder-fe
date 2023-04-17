@@ -2,34 +2,33 @@
 @import "../../../styles/mixins.scss";
 
 .button {
-    border-radius: 4px;
     width: 100%;
+    border-radius: 8px;
     outline: 0;
     cursor: pointer;
     transition: all 0.1s ease-out;
     user-select: none;
-    @include font-600;
     display: flex;
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    padding: 0 20px;
+    padding: 10px 14px;
     box-sizing: border-box;
 }
 
 .small {
-    height: 28px;
-    font-size: 12px;
+    height: 30px;
+    @include font-regular-sm;
 }
 
 .default {
-    height: 36px;
-    font-size: 14px;
+    height: 38px;
+    @include font-regular-base;
 }
 
 .large {
-    height: 44px;
-    font-size: 16px;
+    height: 46px;
+    @include font-regular-lg;
 }
 
 .contained {
@@ -49,7 +48,7 @@
 
 .outlined {
     background-color: #ffffff;
-    border: 2px solid $indigo-500;
+    border: 1px solid $indigo-500;
     color: $indigo-500;
 
     &:hover {

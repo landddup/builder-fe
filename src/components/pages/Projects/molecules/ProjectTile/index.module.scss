@@ -37,9 +37,8 @@
 }
 
 .projectTitle {
-    font-size: 22px;
     text-align: center;
-    @include font-600;
+    @include font-bold-3xl;
 }
 
 .buttons {
