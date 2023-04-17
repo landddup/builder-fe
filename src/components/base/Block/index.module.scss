@@ -50,3 +50,9 @@
         grid-template-areas: "title . button";
     }
 }
+
+@include desktop {
+    .header {
+        grid-template-areas: "title . . button";
+    }
+}

@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 
+import SvgIcon from "../SvgIcon";
+
 import styles from "./index.module.scss";
 
-const CustomLink = ({ to, text, className, children }) => {
+const CustomLink = ({ to, text, icon, replace, className, children }) => {
   return (
     <NavLink
       to={to}
+      replace={replace}
       className={(linkState) =>
         classNames(
           styles.link,
@@ -16,6 +19,7 @@ const CustomLink = ({ to, text, className, children }) => {
         )
       }
     >
+      {icon && <SvgIcon type={icon} className={styles.icon} />}
       {text}
       {children}
     </NavLink>
@@ -25,11 +29,15 @@ const CustomLink = ({ to, text, className, children }) => {
 CustomLink.propTypes = {
   to: PropTypes.string.isRequired,
   text: PropTypes.string,
+  icon: PropTypes.string,
+  replace: PropTypes.bool,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 CustomLink.defaultProps = {
   text: "",
+  icon: "",
+  replace: false,
   className: "",
 };
 

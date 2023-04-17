@@ -52,7 +52,7 @@
     transition: all ease 0.15s;
 }
 
-@include desktop {
+@include laptop {
     .preview {
         &:hover {
             background-color: $grey-300;

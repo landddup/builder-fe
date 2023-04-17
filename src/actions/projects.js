@@ -7,8 +7,10 @@ import { db, dbFunctions } from "../firebase-config";
 import {
   updateProjects,
   updateTemplates,
+  updateProject,
   clearProjects,
   clearTemplates,
+  clearProject,
 } from "../reducers/projects";
 
 import { COLLECTION_TYPES } from "../utils/constants/firebase";
@@ -24,57 +26,37 @@ function sortByDate(items) {
 
 export function setProjects(projectsList) {
   return async (dispatch) => {
-    await dispatch(updateProjects({ projectsList }));
+    await dispatch(updateProjects({ projectsList: sortByDate(projectsList) }));
   };
 }
 
 export function setTemplates(templates) {
   return async (dispatch) => {
-    await dispatch(updateTemplates({ templates }));
+    await dispatch(updateTemplates({ templates: sortByDate(templates) }));
   };
 }
 
-export function subscribeOnProjects(uid) {
-  return (dispatch) => {
-    dbFunctions.onSnapshot(
-      dbFunctions.collection(db, `${COLLECTION_TYPES.PROJECTS}/${uid}/items`),
-      async (doc) => {
-        let projectsList = [];
-
-        doc.forEach((el) => projectsList.push({ ...el.data(), dbId: el.id }));
-
-        await dispatch(setProjects(sortByDate(projectsList)));
-      },
-      async (error) => {
-        console.log("subscribeOnProjects error: ", error);
-
-        await dispatch(clearProjects());
-      }
-    );
+export function setProject(project) {
+  return async (dispatch) => {
+    await dispatch(updateProject({ project }));
   };
 }
 
-export function subscribeOnTemplates() {
-  return (dispatch) => {
-    dbFunctions.onSnapshot(
-      dbFunctions.collection(db, COLLECTION_TYPES.TEMPLATES),
-      async (doc) => {
-        let templates = [];
+export function setProjectsToInitial() {
+  return async (dispatch) => {
+    await dispatch(clearProjects());
+  };
+}
 
-        doc.forEach((el) => {
-          const data = el.data();
+export function setTemplatesToInitial() {
+  return async (dispatch) => {
+    await dispatch(clearTemplates());
+  };
+}
 
-          templates.push({ ...data, createdAt: data.createdAt.seconds });
-        });
-
-        await dispatch(setTemplates(sortByDate(templates)));
-      },
-      async (error) => {
-        console.log("subscribeOnTemplates error: ", error);
-
-        await dispatch(clearTemplates());
-      }
-    );
+export function setProjectToInitial() {
+  return async (dispatch) => {
+    await dispatch(clearProject());
   };
 }
 

@@ -12,8 +12,10 @@ import styles from "./index.module.scss";
 
 const Projects = () => {
   const dispatch = useDispatch();
-  const { isLoading, projectsList } = useSelector((state) => state.projects);
   const { currentSession } = useSelector((state) => state.session);
+  const { projectsLoading, projectsList } = useSelector(
+    (state) => state.projects
+  );
 
   const showAddProjectModal = async () => {
     dispatch(
@@ -34,8 +36,8 @@ const Projects = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <LoadingContainer isLoading={isLoading}>
+    <div>
+      <LoadingContainer isLoading={projectsLoading}>
         <Block
           title="My projects"
           button="Add new project"

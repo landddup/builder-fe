@@ -1,12 +1,29 @@
 @import "../../../styles/variables.scss";
 
 .link {
-    color: $indigo-500;
+    color: $grey-500;
     text-decoration: none;
-    transition: all 0.1s ease-out;
-    display: inline-block;
+    transition: all ease 0.15s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
-        color: $indigo-800;
+        color: $indigo-500;
+
+        .icon {
+            path {
+                fill: $indigo-500;
+            }
+        }
+    }
+}
+
+.icon {
+    margin-right: 10px;
+
+    path {
+        fill: $grey-500;
+        transition: all ease 0.15s;
     }
 }

@@ -68,6 +68,12 @@
     }
 }
 
+@mixin laptop {
+    @media screen and (min-width: $laptop-width) {
+        @content;
+    }
+}
+
 @mixin desktop {
     @media screen and (min-width: $desktop-width) {
         @content;
@@ -77,7 +83,7 @@
 // OTHER
 @mixin adaptiveWidth {
     width: 100%;
-    max-width: $mobile-md-width;
+    max-width: $mobile-lg-width;
 
     @include mobile-lg {
         & {
@@ -88,6 +94,18 @@
     @include tablet {
         & {
             max-width: 980px;
+        }
+    }
+
+    @include laptop {
+        & {
+            max-width: 1024px;
+        }
+    }
+
+    @include desktop {
+        & {
+            max-width: 1440px;
         }
     }
 }
@@ -107,6 +125,13 @@
     @include mobile-lg {
         & {
             grid-template-columns: repeat(3, 1fr);
+            column-gap: 40px;
+        }
+    }
+
+    @include desktop {
+        & {
+            grid-template-columns: repeat(4, 1fr);
             column-gap: 40px;
         }
     }
