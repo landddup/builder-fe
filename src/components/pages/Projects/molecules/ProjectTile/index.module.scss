@@ -17,6 +17,19 @@
     border-radius: 4px;
     box-sizing: border-box;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    transition: all ease 0.15s;
+    transform: scale(4);
+
+    path {
+        fill: $grey-300;
+        transition: all ease 0.15s;
+    }
 }
 
 .link {
@@ -44,6 +57,14 @@
         &:hover {
             background-color: $grey-300;
             transform: scale(1.03);
+
+            .icon {
+                transform: scale(2.5);
+
+                path {
+                    fill: $grey-200;
+                }
+            }
 
             .buttons {
                 opacity: 1;

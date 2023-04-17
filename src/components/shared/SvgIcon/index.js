@@ -11,6 +11,7 @@ import { ReactComponent as XCircle } from "../../../images/x-circle.svg";
 import { ReactComponent as Check } from "../../../images/check.svg";
 import { ReactComponent as Plus } from "../../../images/plus.svg";
 import { ReactComponent as GridAdd } from "../../../images/grid-add.svg";
+import { ReactComponent as RectGroup } from "../../../images/rectangle-group.svg";
 
 // SOCIAL
 import { ReactComponent as Google } from "../../../images/google.svg";
@@ -26,6 +27,7 @@ const SvgIcon = ({ type, className, onClick }) => {
     check: Check,
     plus: Plus,
     gridAdd: GridAdd,
+    rectGroup: RectGroup,
   };
 
   const SOCIAL = {
