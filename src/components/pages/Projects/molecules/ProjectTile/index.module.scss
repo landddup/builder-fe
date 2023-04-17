@@ -24,7 +24,7 @@
 
 .icon {
     transition: all ease 0.15s;
-    transform: scale(4);
+    transform: scale(2.5);
 
     path {
         fill: $grey-300;
@@ -59,7 +59,7 @@
             transform: scale(1.03);
 
             .icon {
-                transform: scale(2.5);
+                transform: scale(2);
 
                 path {
                     fill: $grey-200;
