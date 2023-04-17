@@ -40,7 +40,7 @@
     }
 
     &:hover {
-        background-color: $indigo-50;
+        background-color: $indigo-50 !important;
         box-shadow: 2px 3px 6px rgba(40, 53, 147, 0.2);
     }
 }

@@ -3,12 +3,10 @@ import { useDispatch } from "react-redux";
 
 import { preparePayload } from "../../../utils/validation/helpers";
 import { validateRestorePassword } from "../../../utils/validation";
-import { sessionActions } from "../../../actions";
-import { SIGN_IN, SIGN_UP } from "../../../utils/constants/routes";
+import actions from "../../../actions";
+import constants from "../../../utils/constants";
 
-import Input from "../../shared/Input";
-import Button from "../../shared/Button";
-import CustomLink from "../../shared/Link";
+import { Input, Button, CustomLink } from "../../shared";
 
 import styles from "./index.module.scss";
 
@@ -54,7 +52,7 @@ const RestorePassword = () => {
   const callRestorePassword = async ({ email }) => {
     setFetching(true);
 
-    await dispatch(sessionActions.restorePassword({ email }));
+    await dispatch(actions.session.restorePassword({ email }));
 
     setFetching(false);
   };
@@ -89,13 +87,13 @@ const RestorePassword = () => {
 
       <div className={styles.links}>
         <CustomLink
-          to={SIGN_UP}
+          to={constants.routes.SIGN_UP}
           text="Need an account?"
           className={styles.link}
         />
 
         <CustomLink
-          to={SIGN_IN}
+          to={constants.routes.SIGN_IN}
           text="Already have an account?"
           className={styles.link}
         />

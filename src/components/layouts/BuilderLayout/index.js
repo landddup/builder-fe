@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { projectsActions } from "../../../actions";
-import { db, dbFunctions } from "../../../firebase-config";
-import { COLLECTION_TYPES } from "../../../utils/constants/firebase";
+import actions from "../../../actions";
+import firebase from "../../../firebase-config";
+import constants from "../../../utils/constants";
 
-import { BuilderHeader } from "../../base/Header";
+import { BuilderHeader } from "../../base";
 
 import styles from "./index.module.scss";
 
@@ -16,14 +16,14 @@ const BuilderLayout = ({ children }) => {
   const { uid } = useSelector((state) => state.session.currentSession);
 
   const initProject = () => {
-    const collectionRef = dbFunctions.collection(
-      db,
-      `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
+    const collectionRef = firebase.functions.db.collection(
+      firebase.db,
+      `${constants.firebase.COLLECTION_TYPES.PROJECTS}/${uid}/items`
     );
 
-    const unsubscribe = dbFunctions.onSnapshot(
-      dbFunctions.doc(collectionRef, projectId),
-      async (doc) => await dispatch(projectsActions.setProject(doc.data())),
+    const unsubscribe = firebase.functions.db.onSnapshot(
+      firebase.functions.db.doc(collectionRef, projectId),
+      async (doc) => await dispatch(actions.projects.setProject(doc.data())),
       async (error) => {
         console.log("subscribeOnProject error: ", error);
       }
@@ -33,7 +33,7 @@ const BuilderLayout = ({ children }) => {
   };
 
   const resetToInitial = () => {
-    dispatch(projectsActions.setProjectToInitial());
+    dispatch(actions.projects.setProjectToInitial());
   };
 
   useEffect(() => {

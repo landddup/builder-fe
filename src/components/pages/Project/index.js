@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import LoadingContainer from "../../containers/LoadingContainer";
+
+import { LoadingContainer } from "../../containers";
 
 const Project = () => {
   const { projectLoading } = useSelector((state) => state.projects);

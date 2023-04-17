@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import CustomLink from "../../../../shared/Link";
-import SvgIcon from "../../../../shared/SvgIcon";
-import Button from "../../../../shared/Button";
+import { CustomLink, SvgIcon, Button } from "../../../../shared";
 
 import styles from "./index.module.scss";
 

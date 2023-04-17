@@ -1,6 +1,8 @@
-import * as sessionActions from "./session";
-import * as toastActions from "./toast";
-import * as projectsActions from "./projects";
-import * as modalActions from "./modal";
+import * as session from "./session";
+import * as toast from "./toast";
+import * as projects from "./projects";
+import * as modal from "./modal";
 
-export { sessionActions, toastActions, projectsActions, modalActions };
+const actions = { session, toast, projects, modal };
+
+export default actions;

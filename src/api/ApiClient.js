@@ -1,4 +1,4 @@
-import { firebaseAuth } from "../firebase-config";
+import firebase from "../firebase-config";
 
 export default class ApiClient {
   constructor({ onError = () => {} }) {
@@ -7,7 +7,7 @@ export default class ApiClient {
 
   async request({ query, payload = {} }) {
     try {
-      const res = await query(firebaseAuth, { ...payload });
+      const res = await query(firebase.auth, { ...payload });
 
       return res;
     } catch (error) {

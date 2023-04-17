@@ -54,11 +54,11 @@
     top: 50%;
     right: 8px;
     transform: translate(0, -50%);
-    border: 0;
-    background-color: transparent;
+    border: 0 !important;
+    background-color: transparent !important;
 
     &:hover {
-        box-shadow: none;
+        box-shadow: none !important;
     }
 }
 

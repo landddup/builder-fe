@@ -3,7 +3,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import SvgButton from "../SvgButton";
+import { SvgButton } from "../";
 
 import styles from "./index.module.scss";
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
-import SvgIcon from "../SvgIcon";
+import { SvgIcon } from "../";
 
 import styles from "./index.module.scss";
 

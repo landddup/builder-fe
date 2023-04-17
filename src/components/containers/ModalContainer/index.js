@@ -2,9 +2,9 @@ import React, { useMemo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
 
-import { modalActions } from "../../../actions";
+import actions from "../../../actions";
 
-import CreateProjectModal from "../../base/Modals/CreateProjectModal";
+import { CreateProjectModal } from "../../base";
 
 import styles from "./index.module.scss";
 
@@ -35,7 +35,7 @@ const ModalContainer = ({ children }) => {
     const shouldHide = target === containerRef.current;
 
     if (shouldHide) {
-      dispatch(modalActions.hideModal());
+      dispatch(actions.modal.hideModal());
 
       if (currentModal.onClose) {
         currentModal.onClose();

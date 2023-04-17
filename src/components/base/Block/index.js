@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import { Button } from "../../shared";
+
 import styles from "./index.module.scss";
-import Button from "../../shared/Button";
 
 const Block = ({
   title,

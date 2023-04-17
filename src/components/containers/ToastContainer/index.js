@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toastActions } from "../../../actions";
+import actions from "../../../actions";
 
-import Toast from "../../base/Toast";
+import { Toast } from "../../base";
 
 const ToastContainer = ({ children }) => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const ToastContainer = ({ children }) => {
       clearTimeout(hideRef.current);
 
       hideRef.current = setTimeout(() => {
-        dispatch(toastActions.hide());
+        dispatch(actions.toast.hide());
       }, duration);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -3,13 +3,10 @@ import { useDispatch } from "react-redux";
 
 import { preparePayload } from "../../../utils/validation/helpers";
 import { validateSignUp } from "../../../utils/validation";
-import { sessionActions } from "../../../actions";
-import { RESTORE_PASSWORD, SIGN_IN } from "../../../utils/constants/routes";
+import actions from "../../../actions";
+import constants from "../../../utils/constants";
 
-import Input from "../../shared/Input";
-import Button from "../../shared/Button";
-import CustomLink from "../../shared/Link";
-import SvgButton from "../../shared/SvgButton";
+import { Input, Button, CustomLink, SvgButton } from "../../shared";
 
 import styles from "./index.module.scss";
 
@@ -74,7 +71,7 @@ const SignUp = () => {
     setFetching(true);
 
     await dispatch(
-      sessionActions.register({
+      actions.session.register({
         email,
         password,
       })
@@ -96,7 +93,7 @@ const SignUp = () => {
   };
 
   const signUpWithGoogle = async () => {
-    await dispatch(sessionActions.loginWithGoogle());
+    await dispatch(actions.session.loginWithGoogle());
   };
 
   return (
@@ -121,13 +118,13 @@ const SignUp = () => {
 
       <div className={styles.links}>
         <CustomLink
-          to={SIGN_IN}
+          to={constants.routes.SIGN_IN}
           text="Already have an account?"
           className={styles.link}
         />
 
         <CustomLink
-          to={RESTORE_PASSWORD}
+          to={constants.routes.RESTORE_PASSWORD}
           text="Restore password"
           className={styles.link}
         />

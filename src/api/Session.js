@@ -1,25 +1,33 @@
 import Base from "./Base.js";
 
-import { authFunctions, googleProvider } from "../firebase-config";
+import firebase from "../firebase-config";
 
 export default class SessionAPI extends Base {
   register(email, password) {
     return this.apiClient.request({
       query: (auth) =>
-        authFunctions.createUserWithEmailAndPassword(auth, email, password),
+        firebase.functions.auth.createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        ),
     });
   }
 
   create(email, password) {
     return this.apiClient.request({
       query: (auth) =>
-        authFunctions.signInWithEmailAndPassword(auth, email, password),
+        firebase.functions.auth.signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        ),
     });
   }
 
   verifyEmail(user) {
     return this.apiClient.request({
-      query: () => authFunctions.sendEmailVerification(user),
+      query: () => firebase.functions.auth.sendEmailVerification(user),
     });
   }
 
@@ -31,25 +39,29 @@ export default class SessionAPI extends Base {
 
   restorePassword(email) {
     return this.apiClient.request({
-      query: (auth) => authFunctions.sendPasswordResetEmail(auth, email),
+      query: (auth) =>
+        firebase.functions.auth.sendPasswordResetEmail(auth, email),
     });
   }
 
   createWithGoogle() {
     return this.apiClient.request({
-      query: (auth) => authFunctions.signInWithPopup(auth, googleProvider),
+      query: (auth) =>
+        firebase.functions.auth.signInWithPopup(auth, firebase.googleProvider),
     });
   }
 
   updateProfile(payload) {
     return this.apiClient.request({
-      query: (auth) => authFunctions.updateProfile(auth.currentUser, payload),
+      query: (auth) =>
+        firebase.functions.auth.updateProfile(auth.currentUser, payload),
     });
   }
 
   updateEmail(payload) {
     return this.apiClient.request({
-      query: (auth) => authFunctions.updateEmail(auth.currentUser, payload),
+      query: (auth) =>
+        firebase.functions.auth.updateEmail(auth.currentUser, payload),
     });
   }
 }

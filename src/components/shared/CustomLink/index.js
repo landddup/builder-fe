@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 
-import SvgIcon from "../SvgIcon";
+import { SvgIcon } from "../";
 
 import styles from "./index.module.scss";
 

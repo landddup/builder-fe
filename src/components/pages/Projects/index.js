@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { modalActions, projectsActions } from "../../../actions";
+import actions from "../../../actions";
 
-import LoadingContainer from "../../containers/LoadingContainer";
-import Block from "../../base/Block";
-import DummyProjects from "./molecules/DummyProjects";
-import ProjectTile from "./molecules/ProjectTile";
+import { LoadingContainer } from "../../containers";
+import { Block } from "../../base";
+import { DummyProjects, ProjectTile } from "./molecules";
 
 import styles from "./index.module.scss";
 
@@ -19,7 +18,7 @@ const Projects = () => {
 
   const showAddProjectModal = async () => {
     dispatch(
-      modalActions.showModal({
+      actions.modal.showModal({
         type: "createProject",
       })
     );
@@ -31,7 +30,7 @@ const Projects = () => {
     );
 
     if (confirmDelete) {
-      await dispatch(projectsActions.deleteProject(currentSession.uid, id));
+      await dispatch(actions.projects.deleteProject(currentSession.uid, id));
     }
   };
 

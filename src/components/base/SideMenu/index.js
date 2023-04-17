@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 
-import { SIDE_MENU_ROUTES } from "../../../utils/constants/routes";
+import constants from "../../../utils/constants";
 
-import Burger from "./molecules/Burger";
-import CustomLink from "../../shared/Link";
+import { Burger } from "./molecules";
+import { CustomLink } from "../../shared";
 
 import styles from "./index.module.scss";
 
@@ -44,22 +44,24 @@ const SideMenu = ({ className }) => {
 
       <div className={menuClassName}>
         <nav className={styles.nav}>
-          {Object.keys(SIDE_MENU_ROUTES).map((routeKey, index) => {
-            return (
-              <Fragment key={routeKey}>
-                {index > 0 && <div className={styles.linkSeparator} />}
+          {Object.keys(constants.routes.SIDE_MENU_ROUTES).map(
+            (routeKey, index) => {
+              return (
+                <Fragment key={routeKey}>
+                  {index > 0 && <div className={styles.linkSeparator} />}
 
-                <CustomLink
-                  to={routeKey}
-                  className={({ isActive }) =>
-                    classNames(styles.link, { [styles.linkActive]: isActive })
-                  }
-                >
-                  {SIDE_MENU_ROUTES[routeKey]}
-                </CustomLink>
-              </Fragment>
-            );
-          })}
+                  <CustomLink
+                    to={routeKey}
+                    className={({ isActive }) =>
+                      classNames(styles.link, { [styles.linkActive]: isActive })
+                    }
+                  >
+                    {constants.routes.SIDE_MENU_ROUTES[routeKey]}
+                  </CustomLink>
+                </Fragment>
+              );
+            }
+          )}
         </nav>
       </div>
     </div>

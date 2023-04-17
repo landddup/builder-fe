@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { projectsActions } from "../../../actions";
-import { db, dbFunctions } from "../../../firebase-config";
+import actions from "../../../actions";
+import firebase from "../../../firebase-config";
 import { COLLECTION_TYPES } from "../../../utils/constants/firebase";
 
 import { AdminToolHeader } from "../../base/Header";
@@ -14,19 +14,22 @@ const MainLayout = ({ children }) => {
   const { uid } = useSelector((state) => state.session.currentSession);
 
   const initProjects = () => {
-    const unsubscribe = dbFunctions.onSnapshot(
-      dbFunctions.collection(db, `${COLLECTION_TYPES.PROJECTS}/${uid}/items`),
+    const unsubscribe = firebase.functions.db.onSnapshot(
+      firebase.functions.db.collection(
+        firebase.db,
+        `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
+      ),
       async (doc) => {
         let projectsList = [];
 
         doc.forEach((el) => projectsList.push({ ...el.data(), dbId: el.id }));
 
-        await dispatch(projectsActions.setProjects(projectsList));
+        await dispatch(actions.projects.setProjects(projectsList));
       },
       async (error) => {
         console.log("subscribeOnProjects error: ", error);
 
-        await dispatch(projectsActions.setProjects([]));
+        await dispatch(actions.projects.setProjects([]));
       }
     );
 
@@ -34,8 +37,8 @@ const MainLayout = ({ children }) => {
   };
 
   const initTemplates = () => {
-    const unsubscribe = dbFunctions.onSnapshot(
-      dbFunctions.collection(db, COLLECTION_TYPES.TEMPLATES),
+    const unsubscribe = firebase.functions.db.onSnapshot(
+      firebase.functions.db.collection(firebase.db, COLLECTION_TYPES.TEMPLATES),
       async (doc) => {
         let templates = [];
 
@@ -45,12 +48,12 @@ const MainLayout = ({ children }) => {
           templates.push({ ...data, createdAt: data.createdAt.seconds });
         });
 
-        await dispatch(projectsActions.setTemplates(templates));
+        await dispatch(actions.projects.setTemplates(templates));
       },
       async (error) => {
         console.log("subscribeOnTemplates error: ", error);
 
-        await dispatch(projectsActions.setTemplates([]));
+        await dispatch(actions.projects.setTemplates([]));
       }
     );
 
@@ -58,8 +61,8 @@ const MainLayout = ({ children }) => {
   };
 
   const resetToInitial = () => {
-    dispatch(projectsActions.setProjectsToInitial());
-    dispatch(projectsActions.setTemplatesToInitial());
+    dispatch(actions.projects.setProjectsToInitial());
+    dispatch(actions.projects.setTemplatesToInitial());
   };
 
   useEffect(() => {

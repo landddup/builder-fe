@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { modalActions, projectsActions } from "../../../../actions";
+import actions from "../../../../actions";
 
-import Block from "../../Block";
-import Template from "./molecules/Template";
+import { Block } from "../../";
+import { Template } from "./molecules";
 
 import styles from "./index.module.scss";
 
@@ -14,13 +14,13 @@ const CreateProjectModal = () => {
   const { templates } = useSelector((state) => state.projects);
 
   const hideModal = () => {
-    dispatch(modalActions.hideModal());
+    dispatch(actions.modal.hideModal());
   };
 
   const createProject = async (project) => {
     const payload = { ...project, uid: currentSession.uid };
 
-    await dispatch(projectsActions.addNewProject(payload));
+    await dispatch(actions.projects.addNewProject(payload));
     hideModal();
   };
 

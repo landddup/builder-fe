@@ -1,8 +1,8 @@
 import React from "react";
 
-import { ROOT } from "../../../../utils/constants/routes";
+import constants from "../../../../utils/constants";
 
-import CustomLink from "../../../shared/Link";
+import { CustomLink } from "../../../shared";
 
 import styles from "./index.module.scss";
 
@@ -14,7 +14,7 @@ const BuilderHeader = () => {
           className={styles.link}
           text="ALL PROJECTS"
           icon="arrowLeft"
-          to={ROOT}
+          to={constants.routes.ROOT}
           replace
         />
       </div>

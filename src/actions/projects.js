@@ -1,8 +1,9 @@
 import { nanoid } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
-import { toastActions } from ".";
-import { db, dbFunctions } from "../firebase-config";
+import actions from ".";
+import firebase from "../firebase-config";
+import constants from "../utils/constants";
 
 import {
   updateProjects,
@@ -12,9 +13,6 @@ import {
   clearTemplates,
   clearProject,
 } from "../reducers/projects";
-
-import { COLLECTION_TYPES } from "../utils/constants/firebase";
-import { TOAST_TYPES } from "../utils/constants/toast";
 
 function sortByDate(items) {
   const output = items.sort((a, b) =>
@@ -64,16 +62,16 @@ export function addNewProject({ uid, ...rest }) {
   return async (dispatch) => {
     try {
       const newProject = { id: nanoid(), createdAt: dayjs().unix(), ...rest };
-      const collectionRef = dbFunctions.collection(
-        db,
-        `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
+      const collectionRef = firebase.functions.db.collection(
+        firebase.db,
+        `${constants.firebase.COLLECTION_TYPES.PROJECTS}/${uid}/items`
       );
 
-      await dbFunctions.addDoc(collectionRef, newProject);
+      await firebase.functions.db.addDoc(collectionRef, newProject);
 
       await dispatch(
-        toastActions.show({
-          type: TOAST_TYPES.SUCCESS,
+        actions.toast.show({
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Project successfully added",
         })
@@ -82,8 +80,8 @@ export function addNewProject({ uid, ...rest }) {
       console.log("addNewProject error: ", error);
 
       await dispatch(
-        toastActions.show({
-          type: TOAST_TYPES.ERROR,
+        actions.toast.show({
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: "Project not added",
         })
@@ -95,16 +93,18 @@ export function addNewProject({ uid, ...rest }) {
 export function deleteProject(uid, dbId) {
   return async (dispatch) => {
     try {
-      const collectionRef = dbFunctions.collection(
-        db,
-        `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
+      const collectionRef = firebase.functions.db.collection(
+        firebase.db,
+        `${constants.firebase.COLLECTION_TYPES.PROJECTS}/${uid}/items`
       );
 
-      await dbFunctions.deleteDoc(dbFunctions.doc(collectionRef, dbId));
+      await firebase.functions.db.deleteDoc(
+        firebase.functions.db.doc(collectionRef, dbId)
+      );
 
       await dispatch(
-        toastActions.show({
-          type: TOAST_TYPES.SUCCESS,
+        actions.toast.show({
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Project successfully deleted",
         })
@@ -113,8 +113,8 @@ export function deleteProject(uid, dbId) {
       console.log("deleteProject error: ", error);
 
       await dispatch(
-        toastActions.show({
-          type: TOAST_TYPES.ERROR,
+        actions.toast.show({
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: "Project not deleted",
         })

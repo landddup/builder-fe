@@ -9,7 +9,7 @@ import {
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT } from "./utils/constants/routes";
 
-import { sessionActions } from "./actions";
+import actions from "./actions";
 
 import LoadingContainer from "./components/containers/LoadingContainer";
 
@@ -26,7 +26,7 @@ const Navigation = () => {
   }, [currentSession]);
 
   const initSession = () => {
-    dispatch(sessionActions.subscribeOnSessionChanges());
+    dispatch(actions.session.subscribeOnSessionChanges());
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

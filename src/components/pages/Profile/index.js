@@ -8,13 +8,11 @@ import {
   validateProfileWithPassword,
 } from "../../../utils/validation";
 
-import { PROVIDERS } from "../../../utils/constants/firebase";
-import { sessionActions } from "../../../actions";
+import constants from "../../../utils/constants";
+import actions from "../../../actions";
 
-import Block from "../../base/Block";
-import SvgIcon from "../../shared/SvgIcon";
-import Button from "../../shared/Button";
-import Input from "../../shared/Input";
+import { Block } from "../../base";
+import { SvgIcon, Button, Input } from "../../shared";
 
 import styles from "./index.module.scss";
 
@@ -43,8 +41,8 @@ const prepareInputs = (profile, providerId) => {
     };
   });
 
-  if (providerId === PROVIDERS.PASSWORD) {
-    output[PROVIDERS.PASSWORD] = {
+  if (providerId === constants.firebase.PROVIDERS.PASSWORD) {
+    output[constants.firebase.PROVIDERS.PASSWORD] = {
       value: "",
       label: "Current password",
       placeholder: "Current password",
@@ -95,7 +93,7 @@ const Profile = () => {
   const updateCurrentProfile = async (validInputs) => {
     setFetching((prev) => ({ ...prev, profile: true }));
 
-    await dispatch(sessionActions.updateProfile(validInputs));
+    await dispatch(actions.session.updateProfile(validInputs));
 
     setFetching((prev) => ({ ...prev, profile: false }));
   };
@@ -105,7 +103,7 @@ const Profile = () => {
 
     const payload = preparePayload(inputs, "value");
     const validate =
-      PROVIDERS.PASSWORD in payload
+      constants.firebase.PROVIDERS.PASSWORD in payload
         ? validateProfileWithPassword
         : validateProfile;
 
@@ -119,7 +117,7 @@ const Profile = () => {
   const verifyEmail = async () => {
     setFetching((prev) => ({ ...prev, email: true }));
 
-    await dispatch(sessionActions.verifyEmail(currentSession));
+    await dispatch(actions.session.verifyEmail(currentSession));
 
     setFetching((prev) => ({ ...prev, email: false }));
   };

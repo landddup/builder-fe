@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Logo from "../../base/Logo";
-import LoadingIndicator from "../../shared/LoadingIndicator";
+import { Logo } from "../../base";
+import { LoadingIndicator } from "../../shared";
 
 import styles from "./index.module.scss";
 

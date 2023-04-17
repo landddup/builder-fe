@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import randomWords from "random-words";
 
-import SvgIcon from "../../../../../shared/SvgIcon";
-import Button from "../../../../../shared/Button";
+import { SvgIcon, Button } from "../../../../../shared";
 
 import styles from "./index.module.scss";
 

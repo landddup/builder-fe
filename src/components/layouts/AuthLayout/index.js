@@ -1,6 +1,6 @@
 import React from "react";
 
-import Logo from "../../base/Logo";
+import { Logo } from "../../base";
 
 import styles from "./index.module.scss";
 
