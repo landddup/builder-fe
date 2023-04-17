@@ -1,0 +1,13 @@
+@import "../../../styles/variables.scss";
+
+.container {
+    background-color: $grey-50;
+    min-width: 100px;
+    height: calc(100vh - 75px);
+    position: fixed;
+    top: 75px;
+    left: 0;
+    transition: all 0.15s ease-out;
+    padding: 20px;
+    box-sizing: border-box;
+}

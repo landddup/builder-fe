@@ -3,7 +3,7 @@
 .link {
     color: $grey-500;
     text-decoration: none;
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +24,6 @@
 
     path {
         fill: $grey-500;
-        transition: all ease 0.15s;
+        transition: all 0.15s ease-out;
     }
 }

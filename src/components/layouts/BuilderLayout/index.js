@@ -23,17 +23,19 @@ const BuilderLayout = ({ children }) => {
 
     const unsubscribe = firebase.functions.db.onSnapshot(
       firebase.functions.db.doc(collectionRef, projectId),
-      async (doc) => await dispatch(actions.projects.setProject(doc.data())),
+      async (doc) => await dispatch(actions.builder.setProject(doc.data())),
       async (error) => {
         console.log("subscribeOnProject error: ", error);
       }
     );
 
+    dispatch(actions.builder.initComponents());
+
     return unsubscribe;
   };
 
   const resetToInitial = () => {
-    dispatch(actions.projects.setProjectToInitial());
+    dispatch(actions.builder.setProjectToInitial());
   };
 
   useEffect(() => {

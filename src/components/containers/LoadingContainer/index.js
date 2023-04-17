@@ -6,7 +6,7 @@ import { LoadingIndicator } from "../../shared";
 
 import styles from "./index.module.scss";
 
-const LoadingContainer = ({ isLoading, withLogo, children }) => {
+const LoadingContainer = ({ isLoading, withLogo, width, height, children }) => {
   if (isLoading) {
     return (
       <div className={styles.container}>
@@ -15,8 +15,8 @@ const LoadingContainer = ({ isLoading, withLogo, children }) => {
         <LoadingIndicator
           color="#3f51b5"
           secondaryColor="#3f51b5"
-          width={40}
-          height={40}
+          width={width}
+          height={height}
         />
       </div>
     );
@@ -28,10 +28,14 @@ const LoadingContainer = ({ isLoading, withLogo, children }) => {
 LoadingContainer.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   withLogo: PropTypes.bool,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 LoadingContainer.defaultProps = {
   withLogo: false,
+  width: 40,
+  height: 40,
 };
 
 export default LoadingContainer;

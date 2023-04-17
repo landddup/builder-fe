@@ -8,10 +8,8 @@ import constants from "../utils/constants";
 import {
   updateProjects,
   updateTemplates,
-  updateProject,
   clearProjects,
   clearTemplates,
-  clearProject,
 } from "../reducers/projects";
 
 function sortByDate(items) {
@@ -34,12 +32,6 @@ export function setTemplates(templates) {
   };
 }
 
-export function setProject(project) {
-  return async (dispatch) => {
-    await dispatch(updateProject({ project }));
-  };
-}
-
 export function setProjectsToInitial() {
   return async (dispatch) => {
     await dispatch(clearProjects());
@@ -49,12 +41,6 @@ export function setProjectsToInitial() {
 export function setTemplatesToInitial() {
   return async (dispatch) => {
     await dispatch(clearTemplates());
-  };
-}
-
-export function setProjectToInitial() {
-  return async (dispatch) => {
-    await dispatch(clearProject());
   };
 }
 

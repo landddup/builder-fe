@@ -13,7 +13,7 @@
     padding: 20px;
     height: 200px;
     background-color: $grey-200;
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
     border-radius: 4px;
     box-sizing: border-box;
     position: relative;
@@ -23,12 +23,12 @@
 }
 
 .icon {
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
     transform: scale(2.5);
 
     path {
         fill: $grey-300;
-        transition: all ease 0.15s;
+        transition: all 0.15s ease-out;
     }
 }
 
@@ -48,7 +48,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
 }
 
 @include laptop {

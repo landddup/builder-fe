@@ -5,10 +5,8 @@ export const projectsSlice = createSlice({
   initialState: {
     projectsList: [],
     templates: [],
-    project: {},
     projectsLoading: true,
     templatesLoading: true,
-    projectLoading: true,
   },
   reducers: {
     updateProjects: (state, action) => {
@@ -19,10 +17,6 @@ export const projectsSlice = createSlice({
       state.templates = action.payload.templates;
       state.templatesLoading = false;
     },
-    updateProject: (state, action) => {
-      state.project = action.payload.project;
-      state.projectLoading = false;
-    },
     clearProjects: (state) => {
       state.projectsList = [];
       state.projectsLoading = true;
@@ -31,20 +25,14 @@ export const projectsSlice = createSlice({
       state.templates = [];
       state.templatesLoading = true;
     },
-    clearProject: (state) => {
-      state.project = {};
-      state.projectLoading = true;
-    },
   },
 });
 
 export const {
   updateProjects,
   updateTemplates,
-  updateProject,
   clearProjects,
   clearTemplates,
-  clearProject,
 } = projectsSlice.actions;
 
 export default projectsSlice.reducer;

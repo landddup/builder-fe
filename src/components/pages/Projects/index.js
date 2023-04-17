@@ -35,37 +35,35 @@ const Projects = () => {
   };
 
   return (
-    <div>
-      <LoadingContainer isLoading={projectsLoading}>
-        <Block
-          title="My projects"
-          button="Create new project"
-          onClick={showAddProjectModal}
-          stickyHeader
-        >
-          <div className={styles.content}>
-            {!!projectsList.length ? (
-              <div className={styles.projects}>
-                {projectsList.map((project) => {
-                  const { dbId, title } = project;
+    <LoadingContainer isLoading={projectsLoading}>
+      <Block
+        title="My projects"
+        button="Create new project"
+        onClick={showAddProjectModal}
+        stickyHeader
+      >
+        <div className={styles.content}>
+          {!!projectsList.length ? (
+            <div className={styles.projects}>
+              {projectsList.map((project) => {
+                const { dbId, title } = project;
 
-                  return (
-                    <ProjectTile
-                      key={dbId}
-                      id={dbId}
-                      title={title}
-                      onDelete={deleteProject}
-                    />
-                  );
-                })}
-              </div>
-            ) : (
-              <DummyProjects />
-            )}
-          </div>
-        </Block>
-      </LoadingContainer>
-    </div>
+                return (
+                  <ProjectTile
+                    key={dbId}
+                    id={dbId}
+                    title={title}
+                    onDelete={deleteProject}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <DummyProjects />
+          )}
+        </div>
+      </Block>
+    </LoadingContainer>
   );
 };
 

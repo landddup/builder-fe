@@ -6,7 +6,7 @@
     width: 100%;
     height: 4px;
     border-radius: 4px;
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
 }
 
 .container {
@@ -15,7 +15,7 @@
     align-items: center;
     background-color: transparent;
     cursor: pointer;
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
     text-transform: none;
     margin: 0;
     border: none;
@@ -30,12 +30,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
 }
 
 .itemsOpened {
     transform: rotate(180deg);
-    transition: all ease 0.15s;
+    transition: all 0.15s ease-out;
 }
 
 .item {

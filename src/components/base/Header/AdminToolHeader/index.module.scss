@@ -42,7 +42,7 @@
     gap: 10px;
 }
 
-@include laptop {
+@include tablet {
     .icons {
         display: flex;
     }
