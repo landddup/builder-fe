@@ -40,7 +40,7 @@ const Projects = () => {
       <LoadingContainer isLoading={projectsLoading}>
         <Block
           title="My projects"
-          button="Add new project"
+          button="Create new project"
           onClick={showAddProjectModal}
           stickyHeader
         >
