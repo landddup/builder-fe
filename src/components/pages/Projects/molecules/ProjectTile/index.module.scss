@@ -22,16 +22,6 @@
     align-items: center;
 }
 
-.icon {
-    transition: all 0.15s ease-out;
-    transform: scale(2.5);
-
-    path {
-        fill: $grey-300;
-        transition: all 0.15s ease-out;
-    }
-}
-
 .link {
     width: 100%;
 }
@@ -55,15 +45,6 @@
     .preview {
         &:hover {
             background-color: $grey-300;
-            transform: scale(1.03);
-
-            .icon {
-                transform: scale(2);
-
-                path {
-                    fill: $indigo-500;
-                }
-            }
 
             .buttons {
                 opacity: 1;

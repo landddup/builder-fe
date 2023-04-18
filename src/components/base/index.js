@@ -1,5 +1,5 @@
 import Block from "./Block";
-import Header from "./Header";
+import { ProfileHeader, BuilderHeader } from "./Header";
 import Logo from "./Logo";
 import { CreateProjectModal } from "./Modals";
 import SideMenu from "./SideMenu";
@@ -8,7 +8,8 @@ import BuilderComponentsMenu from "./BuilderComponentsMenu";
 
 export {
   Block,
-  Header,
+  ProfileHeader,
+  BuilderHeader,
   Logo,
   CreateProjectModal,
   SideMenu,

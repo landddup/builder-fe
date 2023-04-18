@@ -1,11 +1,14 @@
 .container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
     position: relative;
 }
 
 .content {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
     flex: 1;
-    padding: 20px;
 }

@@ -1,5 +1,4 @@
 @import "../../../styles/variables.scss";
-@import "../../../styles/mixins.scss";
 
 .container {
     min-width: 100vw;
@@ -16,8 +15,5 @@
     flex: 1;
     position: relative;
     width: 100%;
-}
-
-@include mobile-md {
-    .content {}
+    display: flex;
 }

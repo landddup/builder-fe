@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { CustomLink, SvgIcon, Button } from "../../../../shared";
+import { CustomLink, Button } from "../../../../shared";
 
 import styles from "./index.module.scss";
 
@@ -21,8 +21,6 @@ const ProjectTile = ({ id, title, onDelete }) => {
       <p className={styles.projectTitle}>{title}</p>
 
       <div className={styles.preview}>
-        <SvgIcon type="rectGroup" className={styles.icon} />
-
         <div className={styles.buttons}>
           <CustomLink to={`projects/${id}`} className={styles.link}>
             <Button

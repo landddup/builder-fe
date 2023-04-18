@@ -28,7 +28,7 @@ const Template = ({ title, onAdd }) => {
       <p className={styles.title}>{title}</p>
 
       <div className={styles.preview}>
-        <SvgIcon type="gridAdd" className={styles.icon} />
+        <SvgIcon type="gridPlus" className={styles.icon} />
 
         <Button
           className={styles.button}

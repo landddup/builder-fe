@@ -8,14 +8,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
     @include font-bold-lg;
 
     &:hover {
-        color: $indigo-500;
+        color: $grey-600;
 
         .icon {
             path {
-                fill: $indigo-500;
+                fill: $grey-600;
             }
         }
     }

@@ -3,9 +3,8 @@
 
 .container {
     background-color: $grey-50;
-    min-width: 200px;
     width: min-content;
-    height: 100vh;
+    height: 100%;
     position: sticky;
     top: 0;
     left: 0;
@@ -30,16 +29,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    min-width: 120px;
     height: 100px;
+    padding: 0 20px;
     box-sizing: border-box;
-    border-radius: 8px;
+    border-radius: 4px;
     cursor: grab;
     transition: all 0.15s ease-out;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5px;
     user-select: none;
     border: 0;
 
@@ -50,8 +51,8 @@
 }
 
 .icon {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
 
     path {
         fill: $grey-500;
@@ -61,7 +62,7 @@
 .title {
     text-align: center;
     color: $grey-500;
-    @include font-bold-base;
+    @include font-medium-base;
 }
 
 @include tablet {

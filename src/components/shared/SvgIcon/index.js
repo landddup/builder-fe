@@ -9,9 +9,8 @@ import { ReactComponent as Profile } from "../../../images/profile.svg";
 import { ReactComponent as Logout } from "../../../images/logout.svg";
 import { ReactComponent as XCircle } from "../../../images/x-circle.svg";
 import { ReactComponent as Check } from "../../../images/check.svg";
-import { ReactComponent as Plus } from "../../../images/plus.svg";
-import { ReactComponent as GridAdd } from "../../../images/grid-add.svg";
-import { ReactComponent as RectGroup } from "../../../images/rectangle-group.svg";
+import { ReactComponent as GridPlus } from "../../../images/grid-plus.svg";
+import { ReactComponent as GridGroup } from "../../../images/grid-group.svg";
 import { ReactComponent as ArrowLeft } from "../../../images/arrow-left.svg";
 
 // SOCIAL
@@ -30,10 +29,9 @@ const SvgIcon = ({ type, className, onClick }) => {
     logout: Logout,
     xcircle: XCircle,
     check: Check,
-    plus: Plus,
-    gridAdd: GridAdd,
-    rectGroup: RectGroup,
+    gridPlus: GridPlus,
     arrowLeft: ArrowLeft,
+    gridGroup: GridGroup,
   };
 
   const SOCIAL = {

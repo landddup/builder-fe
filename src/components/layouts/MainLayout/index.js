@@ -5,7 +5,7 @@ import actions from "../../../actions";
 import firebase from "../../../firebase-config";
 import constants from "../../../utils/constants";
 
-import { Header } from "../../base";
+import { ProfileHeader } from "../../base";
 
 import styles from "./index.module.scss";
 
@@ -38,7 +38,10 @@ const MainLayout = ({ children }) => {
 
   const initTemplates = () => {
     const unsubscribe = firebase.functions.db.onSnapshot(
-      firebase.functions.db.collection(firebase.db, constants.firebase.COLLECTION_TYPES.TEMPLATES),
+      firebase.functions.db.collection(
+        firebase.db,
+        constants.firebase.COLLECTION_TYPES.TEMPLATES
+      ),
       async (doc) => {
         let templates = [];
 
@@ -79,7 +82,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <section className={styles.container}>
-      <Header />
+      <ProfileHeader />
 
       <div className={styles.content}>{children}</div>
     </section>

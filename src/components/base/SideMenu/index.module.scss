@@ -55,10 +55,6 @@
     transition: all 0.3s;
     text-align: left;
     justify-content: flex-start;
-
-    &:hover {
-        color: $indigo-500;
-    }
 }
 
 .linkActive {
