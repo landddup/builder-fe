@@ -1,5 +1,5 @@
 import Block from "./Block";
-import { AdminToolHeader, BuilderHeader } from "./Header";
+import Header from "./Header";
 import Logo from "./Logo";
 import { CreateProjectModal } from "./Modals";
 import SideMenu from "./SideMenu";
@@ -8,8 +8,7 @@ import BuilderComponentsMenu from "./BuilderComponentsMenu";
 
 export {
   Block,
-  AdminToolHeader,
-  BuilderHeader,
+  Header,
   Logo,
   CreateProjectModal,
   SideMenu,

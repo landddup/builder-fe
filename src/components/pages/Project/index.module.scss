@@ -1,2 +1,10 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
 .content {
+    flex: 1;
+    padding: 20px;
 }

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import actions from "../../../actions";
 import firebase from "../../../firebase-config";
-import { COLLECTION_TYPES } from "../../../utils/constants/firebase";
+import constants from "../../../utils/constants";
 
-import { AdminToolHeader } from "../../base/Header";
+import { Header } from "../../base";
 
 import styles from "./index.module.scss";
 
@@ -17,7 +17,7 @@ const MainLayout = ({ children }) => {
     const unsubscribe = firebase.functions.db.onSnapshot(
       firebase.functions.db.collection(
         firebase.db,
-        `${COLLECTION_TYPES.PROJECTS}/${uid}/items`
+        `${constants.firebase.COLLECTION_TYPES.PROJECTS}/${uid}/items`
       ),
       async (doc) => {
         let projectsList = [];
@@ -38,7 +38,7 @@ const MainLayout = ({ children }) => {
 
   const initTemplates = () => {
     const unsubscribe = firebase.functions.db.onSnapshot(
-      firebase.functions.db.collection(firebase.db, COLLECTION_TYPES.TEMPLATES),
+      firebase.functions.db.collection(firebase.db, constants.firebase.COLLECTION_TYPES.TEMPLATES),
       async (doc) => {
         let templates = [];
 
@@ -79,7 +79,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <section className={styles.container}>
-      <AdminToolHeader />
+      <Header />
 
       <div className={styles.content}>{children}</div>
     </section>

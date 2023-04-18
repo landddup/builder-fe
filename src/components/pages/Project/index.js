@@ -10,11 +10,14 @@ const Project = () => {
   const { projectLoading } = useSelector((state) => state.builder);
 
   return (
-    <LoadingContainer isLoading={projectLoading}>
+    <div className={styles.container}>
       <BuilderComponentsMenu />
 
-      <div className={styles.content}></div>
-    </LoadingContainer>
+      <div className={styles.content}>
+        <LoadingContainer isLoading={projectLoading}>
+        </LoadingContainer>
+      </div>
+    </div>
   );
 };
 
