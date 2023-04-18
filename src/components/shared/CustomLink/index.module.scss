@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @include font-bold-base;
+    @include font-bold-lg;
 
     &:hover {
         color: $indigo-500;
