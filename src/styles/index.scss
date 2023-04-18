@@ -12,6 +12,7 @@ body {
     font-family: "Roboto Flex", sans-serif;
     color: $grey-900;
     box-sizing: border-box;
+    background-color: $grey-200;
     @include font-medium-base;
 
     &::-webkit-scrollbar {
@@ -63,4 +64,5 @@ input::selection {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $grey-200;
 }
