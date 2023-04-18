@@ -18,22 +18,50 @@
 }
 
 .nav {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
 .component {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.54);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    cursor: grab;
+    transition: all 0.15s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    border: 0;
 
-    svg {
-        width: 50px;
-        height: 50px;
-
-        path {
-            fill: $grey-400;
-        }
+    &:active {
+        cursor: grabbing;
+        transform: scale(0.97);
     }
+}
+
+.icon {
+    width: 35px;
+    height: 35px;
+
+    path {
+        fill: $grey-500;
+    }
+}
+
+.title {
+    text-align: center;
+    color: $grey-500;
+    @include font-bold-base;
 }
 
 @include tablet {

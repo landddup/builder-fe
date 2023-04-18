@@ -19,6 +19,7 @@ import { ReactComponent as Google } from "../../../images/google.svg";
 
 // BUILDER MENU
 import { ReactComponent as Burger } from "../../../images/burger.svg";
+import { ReactComponent as Case } from "../../../images/case.svg";
 
 const SvgIcon = ({ type, className, onClick }) => {
   const BASE = {
@@ -41,12 +42,13 @@ const SvgIcon = ({ type, className, onClick }) => {
 
   const BUILDER_MENU = {
     burger: Burger,
+    case: Case,
   };
 
   const SVG_BY_TYPE = {
     ...BASE,
     ...SOCIAL,
-    ...BUILDER_MENU
+    ...BUILDER_MENU,
   };
 
   const CustomSvg = SVG_BY_TYPE[type] || "svg";
@@ -63,7 +65,7 @@ SvgIcon.propTypes = {
 SvgIcon.defaultProps = {
   type: "",
   className: "",
-  onClick: () => { },
+  onClick: () => {},
 };
 
 export default SvgIcon;

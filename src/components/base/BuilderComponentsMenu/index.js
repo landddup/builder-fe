@@ -15,20 +15,25 @@ const BuilderComponentsMenu = () => {
 
   return (
     <div className={styles.container}>
-      <CustomLink to={constants.routes.ROOT} icon="arrowLeft" text="ALL PROJECTS" replace />
+      <CustomLink
+        to={constants.routes.ROOT}
+        icon="arrowLeft"
+        text="ALL PROJECTS"
+        replace
+      />
 
-      <LoadingContainer
-        width={30}
-        height={30}
-        isLoading={componentsLoading}
-      >
+      <LoadingContainer width={30} height={30} isLoading={componentsLoading}>
         <div className={styles.nav}>
-          {Object.values(components).map(component => {
+          {Object.values(components).map((component) => {
             const { title, icon } = component;
 
-            console.log(component);
+            return (
+              <div draggable key={title} className={styles.component}>
+                <SvgIcon type={icon} className={styles.icon} />
 
-            return <div key={title} className={styles.component}><SvgIcon type={icon} className={styles.icon} /></div>;
+                <p className={styles.title}>{title}</p>
+              </div>
+            );
           })}
         </div>
       </LoadingContainer>
