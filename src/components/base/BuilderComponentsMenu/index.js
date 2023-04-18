@@ -13,7 +13,6 @@ const BuilderComponentsMenu = () => {
     (state) => state.builder
   );
 
-  console.log(components);
 
   return (
     <div className={styles.container}>
