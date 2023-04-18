@@ -9,9 +9,11 @@ import { CustomLink } from "../../shared";
 import styles from "./index.module.scss";
 
 const BuilderComponentsMenu = () => {
-  const { componentsLoading } = useSelector(
+  const { componentsLoading, components } = useSelector(
     (state) => state.builder
   );
+
+  console.log(components);
 
   return (
     <div className={styles.container}>
