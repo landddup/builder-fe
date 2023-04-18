@@ -18,17 +18,17 @@
 
 .small {
     height: 30px;
-    @include font-regular-sm;
+    @include font-bold-sm;
 }
 
 .default {
     height: 38px;
-    @include font-regular-base;
+    @include font-medium-base;
 }
 
 .large {
     height: 46px;
-    @include font-regular-lg;
+    @include font-medium-lg;
 }
 
 .contained {

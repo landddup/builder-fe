@@ -1,6 +1,11 @@
 @import "./mixins.scss";
 @import "./variables.scss";
 
+* {
+    font-family: 'Montserrat', sans-serif;
+
+}
+
 html,
 body {
     margin: 0;
@@ -9,7 +14,6 @@ body {
     width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: 'Montserrat', sans-serif;
     color: $grey-900;
     box-sizing: border-box;
     background-color: $grey-200;
