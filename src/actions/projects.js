@@ -19,6 +19,30 @@ function sortByDate(items) {
   return output;
 }
 
+function prepareNewProject(title) {
+  return async () => {
+    const contentBlockRef = firebase.functions.db.doc(
+      firebase.db,
+      constants.firebase.COLLECTION_TYPES.ELEMENTS,
+      constants.builder.ELEMENT_TYPES.EMPTY_BLOCK
+    );
+
+    const contentBlockSnap = await firebase.functions.db.getDoc(
+      contentBlockRef
+    );
+
+    const newProject = {
+      title,
+      createdAt: dayjs().unix(),
+      elements: {
+        0: contentBlockSnap.data(),
+      },
+    };
+
+    return newProject;
+  };
+}
+
 export function setProjects(projectsList) {
   return async (dispatch) => {
     await dispatch(updateProjects({ projectsList: sortByDate(projectsList) }));
@@ -62,28 +86,12 @@ export function initTemplates() {
 export function addNewProject({ uid, title }) {
   return async (dispatch) => {
     try {
-      const contentBlockRef = firebase.functions.db.doc(
-        firebase.db,
-        constants.firebase.COLLECTION_TYPES.ELEMENTS,
-        constants.builder.ELEMENT_TYPES.CONTENT_BLOCK
-      );
-
       const collectionRef = firebase.functions.db.collection(
         firebase.db,
         `${constants.firebase.COLLECTION_TYPES.PROJECTS}/${uid}/items`
       );
 
-      const contentBlockSnap = await firebase.functions.db.getDoc(
-        contentBlockRef
-      );
-
-      const newProject = {
-        title,
-        createdAt: dayjs().unix(),
-        elements: {
-          0: contentBlockSnap.data(),
-        },
-      };
+      const newProject = await dispatch(prepareNewProject(title));
 
       await firebase.functions.db.addDoc(collectionRef, newProject);
 

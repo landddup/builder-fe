@@ -1,7 +1,23 @@
 @import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .container {
-    border: 2px dashed $indigo-300;
-    padding: 20px;
-    border-radius: 4px;
+    transition: all 0.15s ease-out;
+}
+
+.containerEmpty {
+    background-color: $grey-50;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 400px;
+}
+
+.paragraph {
+    @include font-regular-2xl;
+    color: $grey-300;
+    pointer-events: none;
+    user-select: none;
 }

@@ -1,14 +1,20 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import constants from "../../../../../utils/constants";
 
-const Element = ({ type }) => {
+import constants from "../../../../../utils/constants";
+import { DragOverContainer } from "../../../../containers";
+
+const Element = ({ type, children }) => {
   const Component = useMemo(
     () => constants.builder.ELEMENTS_BY_TYPES[type].element,
     [type]
   );
 
-  return <Component />;
+  return (
+    <DragOverContainer>
+      <Component>{children}</Component>
+    </DragOverContainer>
+  );
 };
 
 Element.propTypes = {

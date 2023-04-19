@@ -10,7 +10,19 @@ const Elements = ({ elements }) => {
         const {
           type,
           createdAt: { seconds },
+          elements: nestedElements,
         } = element;
+
+        const shouldRenderRecursively =
+          nestedElements && !!Object.keys(nestedElements).length;
+
+        if (shouldRenderRecursively) {
+          return (
+            <Element key={seconds}>
+              <Elements elements={nestedElements} />
+            </Element>
+          );
+        }
 
         return <Element key={seconds} type={type} />;
       })}
