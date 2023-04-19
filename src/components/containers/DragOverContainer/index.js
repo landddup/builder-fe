@@ -15,6 +15,10 @@ const DragOverContainer = ({ children }) => {
     setIsDragOver(false);
   };
 
+  const handleDrop = () => {
+    handleDragLeave();
+  };
+
   return (
     <div
       className={classNames(styles.container, {
@@ -23,7 +27,7 @@ const DragOverContainer = ({ children }) => {
       onDragEnter={handleDragOver}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
-      onDrop={handleDragLeave}
+      onDrop={handleDrop}
     >
       {children}
 
