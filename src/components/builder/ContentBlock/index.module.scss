@@ -1,0 +1,7 @@
+@import "../../../styles/variables.scss";
+
+.container {
+    border: 2px dashed $indigo-300;
+    padding: 20px;
+    border-radius: 4px;
+}

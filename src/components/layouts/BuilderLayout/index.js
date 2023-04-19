@@ -27,7 +27,7 @@ const BuilderLayout = ({ children }) => {
       }
     );
 
-    dispatch(actions.builder.initComponents());
+    dispatch(actions.builder.initElements());
 
     return unsubscribe;
   };

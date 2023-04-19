@@ -6,5 +6,5 @@ export const PROVIDERS = {
 export const COLLECTION_TYPES = {
   PROJECTS: "projects",
   TEMPLATES: "templates",
-  COMPONENTS: "components",
+  ELEMENTS: "elements",
 };

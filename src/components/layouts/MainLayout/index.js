@@ -36,45 +36,17 @@ const MainLayout = ({ children }) => {
     return unsubscribe;
   };
 
-  const initTemplates = () => {
-    const unsubscribe = firebase.functions.db.onSnapshot(
-      firebase.functions.db.collection(
-        firebase.db,
-        constants.firebase.COLLECTION_TYPES.TEMPLATES
-      ),
-      async (doc) => {
-        let templates = [];
-
-        doc.forEach((el) => {
-          const data = el.data();
-
-          templates.push({ ...data, createdAt: data.createdAt.seconds });
-        });
-
-        await dispatch(actions.projects.setTemplates(templates));
-      },
-      async (error) => {
-        console.log("subscribeOnTemplates error: ", error);
-
-        await dispatch(actions.projects.setTemplates([]));
-      }
-    );
-
-    return unsubscribe;
-  };
-
   const resetToInitial = () => {
     dispatch(actions.projects.setProjectsToInitial());
-    dispatch(actions.projects.setTemplatesToInitial());
   };
 
   useEffect(() => {
     const unsubscribeProjects = initProjects();
-    const unsubscribeTemplates = initTemplates();
+
+    dispatch(actions.projects.initTemplates());
 
     return () => {
       unsubscribeProjects();
-      unsubscribeTemplates();
       resetToInitial();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

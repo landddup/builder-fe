@@ -1,4 +1,3 @@
-import { nanoid } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
 import actions from ".";
@@ -44,14 +43,47 @@ export function setTemplatesToInitial() {
   };
 }
 
-export function addNewProject({ uid, ...rest }) {
+export function initTemplates() {
+  return async (dispatch) => {
+    const templates = [];
+    const collectionSnap = await firebase.functions.db.getDocs(
+      firebase.functions.db.collection(
+        firebase.db,
+        constants.firebase.COLLECTION_TYPES.TEMPLATES
+      )
+    );
+
+    collectionSnap.forEach((el) => templates.push(el.data()));
+
+    dispatch(setTemplates(templates));
+  };
+}
+
+export function addNewProject({ uid, title }) {
   return async (dispatch) => {
     try {
-      const newProject = { id: nanoid(), createdAt: dayjs().unix(), ...rest };
+      const contentBlockRef = firebase.functions.db.doc(
+        firebase.db,
+        constants.firebase.COLLECTION_TYPES.ELEMENTS,
+        constants.builder.ELEMENT_TYPES.CONTENT_BLOCK
+      );
+
       const collectionRef = firebase.functions.db.collection(
         firebase.db,
         `${constants.firebase.COLLECTION_TYPES.PROJECTS}/${uid}/items`
       );
+
+      const contentBlockSnap = await firebase.functions.db.getDoc(
+        contentBlockRef
+      );
+
+      const newProject = {
+        title,
+        createdAt: dayjs().unix(),
+        elements: {
+          0: contentBlockSnap.data(),
+        },
+      };
 
       await firebase.functions.db.addDoc(collectionRef, newProject);
 

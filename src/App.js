@@ -4,8 +4,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import Navigation from "./Navigation";
-import ToastContainer from "./components/containers/ToastContainer";
-import ModalContainer from "./components/containers/ModalContainer";
+import { ToastContainer, ModalContainer } from "./components/containers";
 
 function App() {
   return (

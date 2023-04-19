@@ -4,18 +4,18 @@ export const builderSlice = createSlice({
   name: "projects",
   initialState: {
     project: {},
-    components: {},
+    elements: {},
     projectLoading: true,
-    componentsLoading: true,
+    elementsLoading: true,
   },
   reducers: {
     updateProject: (state, action) => {
       state.project = action.payload.project;
       state.projectLoading = false;
     },
-    updateComponents: (state, action) => {
-      state.components = action.payload.components;
-      state.componentsLoading = false;
+    updateElements: (state, action) => {
+      state.elements = action.payload.elements;
+      state.elementsLoading = false;
     },
     clearProject: (state) => {
       state.project = {};
@@ -24,7 +24,7 @@ export const builderSlice = createSlice({
   },
 });
 
-export const { updateProject, updateComponents, clearProject } =
+export const { updateProject, updateElements, clearProject } =
   builderSlice.actions;
 
 export default builderSlice.reducer;

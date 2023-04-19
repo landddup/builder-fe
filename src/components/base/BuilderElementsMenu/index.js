@@ -6,20 +6,18 @@ import { SvgIcon } from "../../shared";
 
 import styles from "./index.module.scss";
 
-const BuilderComponentsMenu = () => {
-  const { componentsLoading, components } = useSelector(
-    (state) => state.builder
-  );
+const BuilderElementsMenu = () => {
+  const { elementsLoading, elements } = useSelector((state) => state.builder);
 
   return (
     <div className={styles.container}>
-      <LoadingContainer width={30} height={30} isLoading={componentsLoading}>
+      <LoadingContainer width={30} height={30} isLoading={elementsLoading}>
         <div className={styles.nav}>
-          {Object.values(components).map((component) => {
-            const { title, icon } = component;
+          {Object.values(elements).map((element) => {
+            const { title, icon } = element;
 
             return (
-              <div draggable key={title} className={styles.component}>
+              <div draggable key={title} className={styles.element}>
                 <SvgIcon type={icon} className={styles.icon} />
 
                 <p className={styles.title}>{title}</p>
@@ -32,4 +30,4 @@ const BuilderComponentsMenu = () => {
   );
 };
 
-export default BuilderComponentsMenu;
+export default BuilderElementsMenu;

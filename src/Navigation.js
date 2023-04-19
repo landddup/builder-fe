@@ -7,11 +7,11 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { PRIVATE_ROUTES, PUBLIC_ROUTES, ROOT } from "./utils/constants/routes";
+import constants from "./utils/constants";
 
 import actions from "./actions";
 
-import LoadingContainer from "./components/containers/LoadingContainer";
+import { LoadingContainer } from "./components/containers";
 
 const Navigation = () => {
   const dispatch = useDispatch();
@@ -19,10 +19,10 @@ const Navigation = () => {
 
   const navigationRoutes = useMemo(() => {
     if (currentSession) {
-      return PRIVATE_ROUTES;
+      return constants.routes.PRIVATE_ROUTES;
     }
 
-    return PUBLIC_ROUTES;
+    return constants.routes.PUBLIC_ROUTES;
   }, [currentSession]);
 
   const initSession = () => {
@@ -53,7 +53,7 @@ const Navigation = () => {
             );
           })}
 
-          <Route path="*" element={<Navigate to={ROOT} />} />
+          <Route path="*" element={<Navigate to={constants.routes.ROOT} />} />
         </Routes>
       </LoadingContainer>
     </Router>

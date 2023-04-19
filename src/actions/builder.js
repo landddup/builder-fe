@@ -3,7 +3,7 @@ import constants from "../utils/constants";
 import {
   clearProject,
   updateProject,
-  updateComponents,
+  updateElements,
 } from "../reducers/builder";
 
 export function setProject(project) {
@@ -18,18 +18,18 @@ export function setProjectToInitial() {
   };
 }
 
-export function initComponents() {
+export function initElements() {
   return async (dispatch) => {
-    const components = {};
+    const elements = {};
     const collectionSnap = await firebase.functions.db.getDocs(
       firebase.functions.db.collection(
         firebase.db,
-        constants.firebase.COLLECTION_TYPES.COMPONENTS
+        constants.firebase.COLLECTION_TYPES.ELEMENTS
       )
     );
 
-    collectionSnap.forEach((el) => (components[el.id] = el.data()));
+    collectionSnap.forEach((el) => (elements[el.id] = el.data()));
 
-    dispatch(updateComponents({ components }));
+    dispatch(updateElements({ elements }));
   };
 }
