@@ -1,9 +1,8 @@
 import firebase from "../firebase-config";
+import constants from "../utils/constants";
 import { createSession } from "../reducers/session";
-import { TOAST_TYPES } from "../utils/constants/toast";
 import actions from ".";
 import api from "../apiSingleton";
-import { PROVIDERS } from "../utils/constants/firebase";
 
 const ERRORS = {
   "auth/email-already-in-use": "Email already in use",
@@ -39,7 +38,7 @@ export function verifyEmail(user) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: `Link sent to ${user.email}`,
         })
@@ -49,7 +48,7 @@ export function verifyEmail(user) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code],
         })
@@ -65,7 +64,7 @@ export function login({ email, password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Successfully signed in",
         })
@@ -75,7 +74,7 @@ export function login({ email, password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code],
         })
@@ -94,7 +93,7 @@ export function register({ email, password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Account successfully created",
         })
@@ -104,7 +103,7 @@ export function register({ email, password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code],
         })
@@ -120,7 +119,7 @@ export function logout() {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Successfully signed out",
         })
@@ -130,7 +129,7 @@ export function logout() {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code] || ERRORS.default,
         })
@@ -146,7 +145,7 @@ export function restorePassword({ email }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: `Link was sent to ${email}`,
         })
@@ -156,7 +155,7 @@ export function restorePassword({ email }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code] || ERRORS.default,
         })
@@ -172,7 +171,7 @@ export function loginWithGoogle() {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Successfully signed in",
         })
@@ -184,7 +183,7 @@ export function loginWithGoogle() {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code] || ERRORS.default,
         })
@@ -212,7 +211,7 @@ export function reauthenticateWithPassword({ password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code] || ERRORS.default,
         })
@@ -235,7 +234,7 @@ export function reauthenticateWithGoogle() {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code] || ERRORS.default,
         })
@@ -250,11 +249,11 @@ function reauthenticate(validInputs) {
 
     let currentProfile;
 
-    if (providerId === PROVIDERS.PASSWORD) {
+    if (providerId === constants.firebase.PROVIDERS.PASSWORD) {
       currentProfile = await dispatch(reauthenticateWithPassword(validInputs));
     }
 
-    if (providerId === PROVIDERS.GOOGLE) {
+    if (providerId === constants.firebase.PROVIDERS.GOOGLE) {
       currentProfile = await dispatch(reauthenticateWithGoogle());
     }
 
@@ -284,7 +283,7 @@ export function updateProfile({ displayName, email, password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.SUCCESS,
+          type: constants.toast.TOAST_TYPES.SUCCESS,
           duration: 3000,
           message: "Profile successfully updated",
         })
@@ -294,7 +293,7 @@ export function updateProfile({ displayName, email, password }) {
 
       await dispatch(
         actions.toast.show({
-          type: TOAST_TYPES.ERROR,
+          type: constants.toast.TOAST_TYPES.ERROR,
           duration: 3000,
           message: ERRORS[error.code] || ERRORS.default,
         })

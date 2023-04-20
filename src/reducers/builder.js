@@ -5,6 +5,7 @@ export const builderSlice = createSlice({
   initialState: {
     project: {},
     elements: {},
+    draggedElement: {},
     projectLoading: true,
     elementsLoading: true,
   },
@@ -21,10 +22,17 @@ export const builderSlice = createSlice({
       state.project = {};
       state.projectLoading = true;
     },
+    updateDraggedElement: (state, action) => {
+      state.draggedElement = action.payload.draggedElement;
+    },
   },
 });
 
-export const { updateProject, updateElements, clearProject } =
-  builderSlice.actions;
+export const {
+  updateProject,
+  updateElements,
+  clearProject,
+  updateDraggedElement,
+} = builderSlice.actions;
 
 export default builderSlice.reducer;

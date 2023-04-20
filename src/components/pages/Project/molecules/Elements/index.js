@@ -3,36 +3,42 @@ import PropTypes from "prop-types";
 
 import { Element } from "../";
 
-const Elements = ({ elements }) => {
+const Elements = ({ elements, path }) => {
   return (
-    <div>
-      {Object.values(elements).map((element) => {
+    <>
+      {Object.keys(elements).map((elementKey) => {
         const {
           type,
           createdAt: { seconds },
           elements: nestedElements,
           ...rest
-        } = element;
+        } = elements[elementKey];
 
-        const shouldRenderRecursively =
+        const shouldRenderElements =
           nestedElements && !!Object.keys(nestedElements).length;
 
+        const elementPath = `${path}.${elementKey}.elements`;
+
         return (
-          <Element key={seconds} type={type} {...rest}>
-            {shouldRenderRecursively && <Elements elements={nestedElements} />}
+          <Element key={seconds} type={type} path={elementPath} {...rest}>
+            {shouldRenderElements && (
+              <Elements elements={nestedElements} path={elementPath} />
+            )}
           </Element>
         );
       })}
-    </div>
+    </>
   );
 };
 
 Elements.propTypes = {
   elements: PropTypes.object,
+  path: PropTypes.string,
 };
 
 Elements.defaultProps = {
   elements: {},
+  path: "elements",
 };
 
 export default Elements;
