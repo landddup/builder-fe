@@ -6,6 +6,8 @@ import actions from "../../../actions";
 import firebase from "../../../firebase-config";
 import constants from "../../../utils/constants";
 
+import { BuilderHeader } from "../../base";
+
 import styles from "./index.module.scss";
 
 const BuilderLayout = ({ children }) => {
@@ -47,6 +49,8 @@ const BuilderLayout = ({ children }) => {
   }, []);
   return (
     <section className={styles.container}>
+      <BuilderHeader />
+
       <div className={styles.content}>{children}</div>
     </section>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { LoadingContainer } from "../../containers";
-import { BuilderElementsMenu, BuilderHeader } from "../../base";
+import { BuilderElementsMenu } from "../../base";
 import { Elements } from "./molecules";
 
 import styles from "./index.module.scss";
@@ -12,16 +12,12 @@ const Project = () => {
 
   return (
     <div className={styles.container}>
-      <BuilderHeader />
+      <BuilderElementsMenu />
 
-      <div className={styles.content}>
-        <BuilderElementsMenu />
-
-        <div className={styles.builder}>
-          <LoadingContainer isLoading={projectLoading}>
-            <Elements elements={project.elements} />
-          </LoadingContainer>
-        </div>
+      <div className={styles.builder}>
+        <LoadingContainer isLoading={projectLoading}>
+          <Elements elements={project.elements} />
+        </LoadingContainer>
       </div>
     </div>
   );

@@ -2,22 +2,7 @@
 @import "./variables.scss";
 
 * {
-    font-family: 'Montserrat', sans-serif;
-
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    max-width: 100vw;
-    width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
-    color: $grey-900;
-    box-sizing: border-box;
-    background-color: $grey-200;
-    @include font-medium-base;
+    font-family: "Montserrat", sans-serif;
 
     &::-webkit-scrollbar {
         width: 10px;
@@ -35,6 +20,20 @@ body {
     &::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: $grey-900;
+    box-sizing: border-box;
+    background-color: $grey-200;
+    @include font-medium-base;
 }
 
 h1,

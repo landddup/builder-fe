@@ -1,26 +1,21 @@
 @import "../../../styles/mixins.scss";
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    flex: 1;
-    position: relative;
+    width: 100%;
 }
 
 .content {
-    display: flex;
-    gap: 20px;
-    flex: 1;
+    width: 100%;
 }
 
 .builder {
-    padding: 15px 20px 20px;
-    flex: 1;
+    padding: 16px;
+    overflow-y: scroll;
 }
 
 @include tablet {
-    .builder {
-        padding: 15px 20px 20px 0;
+    .container {
+        display: grid;
+        grid-template-columns: 140px 1fr;
     }
 }

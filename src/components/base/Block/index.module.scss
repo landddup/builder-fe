@@ -15,6 +15,7 @@
 .header {
     @include adaptiveLayout;
     padding: 10px 0;
+    box-sizing: border-box;
     background-color: #ffffff;
     grid-template-areas:
         "title"
