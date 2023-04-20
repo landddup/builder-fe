@@ -17,8 +17,7 @@ import { ReactComponent as Google } from "../../../images/google.svg";
 
 // BUILDER MENU
 import { ReactComponent as GridGroup } from "../../../images/grid-group.svg";
-import { ReactComponent as Heading } from "../../../images/heading.svg";
-import { ReactComponent as Paragraph } from "../../../images/paragraph.svg";
+import { ReactComponent as Text } from "../../../images/text.svg";
 import { ReactComponent as Burger } from "../../../images/burger.svg";
 import { ReactComponent as Case } from "../../../images/case.svg";
 
@@ -41,8 +40,7 @@ const SvgIcon = ({ type, className, onClick }) => {
 
   const BUILDER_MENU = {
     gridGroup: GridGroup,
-    heading: Heading,
-    paragraph: Paragraph,
+    text: Text,
     burger: Burger,
     case: Case,
   };

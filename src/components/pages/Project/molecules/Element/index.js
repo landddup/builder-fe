@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import constants from "../../../../../utils/constants";
 import { DragOverContainer } from "../../../../containers";
 
-const Element = ({ type, children }) => {
+const Element = ({ type, children, ...rest }) => {
   const Component = useMemo(
     () => constants.builder.ELEMENTS_BY_TYPES[type].element,
     [type]
@@ -12,7 +12,7 @@ const Element = ({ type, children }) => {
 
   return (
     <DragOverContainer>
-      <Component>{children}</Component>
+      <Component {...rest}>{children}</Component>
     </DragOverContainer>
   );
 };

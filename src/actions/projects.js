@@ -31,11 +31,13 @@ function prepareNewProject(title) {
       contentBlockRef
     );
 
+    const { type, createdAt } = contentBlockSnap.data();
+
     const newProject = {
       title,
       createdAt: dayjs().unix(),
       elements: {
-        0: contentBlockSnap.data(),
+        0: { type, createdAt },
       },
     };
 

@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import classNames from "classnames";
 
 import styles from "./index.module.scss";
 
 const DragOverContainer = ({ children }) => {
+  const containerRef = useRef();
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDragOver(true);
+    if (e.target === containerRef.current.firstChild) {
+      e.preventDefault();
+      setIsDragOver(true);
+    }
   };
 
   const handleDragLeave = () => {
-    setIsDragOver(false);
+    if (isDragOver) {
+      setIsDragOver(false);
+    }
   };
 
   const handleDrop = () => {
-    handleDragLeave();
+    if (isDragOver) {
+      handleDragLeave();
+    }
   };
 
   return (
     <div
+      ref={containerRef}
       className={classNames(styles.container, {
         [styles.containerActive]: isDragOver,
       })}
@@ -31,11 +39,11 @@ const DragOverContainer = ({ children }) => {
     >
       {children}
 
-      <div
+      {/* <div
         className={classNames(styles.background, {
           [styles.backgroundActive]: isDragOver,
         })}
-      />
+      /> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@
 .container {
     border: 4px dashed transparent;
     position: relative;
-    flex: 1;
+    height: min-content;
 }
 
 .containerActive {
