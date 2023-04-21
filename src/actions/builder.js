@@ -1,4 +1,4 @@
-import { cloneDeep, get, set } from "lodash";
+import { cloneDeep, get, set, unset } from "lodash";
 import dayjs from "dayjs";
 
 import firebase from "../firebase-config";
@@ -83,5 +83,17 @@ export function dropElement(path, projectId) {
     const updatedProject = set(clonedData.project, path, updatedElements);
 
     dispatch(updateElementsInDb(updatedProject, projectId));
+  };
+}
+
+export function deleteElement(path, projectId) {
+  return async (dispatch, getState) => {
+    const { project } = getState().builder;
+    const finalPath = path.split(".").slice(0, -1).join(".");
+    const clonedProject = cloneDeep(project);
+
+    unset(clonedProject, finalPath);
+
+    dispatch(updateElementsInDb(clonedProject, projectId));
   };
 }

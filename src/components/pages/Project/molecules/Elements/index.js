@@ -12,6 +12,7 @@ const Elements = ({ elements, path }) => {
           createdAt: { seconds },
           elements: nestedElements,
           dropAllowed,
+          deleteAllowed = true,
           ...rest
         } = elements[elementKey];
 
@@ -26,6 +27,7 @@ const Elements = ({ elements, path }) => {
             type={type}
             path={elementPath}
             dropAllowed={dropAllowed}
+            deleteAllowed={deleteAllowed}
             {...rest}
           >
             {shouldRenderElements && (

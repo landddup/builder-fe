@@ -16,7 +16,10 @@ const DragOverContainer = ({ path, dropAllowed, children }) => {
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e) => {
-    if (e.target === containerRef.current.firstChild && dropAllowed) {
+    const shouldDrop =
+      dropAllowed && e.target === containerRef.current.firstChild;
+
+    if (shouldDrop) {
       e.preventDefault();
       setIsDragOver(true);
     }
