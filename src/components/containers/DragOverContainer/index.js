@@ -8,7 +8,7 @@ import actions from "../../../actions";
 
 import styles from "./index.module.scss";
 
-const DragOverContainer = ({ path, children }) => {
+const DragOverContainer = ({ path, dropAllowed, children }) => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
   const containerRef = useRef();
@@ -16,7 +16,7 @@ const DragOverContainer = ({ path, children }) => {
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e) => {
-    if (e.target === containerRef.current.firstChild) {
+    if (e.target === containerRef.current.firstChild && dropAllowed) {
       e.preventDefault();
       setIsDragOver(true);
     }
@@ -40,6 +40,7 @@ const DragOverContainer = ({ path, children }) => {
       ref={containerRef}
       className={classNames(styles.container, {
         [styles.containerActive]: isDragOver,
+        [styles.containerDisabled]: !dropAllowed,
       })}
       onDragEnter={handleDragOver}
       onDragOver={handleDragOver}
@@ -53,6 +54,7 @@ const DragOverContainer = ({ path, children }) => {
 
 DragOverContainer.propTypes = {
   path: PropTypes.string.isRequired,
+  dropAllowed: PropTypes.bool.isRequired,
 };
 
 export default DragOverContainer;

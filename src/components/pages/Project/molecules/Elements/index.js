@@ -11,6 +11,7 @@ const Elements = ({ elements, path }) => {
           type,
           createdAt: { seconds },
           elements: nestedElements,
+          dropAllowed,
           ...rest
         } = elements[elementKey];
 
@@ -20,7 +21,13 @@ const Elements = ({ elements, path }) => {
         const elementPath = `${path}.${elementKey}.elements`;
 
         return (
-          <Element key={seconds} type={type} path={elementPath} {...rest}>
+          <Element
+            key={seconds}
+            type={type}
+            path={elementPath}
+            dropAllowed={dropAllowed}
+            {...rest}
+          >
             {shouldRenderElements && (
               <Elements elements={nestedElements} path={elementPath} />
             )}
