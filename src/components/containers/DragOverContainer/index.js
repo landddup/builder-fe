@@ -4,11 +4,12 @@ import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
+import constants from "../../../utils/constants";
 import actions from "../../../actions";
 
 import styles from "./index.module.scss";
 
-const DragOverContainer = ({ path, children }) => {
+const DragOverContainer = ({ path, type, children }) => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
   const containerRef = useRef();
@@ -16,7 +17,9 @@ const DragOverContainer = ({ path, children }) => {
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e) => {
-    const shouldDrop = e.target === containerRef.current.firstChild;
+    const shouldDrop =
+      !constants.builder.NOT_ALLOWED_DROP_ELEMENTS.includes(type) &&
+      e.target === containerRef.current.firstChild;
 
     if (shouldDrop) {
       e.preventDefault();
@@ -40,7 +43,9 @@ const DragOverContainer = ({ path, children }) => {
   return (
     <div
       ref={containerRef}
-      className={styles.container}
+      className={classNames(styles.container, {
+        [styles.containerActive]: isDragOver,
+      })}
       onDragEnter={handleDragOver}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -53,6 +58,7 @@ const DragOverContainer = ({ path, children }) => {
 
 DragOverContainer.propTypes = {
   path: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default DragOverContainer;

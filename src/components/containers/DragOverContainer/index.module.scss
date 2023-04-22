@@ -3,4 +3,9 @@
 .container {
     width: 100%;
     box-sizing: border-box;
+    border: 5px solid transparent;
+}
+
+.containerActive {
+    border: 5px dashed $indigo-300;
 }
