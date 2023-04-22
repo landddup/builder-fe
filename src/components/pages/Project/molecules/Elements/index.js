@@ -11,27 +11,18 @@ const Elements = ({ elements, path }) => {
           type,
           createdAt: { seconds },
           elements: nestedElements,
-          dropAllowed,
-          deleteAllowed = true,
           ...rest
         } = elements[elementKey];
 
         const shouldRenderElements =
           nestedElements && !!Object.keys(nestedElements).length;
 
-        const elementPath = `${path}.${elementKey}.elements`;
+        const nextPath = `${path}${!!path ? "." : ""}${elementKey}`;
 
         return (
-          <Element
-            key={seconds}
-            type={type}
-            path={elementPath}
-            dropAllowed={dropAllowed}
-            deleteAllowed={deleteAllowed}
-            {...rest}
-          >
+          <Element key={seconds} type={type} path={nextPath} {...rest}>
             {shouldRenderElements && (
-              <Elements elements={nestedElements} path={elementPath} />
+              <Elements elements={nestedElements} path={nextPath} />
             )}
           </Element>
         );
@@ -47,7 +38,7 @@ Elements.propTypes = {
 
 Elements.defaultProps = {
   elements: {},
-  path: "elements",
+  path: "",
 };
 
 export default Elements;

@@ -10,12 +10,7 @@ import { SvgIcon } from "../../shared";
 
 import styles from "./index.module.scss";
 
-const ElementSettingsContainer = ({
-  path,
-  dropAllowed,
-  deleteAllowed,
-  children,
-}) => {
+const ElementSettingsContainer = ({ path, type, children }) => {
   const { projectId } = useParams();
   const dispatch = useDispatch();
   const containerRef = useRef();
@@ -28,7 +23,7 @@ const ElementSettingsContainer = ({
       e.target === containerRef.current.childNodes[0].childNodes[0] ||
       e.target === crossRef.current;
 
-    if (shouldSettings && deleteAllowed) {
+    if (shouldSettings) {
       setSettingsVisible(true);
     }
   };
@@ -44,32 +39,30 @@ const ElementSettingsContainer = ({
   return (
     <div
       ref={containerRef}
+      className={classNames(styles.container, styles[type], {
+        [styles.containerActive]: settingsVisible,
+      })}
       onMouseOver={handleMouseEnter}
       onMouseOut={handleMouseLeave}
-      className={classNames(styles.container, {
-        [styles.containerActive]: settingsVisible,
-        [styles.containerDisabled]: !dropAllowed,
-      })}
     >
       {children}
 
-      {settingsVisible && deleteAllowed && (
-        <div
-          ref={crossRef}
-          className={styles.crossContainer}
-          onClick={handleDelete}
-        >
-          <SvgIcon type="cross" />
-        </div>
-      )}
+      <div
+        ref={crossRef}
+        className={classNames(styles.crossContainer, {
+          [styles.crossContainerActive]: settingsVisible,
+        })}
+        onClick={handleDelete}
+      >
+        <SvgIcon type="cross" />
+      </div>
     </div>
   );
 };
 
 ElementSettingsContainer.propTypes = {
   path: PropTypes.string.isRequired,
-  dropAllowed: PropTypes.bool.isRequired,
-  deleteAllowed: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default ElementSettingsContainer;

@@ -1,22 +1,6 @@
 @import "../../../styles/variables.scss";
 
 .container {
-    border: 5px dashed transparent;
-    position: relative;
-    height: min-content;
     width: 100%;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.containerActive {
-    border: 5px dashed $indigo-300;
-    transition: all 0.15s ease-out;
-    cursor: pointer;
-}
-
-.containerDisabled {
-    width: max-content;
 }

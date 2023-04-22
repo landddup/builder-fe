@@ -1,53 +1,46 @@
 @import "../../../styles/variables.scss";
 
 .container {
-    transition: all 0.15s ease-out;
-    box-shadow: inset 0px 0px 0px 5px transparent;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
+    transition: all 0.15s ease-out;
+    border: 5px solid transparent;
     position: relative;
-
-    .crossContainer {
-        opacity: 0;
-        pointer-events: none;
-    }
 }
 
 .containerActive {
-    box-shadow: inset 0px 0px 0px 5px $indigo-300;
-
-    .crossContainer {
-        opacity: 1;
-        pointer-events: all;
-    }
-}
-
-.containerDisabled {
-    width: max-content;
+    border: 5px solid $indigo-300;
 }
 
 .crossContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
     position: absolute;
     top: 0;
     right: 0;
     background-color: $indigo-300;
-    width: 15px;
-    height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
     transition: all 0.15s ease-out;
 
     svg {
-        width: 15px;
-        height: 15px;
         pointer-events: none;
 
         path {
             fill: #ffffff;
         }
     }
+}
+
+.crossContainerActive {
+    pointer-events: all;
+    opacity: 1;
+}
+
+.TEXT {
+    width: max-content;
 }

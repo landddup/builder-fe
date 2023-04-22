@@ -10,6 +10,21 @@ import {
   updateDraggedElement,
 } from "../reducers/builder";
 
+function preparePath(path, actionKey) {
+  const splitted = path.split(".");
+  const joined = splitted.join(".elements.");
+
+  switch (actionKey) {
+    case "add": {
+      return `elements.${joined}.elements`;
+    }
+
+    default: {
+      return `elements.${joined}`;
+    }
+  }
+}
+
 function addElement(elements, newElement) {
   const output = { ...elements };
   const newElementIndex = Object.keys(output).length;
@@ -55,7 +70,7 @@ export function setDraggedElement(draggedElement) {
 }
 
 export function updateElementsInDb(project, projectId) {
-  return async (dispatch, getState) => {
+  return async (_, getState) => {
     const { uid } = getState().session.currentSession;
     const docRef = firebase.functions.db.doc(
       firebase.db,
@@ -73,14 +88,19 @@ export function updateElementsInDb(project, projectId) {
 export function dropElement(path, projectId) {
   return async (dispatch, getState) => {
     const { project, draggedElement } = getState().builder;
+    const preparedPath = preparePath(path, "add");
     const clonedData = cloneDeep({ project, draggedElement });
-    const elementsToUpdate = get(clonedData.project, path);
+    const elementsToUpdate = get(clonedData.project, preparedPath);
     const updatedElements = addElement(
       elementsToUpdate,
       clonedData.draggedElement
     );
 
-    const updatedProject = set(clonedData.project, path, updatedElements);
+    const updatedProject = set(
+      clonedData.project,
+      preparedPath,
+      updatedElements
+    );
 
     dispatch(updateElementsInDb(updatedProject, projectId));
   };
@@ -89,11 +109,10 @@ export function dropElement(path, projectId) {
 export function deleteElement(path, projectId) {
   return async (dispatch, getState) => {
     const { project } = getState().builder;
-    const finalPath = path.split(".").slice(0, -1).join(".");
+    const preparedPath = preparePath(path, "delete");
     const clonedProject = cloneDeep(project);
 
-    unset(clonedProject, finalPath);
-
+    unset(clonedProject, preparedPath);
     dispatch(updateElementsInDb(clonedProject, projectId));
   };
 }

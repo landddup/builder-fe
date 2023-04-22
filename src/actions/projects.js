@@ -37,7 +37,7 @@ function prepareNewProject(title) {
       title,
       createdAt: dayjs().unix(),
       elements: {
-        0: { ...contentBlock, deleteAllowed: false },
+        0: { ...contentBlock },
       },
     };
 

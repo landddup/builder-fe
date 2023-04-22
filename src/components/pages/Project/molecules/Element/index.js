@@ -8,26 +8,15 @@ import {
   ElementSettingsContainer,
 } from "../../../../containers";
 
-const Element = ({
-  type,
-  path,
-  dropAllowed,
-  deleteAllowed,
-  children,
-  ...rest
-}) => {
+const Element = ({ type, path, children, ...rest }) => {
   const Component = useMemo(
     () => constants.builder.ELEMENTS_BY_TYPES[type].element,
     [type]
   );
 
   return (
-    <ElementSettingsContainer
-      path={path}
-      dropAllowed={dropAllowed}
-      deleteAllowed={deleteAllowed}
-    >
-      <DragOverContainer path={path} dropAllowed={dropAllowed}>
+    <ElementSettingsContainer path={path} type={type}>
+      <DragOverContainer path={path} type={type}>
         <Component {...rest}>{children}</Component>
       </DragOverContainer>
     </ElementSettingsContainer>
@@ -37,8 +26,6 @@ const Element = ({
 Element.propTypes = {
   type: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  dropAllowed: PropTypes.bool.isRequired,
-  deleteAllowed: PropTypes.bool.isRequired,
 };
 
 export default Element;
