@@ -4,9 +4,10 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    border: 5px solid transparent;
+    outline: 5px solid transparent;
+    transition: all 0.15s ease-out;
 }
 
 .containerActive {
-    border: 5px dashed $indigo-300;
+    outline: 5px dashed $indigo-300;
 }
