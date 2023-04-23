@@ -1,10 +1,15 @@
 import React from "react";
+import classNames from "classnames";
 
 import styles from "./index.module.scss";
 
 const ContentBlock = ({ children }) => {
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.withChildren]: children,
+      })}
+    >
       {children ? (
         children
       ) : (

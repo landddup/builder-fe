@@ -16,6 +16,10 @@
     flex: 1;
 }
 
+.withChildren {
+    min-height: auto
+}
+
 .paragraph {
     @include font-regular-2xl;
     color: $grey-300;
