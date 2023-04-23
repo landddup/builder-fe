@@ -11,6 +11,10 @@ import {
 } from "../reducers/builder";
 
 function preparePath(path, actionKey) {
+  if (!path) {
+    return "elements";
+  }
+
   const splitted = path.split(".");
   const joined = splitted.join(".elements.");
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { LoadingContainer } from "../../containers";
+import { DragOverContainer, LoadingContainer } from "../../containers";
 import { BuilderElementsMenu } from "../../base";
 import { Elements } from "./molecules";
 
@@ -16,7 +16,9 @@ const Project = () => {
 
       <div className={styles.builder}>
         <LoadingContainer isLoading={projectLoading}>
-          <Elements elements={project.elements} />
+          <DragOverContainer>
+            <Elements elements={project.elements} />
+          </DragOverContainer>
         </LoadingContainer>
       </div>
     </div>

@@ -19,7 +19,8 @@ const DragOverContainer = ({ path, type, children }) => {
   const handleDragOver = (e) => {
     const shouldDrop =
       !constants.builder.NOT_ALLOWED_DROP_ELEMENTS.includes(type) &&
-      e.target === containerRef.current.firstChild;
+      (e.target === containerRef.current ||
+        e.target === containerRef.current.firstChild);
 
     if (shouldDrop) {
       e.preventDefault();
@@ -57,8 +58,13 @@ const DragOverContainer = ({ path, type, children }) => {
 };
 
 DragOverContainer.propTypes = {
-  path: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  path: PropTypes.string,
+  type: PropTypes.string,
+};
+
+DragOverContainer.defaultProps = {
+  path: "",
+  type: "",
 };
 
 export default DragOverContainer;
