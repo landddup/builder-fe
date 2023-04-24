@@ -5,13 +5,15 @@
     background-color: $grey-50;
     min-width: 140px;
     width: min-content;
-    height: 100%;
+    height: calc(100vh - 75px);
     transition: all 0.15s ease-out;
     padding: 20px;
     box-sizing: border-box;
     display: none;
     flex-direction: column;
     gap: 20px;
+    position: sticky;
+    top: 75px;
 }
 
 .nav {

@@ -1,13 +1,11 @@
 import LoadingContainer from "./LoadingContainer";
 import ModalContainer from "./ModalContainer";
 import ToastContainer from "./ToastContainer";
-import DragOverContainer from "./DragOverContainer";
-import ElementSettingsContainer from "./ElementSettingsContainer";
+import BuilderElementContainer from "./BuilderElementContainer";
 
 export {
   LoadingContainer,
   ModalContainer,
   ToastContainer,
-  DragOverContainer,
-  ElementSettingsContainer,
+  BuilderElementContainer,
 };

@@ -1,15 +1,19 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/mixins.scss";
 
 .container {
-    width: 100%;
     box-sizing: border-box;
-    transition: all 0.15s ease-out;
-    border: 5px solid transparent;
+    width: 100%;
+    outline: 5px dashed transparent;
     position: relative;
+    margin-bottom: 20px;
 }
 
-.containerActive {
-    border: 5px solid $indigo-300;
+.dragOverContainer {
+    outline: 5px dashed $indigo-300;
+}
+
+.settingsVisibleContainer {
+    outline: 5px solid $indigo-300;
 }
 
 .crossContainer {
@@ -25,7 +29,6 @@
     cursor: pointer;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.15s ease-out;
 
     svg {
         pointer-events: none;
@@ -36,11 +39,12 @@
     }
 }
 
-.crossContainerActive {
+.crossContainerVisible {
     pointer-events: all;
     opacity: 1;
 }
 
 .TEXT {
     width: max-content;
+    margin-bottom: 0;
 }

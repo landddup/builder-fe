@@ -2,6 +2,7 @@
 
 .container {
     width: 100%;
+    display: flex;
 }
 
 .content {
@@ -9,10 +10,14 @@
 }
 
 .builder {
-    padding: 16px;
+    padding: 20px 20px 5px;
     box-sizing: border-box;
-    max-height: calc(100vh - 75px);
-    overflow-y: scroll;
+}
+
+.dropContainer {
+    height: 100%;
+    padding-bottom: 80px;
+    box-sizing: border-box;
 }
 
 @include tablet {
