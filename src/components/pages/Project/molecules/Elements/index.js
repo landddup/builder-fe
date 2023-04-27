@@ -20,8 +20,9 @@ const Elements = ({ elements, path }) => {
         return (
           <Element
             key={seconds}
-            currentNode={elements[elementKey]}
             path={nextPath}
+            elements={elements}
+            currentNode={elements[elementKey]}
           >
             {shouldRenderElements && (
               <Elements elements={nestedElements} path={nextPath} />

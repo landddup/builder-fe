@@ -11,21 +11,29 @@ import {
 } from "../reducers/builder";
 
 function preparePath(path, actionKey) {
+  const splitted = path.split(".");
+  const joined = splitted.join(".elements.");
+
   if (!path) {
     return "elements";
   }
 
-  const splitted = path.split(".");
-  const joined = splitted.join(".elements.");
+  if (actionKey === "add") {
+    return `elements.${joined}.elements`;
+  }
 
-  switch (actionKey) {
-    case "add": {
-      return `elements.${joined}.elements`;
+  if (actionKey === "delete") {
+    return `elements.${joined}`;
+  }
+
+  if (actionKey === "edit") {
+    const spliced = splitted.splice(0, splitted.length - 1);
+
+    if (!!spliced.length) {
+      return `elements.${spliced.join(".elements.")}.elements`;
     }
 
-    default: {
-      return `elements.${joined}`;
-    }
+    return "elements";
   }
 }
 
@@ -118,5 +126,23 @@ export function deleteElement(path, projectId) {
 
     unset(clonedProject, preparedPath);
     dispatch(updateElementsInDb(clonedProject, projectId));
+  };
+}
+
+export function replaceElements(path, currentIndex, nextIndex) {
+  return async (dispatch, getState) => {
+    const { project, draggedElement } = getState().builder;
+    const preparedPath = preparePath(path, "edit");
+    const clonedData = cloneDeep({ project, draggedElement });
+    const elements = get(clonedData.project, preparedPath);
+
+    [elements[currentIndex], elements[nextIndex]] = [
+      elements[nextIndex],
+      elements[currentIndex],
+    ];
+
+    const updatedProject = set(clonedData.project, preparedPath, elements);
+
+    dispatch(setProject(updatedProject));
   };
 }

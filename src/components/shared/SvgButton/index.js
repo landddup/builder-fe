@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
@@ -6,34 +6,29 @@ import { SvgIcon } from "../";
 
 import styles from "./index.module.scss";
 
-const SvgButton = ({
-  icon,
-  variant,
-  size,
-  disabled,
-  className,
-  title,
-  onClick,
-}) => {
-  return (
-    <div
-      title={title}
-      {...(disabled ? {} : { onClick })}
-      className={classNames(
-        styles.iconContainer,
-        styles[size],
-        styles[variant],
-        {
-          [styles.containedDisabled]: variant === "contained" && disabled,
-          [styles.outlinedDisabled]: variant === "outlined" && disabled,
-        },
-        className
-      )}
-    >
-      <SvgIcon type={icon} className={classNames(styles.icon)} />
-    </div>
-  );
-};
+const SvgButton = forwardRef(
+  ({ icon, variant, size, disabled, className, title, onClick }, ref) => {
+    return (
+      <div
+        ref={ref}
+        title={title}
+        {...(disabled ? {} : { onClick })}
+        className={classNames(
+          styles.iconContainer,
+          styles[size],
+          styles[variant],
+          {
+            [styles.containedDisabled]: variant === "contained" && disabled,
+            [styles.outlinedDisabled]: variant === "outlined" && disabled,
+          },
+          className
+        )}
+      >
+        <SvgIcon type={icon} className={classNames(styles.icon)} />
+      </div>
+    );
+  }
+);
 
 SvgButton.propTypes = {
   icon: PropTypes.string.isRequired,
