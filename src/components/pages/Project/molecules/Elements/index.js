@@ -8,10 +8,8 @@ const Elements = ({ elements, path }) => {
     <>
       {Object.keys(elements).map((elementKey) => {
         const {
-          type,
           createdAt: { seconds },
           elements: nestedElements,
-          ...rest
         } = elements[elementKey];
 
         const shouldRenderElements =
@@ -20,7 +18,11 @@ const Elements = ({ elements, path }) => {
         const nextPath = `${path}${!!path ? "." : ""}${elementKey}`;
 
         return (
-          <Element key={seconds} type={type} path={nextPath} {...rest}>
+          <Element
+            key={seconds}
+            currentNode={elements[elementKey]}
+            path={nextPath}
+          >
             {shouldRenderElements && (
               <Elements elements={nestedElements} path={nextPath} />
             )}

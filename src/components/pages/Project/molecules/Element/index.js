@@ -5,21 +5,24 @@ import constants from "../../../../../utils/constants";
 
 import { BuilderElementContainer } from "../../../../containers";
 
-const Element = ({ type, path, orderIndex, children, ...rest }) => {
+const Element = ({ currentNode, path, children }) => {
   const Component = useMemo(
-    () => constants.builder.ELEMENTS_BY_TYPES[type].element,
-    [type]
+    () => constants.builder.ELEMENTS_BY_TYPES[currentNode.type].element,
+    [currentNode]
   );
 
   return (
-    <BuilderElementContainer type={type} path={path} deleteAllowed>
-      <Component {...rest}>{children}</Component>
+    <BuilderElementContainer
+      currentNode={currentNode}
+      path={path}
+      deleteAllowed
+    >
+      <Component {...currentNode}>{children}</Component>
     </BuilderElementContainer>
   );
 };
 
 Element.propTypes = {
-  type: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
 };
 
