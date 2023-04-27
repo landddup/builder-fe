@@ -89,16 +89,9 @@ const BuilderElementContainer = ({
     dispatch(actions.builder.deleteElement(path, projectId));
   };
 
-  const moveElement = (direction) => async () => {
-    const nextElementIndex =
-      direction === "up" ? currentElementIndex - 1 : currentElementIndex + 1;
-
+  const moveElement = (nextIndex) => async () => {
     await dispatch(
-      actions.builder.replaceElements(
-        path,
-        currentElementIndex,
-        nextElementIndex
-      )
+      actions.builder.replaceElements(path, currentElementIndex, nextIndex)
     );
 
     containerRef.current.scrollIntoView({
@@ -143,7 +136,7 @@ const BuilderElementContainer = ({
           ref={arrowUpRef}
           icon="chevronUp"
           variant="contained"
-          onClick={moveElement("up")}
+          onClick={moveElement(currentElementIndex - 1)}
           className={classNames(styles.arrowButton, styles.arrowUp, {
             [styles.arrowVisible]: settingsVisible,
           })}
@@ -155,7 +148,7 @@ const BuilderElementContainer = ({
           ref={arrowDownRef}
           icon="chevronDown"
           variant="contained"
-          onClick={moveElement("down")}
+          onClick={moveElement(currentElementIndex + 1)}
           className={classNames(styles.arrowButton, styles.arrowDown, {
             [styles.arrowVisible]: settingsVisible,
           })}
