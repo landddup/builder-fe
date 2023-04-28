@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { nanoid } from "@reduxjs/toolkit";
 
 import actions from ".";
 import firebase from "../firebase-config";
@@ -37,9 +38,14 @@ function prepareNewProject(title) {
       title,
       createdAt: dayjs().unix(),
       elements: {
-        0: { ...contentBlock },
+        0: {
+          ...contentBlock,
+          id: nanoid(),
+        },
       },
     };
+
+    delete newProject.elements[0].createdAt;
 
     return newProject;
   };

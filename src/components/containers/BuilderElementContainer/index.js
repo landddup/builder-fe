@@ -1,6 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import classNames from "classnames";
 
@@ -13,13 +12,11 @@ import { SvgButton, SvgIcon } from "../../shared";
 const BuilderElementContainer = ({
   elements,
   currentNode,
-  path,
   deleteAllowed,
   className,
   children,
 }) => {
   const dispatch = useDispatch();
-  const { projectId } = useParams();
 
   const containerRef = useRef();
   const crossRef = useRef();
@@ -32,15 +29,16 @@ const BuilderElementContainer = ({
   const { canMoveUp, canMoveDown, currentElementIndex } = useMemo(() => {
     const elementsCount = Object.keys(elements).length;
     const lastElementIndex = elementsCount - 1;
-    const currentElementIndex =
-      +path.split(".")[path.split(".").length - 1] || 0;
+    const currentElementIndex = Object.values(elements).findIndex(
+      (el) => el.id === currentNode.id
+    );
 
     const canMove = elementsCount > 1;
     const canMoveUp = canMove && currentElementIndex > 0;
     const canMoveDown = canMove && currentElementIndex < lastElementIndex;
 
     return { canMoveUp, canMoveDown, currentElementIndex };
-  }, [elements, path]);
+  }, [elements, currentNode]);
 
   const handleDragOver = (e) => {
     const canDrop =
@@ -62,7 +60,7 @@ const BuilderElementContainer = ({
     if (isDragOver) {
       handleDragLeave();
 
-      dispatch(actions.builder.dropElement(path, projectId));
+      dispatch(actions.builder.dropElement(currentNode.id));
     }
   };
 
@@ -86,18 +84,21 @@ const BuilderElementContainer = ({
   };
 
   const handleDelete = () => {
-    dispatch(actions.builder.deleteElement(path, projectId));
+    dispatch(actions.builder.deleteElement(currentNode.id));
   };
 
   const moveElement = (nextIndex) => async () => {
     await dispatch(
-      actions.builder.replaceElements(path, currentElementIndex, nextIndex)
+      actions.builder.replaceElements(
+        currentNode.id,
+        currentElementIndex,
+        nextIndex
+      )
     );
 
     containerRef.current.scrollIntoView({
       behavior: "smooth",
       block: "center",
-      inline: "center",
     });
   };
 
@@ -160,7 +161,6 @@ const BuilderElementContainer = ({
 
 BuilderElementContainer.propTypes = {
   elements: PropTypes.object,
-  path: PropTypes.string,
   currentNode: PropTypes.object,
   className: PropTypes.string,
   deleteAllowed: PropTypes.bool,
@@ -169,7 +169,6 @@ BuilderElementContainer.propTypes = {
 BuilderElementContainer.defaultProps = {
   elements: {},
   currentNode: {},
-  path: "",
   className: "",
   deleteAllowed: true,
 };

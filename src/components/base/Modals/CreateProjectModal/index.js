@@ -28,11 +28,12 @@ const CreateProjectModal = () => {
     <Block title="Create a new website">
       <div className={styles.templates}>
         {templates.map((template) => {
-          const { createdAt, title } = template;
+          const {
+            createdAt: { seconds },
+            title,
+          } = template;
 
-          return (
-            <Template key={createdAt} title={title} onAdd={createProject} />
-          );
+          return <Template key={seconds} title={title} onAdd={createProject} />;
         })}
       </div>
     </Block>

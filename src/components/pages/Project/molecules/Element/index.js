@@ -5,7 +5,7 @@ import constants from "../../../../../utils/constants";
 
 import { BuilderElementContainer } from "../../../../containers";
 
-const Element = ({ currentNode, elements, path, children }) => {
+const Element = ({ currentNode, elements, children }) => {
   const Component = useMemo(
     () => constants.builder.ELEMENTS_BY_TYPES[currentNode.type].element,
     [currentNode]
@@ -15,7 +15,6 @@ const Element = ({ currentNode, elements, path, children }) => {
     <BuilderElementContainer
       currentNode={currentNode}
       elements={elements}
-      path={path}
       deleteAllowed
     >
       <Component {...currentNode}>{children}</Component>
@@ -26,7 +25,6 @@ const Element = ({ currentNode, elements, path, children }) => {
 Element.propTypes = {
   currentNode: PropTypes.object.isRequired,
   elements: PropTypes.object.isRequired,
-  path: PropTypes.string.isRequired,
 };
 
 export default Element;

@@ -1,8 +1,10 @@
 import { cloneDeep, get, set, unset } from "lodash";
-import dayjs from "dayjs";
+import { nanoid } from "@reduxjs/toolkit";
 
+import { findPath } from "../utils/helpers/builder";
 import firebase from "../firebase-config";
 import constants from "../utils/constants";
+
 import {
   clearProject,
   updateProject,
@@ -10,41 +12,16 @@ import {
   updateDraggedElement,
 } from "../reducers/builder";
 
-function preparePath(path, actionKey) {
-  const splitted = path.split(".");
-  const joined = splitted.join(".elements.");
-
-  if (!path) {
-    return "elements";
-  }
-
-  if (actionKey === "add") {
-    return `elements.${joined}.elements`;
-  }
-
-  if (actionKey === "delete") {
-    return `elements.${joined}`;
-  }
-
-  if (actionKey === "edit") {
-    const spliced = splitted.splice(0, splitted.length - 1);
-
-    if (!!spliced.length) {
-      return `elements.${spliced.join(".elements.")}.elements`;
-    }
-
-    return "elements";
-  }
-}
-
 function addElement(elements, newElement) {
   const output = { ...elements };
   const newElementIndex = Object.keys(output).length;
 
   output[newElementIndex] = {
     ...newElement,
-    createdAt: { seconds: dayjs().unix() },
+    id: nanoid(),
   };
+
+  delete output[newElementIndex].createdAt;
 
   return output;
 }
@@ -97,12 +74,13 @@ export function updateElementsInDb(project, projectId) {
   };
 }
 
-export function dropElement(path, projectId) {
+export function dropElement(nodeId) {
   return async (dispatch, getState) => {
     const { project, draggedElement } = getState().builder;
-    const preparedPath = preparePath(path, "add");
+    const path = findPath(project, "id", nodeId);
+    const preparedPath = `${!!path ? `${path}.` : path}elements`;
     const clonedData = cloneDeep({ project, draggedElement });
-    const elementsToUpdate = get(clonedData.project, preparedPath);
+    const elementsToUpdate = get(clonedData.project, preparedPath) || {};
     const updatedElements = addElement(
       elementsToUpdate,
       clonedData.draggedElement
@@ -114,34 +92,35 @@ export function dropElement(path, projectId) {
       updatedElements
     );
 
-    dispatch(updateElementsInDb(updatedProject, projectId));
+    dispatch(setProject(updatedProject));
   };
 }
 
-export function deleteElement(path, projectId) {
+export function deleteElement(nodeId) {
   return async (dispatch, getState) => {
     const { project } = getState().builder;
-    const preparedPath = preparePath(path, "delete");
+    const preparedPath = findPath(project, "id", nodeId);
     const clonedProject = cloneDeep(project);
 
     unset(clonedProject, preparedPath);
-    dispatch(updateElementsInDb(clonedProject, projectId));
+    dispatch(setProject(clonedProject));
   };
 }
 
-export function replaceElements(path, currentIndex, nextIndex) {
+export function replaceElements(nodeId, currentIndex, nextIndex) {
   return async (dispatch, getState) => {
-    const { project, draggedElement } = getState().builder;
-    const preparedPath = preparePath(path, "edit");
-    const clonedData = cloneDeep({ project, draggedElement });
-    const elements = get(clonedData.project, preparedPath);
+    const { project } = getState().builder;
+    const path = findPath(project, "id", nodeId);
+    const preparedPath = path.split(".").slice(0, -1).join(".");
+    const clonedProject = cloneDeep(project);
+    const elements = get(clonedProject, preparedPath);
 
     [elements[currentIndex], elements[nextIndex]] = [
       elements[nextIndex],
       elements[currentIndex],
     ];
 
-    const updatedProject = set(clonedData.project, preparedPath, elements);
+    const updatedProject = set(clonedProject, preparedPath, elements);
 
     dispatch(setProject(updatedProject));
   };
