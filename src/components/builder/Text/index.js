@@ -1,25 +1,58 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
+
+import { Input } from "../../shared";
 
 import styles from "./index.module.scss";
 
-const Text = ({ component, content }) => {
-  const Component = useMemo(() => component, [component]);
+const Text = ({ currentNode }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [input, setInput] = useState(currentNode.content);
+
+  const Component = useMemo(
+    () => currentNode.component,
+    [currentNode.component]
+  );
+
+  const handleBeginEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleInputChange = (value) => {
+    setInput(value);
+  };
+
+  const handleSubmit = () => {
+    setIsEditing(false);
+  };
+
+  if (isEditing) {
+    return (
+      <Input
+        className={styles.text}
+        value={input}
+        onChange={handleInputChange}
+        onBlur={handleSubmit}
+        labelAllowed={false}
+        errorMessageAllowed={false}
+        autoFocus
+      />
+    );
+  }
 
   return (
-    <Component className={styles.text}>
-      {content ? content : "Text block"}
+    <Component className={styles.text} onClick={handleBeginEdit}>
+      {input}
     </Component>
   );
 };
 
 Text.propTypes = {
-  component: PropTypes.string.isRequired,
-  content: PropTypes.string,
+  currentNode: PropTypes.object,
 };
 
 Text.defaultProps = {
-  content: "",
+  currentNode: "",
 };
 
 export default Text;

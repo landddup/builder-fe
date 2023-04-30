@@ -17,7 +17,7 @@ const Element = ({ currentNode, elements, children }) => {
       elements={elements}
       deleteAllowed
     >
-      <Component {...currentNode}>{children}</Component>
+      <Component currentNode={currentNode}>{children}</Component>
     </BuilderElementContainer>
   );
 };

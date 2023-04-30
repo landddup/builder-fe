@@ -100,6 +100,8 @@ const BuilderElementContainer = ({
       behavior: "smooth",
       block: "center",
     });
+
+    handleMouseOut();
   };
 
   return (

@@ -8,16 +8,21 @@ import { SvgButton } from "../";
 import styles from "./index.module.scss";
 
 const Input = ({
+  className,
   value,
   valueKey,
   label,
+  labelAllowed,
   placeholder,
   disabled,
   errorMessage,
+  errorMessageAllowed,
   secured,
   type,
   required,
+  autoFocus,
   onChange,
+  onBlur,
   ...rest
 }) => {
   const [isValueHidden, setIsValueHidden] = useState(secured);
@@ -52,14 +57,16 @@ const Input = ({
 
   return (
     <div className={styles.container}>
-      <label htmlFor={id} className={styles.label}>
-        {getLabel()}
-      </label>
+      {labelAllowed && (
+        <label htmlFor={id} className={styles.label}>
+          {getLabel()}
+        </label>
+      )}
 
       <div className={styles.fieldContainer}>
         <input
           id={id}
-          className={classNames(styles.field, {
+          className={classNames(styles.field, className, {
             [styles.fieldError]: !!errorMessage,
           })}
           value={value}
@@ -67,7 +74,9 @@ const Input = ({
           disabled={disabled}
           type={isValueHidden ? "password" : type}
           required={required}
+          autoFocus={autoFocus}
           onChange={handleChange}
+          onBlur={onBlur}
           {...rest}
         />
 
@@ -81,33 +90,45 @@ const Input = ({
         )}
       </div>
 
-      <span className={styles.errorMessage}>{errorMessage}</span>
+      {errorMessageAllowed && (
+        <span className={styles.errorMessage}>{errorMessage}</span>
+      )}
     </div>
   );
 };
 
 Input.propTypes = {
+  className: PropTypes.string,
   value: PropTypes.string.isRequired,
   valueKey: PropTypes.string,
   label: PropTypes.string,
+  labelAllowed: PropTypes.bool,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   errorMessage: PropTypes.string,
+  errorMessageAllowed: PropTypes.bool,
   secured: PropTypes.bool,
   type: PropTypes.string,
   required: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
 };
 
 Input.defaultProps = {
+  className: "",
   valueKey: "",
   label: "",
+  labelAllowed: true,
   placeholder: "",
   disabled: false,
   errorMessage: "",
+  errorMessageAllowed: true,
   secured: false,
   type: "default",
   required: false,
+  autoFocus: false,
+  onBlur: () => {},
 };
 
 export default Input;
